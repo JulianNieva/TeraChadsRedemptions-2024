@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: '2do-Parcial-Restaurante',
+  appId: 'com.pps.Comanda',
+  appName: 'El Restaurante',
   webDir: 'www'
 };
 
