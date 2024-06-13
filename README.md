@@ -24,7 +24,7 @@
 
 | Estado|    Tareas              |
 | ----- |   -------              |
-|   ✖️ | Funcionalidad de Login |
+|   ✔️ | Funcionalidad de Login |
 |   ✖️ | Splashscreen animado
 |   ✖️ | Alta de Clientes |
 |   ✖️ | Alta de Productos|
@@ -77,7 +77,7 @@
 | Estado|    Tareas              |
 | ----- |   -------              |
 |   ✔️ | Icono aplicación      |
-|   ✖️ | Esqueleto Login      |
+|   ✔️ | Esqueleto Login      |
 |   ✖️ | Alta de Empleados |
 |   ✖️ | QR de la mesa|
 |   ✖️ | Encuesta de Empleados|
