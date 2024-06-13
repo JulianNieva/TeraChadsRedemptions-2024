@@ -16,17 +16,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentToast(position:"top", message = "", color = "danger"){
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: position,
-      color : color,
-    });
-
-    await toast.present();
-  }
-
   imgUsuarioSelecionado = "../../assets/imagenes/icon.png";
   barraCarga = false;
 
@@ -34,8 +23,30 @@ export class LoginPage implements OnInit {
   clave = "";
 
 
-  logIn(){
-    //Juli (ALFA) lo completa
+  logIn(){ 
+    this.barraCarga = true;
+    setTimeout(() => {
+      if(this.correo != "" || this.clave != "")
+      {
+        //Faltaria almacenar la info del usuario logueado en el servicio una vez que se inicio sesión
+        //para acceder a su rol y datos
+        this.authService.SignIn(this.correo,this.clave).then(() => {
+          this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
+            setTimeout(() => {
+              this.barraCarga = false;
+              this.navCtrl.navigateRoot(['/home'])
+            },2000)
+          })
+        }).catch((err:any) => {
+          this.presentToast("top",this.authService.ObtenerMensajeError(err.code),"danger")
+          this.barraCarga = false;
+        })
+      }
+      else{
+        this.barraCarga = false;
+        this.presentToast("top","¡Asegurese de completar todos los campos!","danger")
+      }
+    }, 1000);
   }
 
 
@@ -86,6 +97,17 @@ export class LoginPage implements OnInit {
     }else{
       this.barraCarga = true;
     }
+  }
+
+  async presentToast(position:"top", message = "", color = "danger"){
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: position,
+      color : color,
+    });
+
+    await toast.present();
   }
 
 }
