@@ -27,7 +27,7 @@
 </div>
 
 <ion-footer [translucent]="true">
-  <ion-button [disabled]="fotoTomada"   fill="outline" id="btn_cam">
+  <ion-button  (click)="TomarFoto()"  fill="outline" id="btn_cam">
     <ion-icon name="camera"></ion-icon>
   </ion-button>
   <ion-button   fill="outline" id="btn_qr" (click)="ScanQr()" >

@@ -3,6 +3,7 @@ import { Storage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Cliente } from 'src/app/clases/cliente';
+import { FotoUsuario } from 'src/app/interfaces/foto-usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { FotoService } from 'src/app/servicios/foto.service';
 import { QrService } from 'src/app/servicios/qr.service';
@@ -118,38 +119,38 @@ export class RegistroClientePage  {
     this.qr.StartScan()
   }
 
-  // TomarFoto(){
-  //   this.cam.agregarNuevaGaleria('empleado')
-  //   this.fotoTomada = true;
-  // }
+  TomarFoto(){
+    this.cam.agregarNuevaGaleria('empleado')
+    this.fotoTomada = true;
+  }
 
-  // public async showActionSheet(photo: FotoUsuario, position: number) {
-  //   const actionSheet = await this.toastController.create({
+  public async showActionSheet(photo: FotoUsuario, position: number) {
+    const actionSheet = await this.toastController.create({
 
-  //     header: 'Fotos',
-  //     buttons: [{
-  //       text: 'Borrar',
-  //       role: 'destructive',
-  //       icon: 'trash',
+      header: 'Fotos',
+      buttons: [{
+        text: 'Borrar',
+        role: 'destructive',
+        icon: 'trash',
 
-  //       handler: () => {
+        handler: () => {
 
-  //         this.cam.deletePicture(photo, position);
-  //         this.fotoTomada = false;
-  //       }
-  //     }, {
+          this.cam.deletePicture(photo, position);
+          this.fotoTomada = false;
+        }
+      }, {
 
-  //       text: 'Cancelar',
-  //       icon: 'close',
-  //       role: 'cancel',
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
 
-  //       handler: () => {
-  //         // Nothing to do, action sheet is automatically closed
-  //         }
-  //     }]
-  //   });
-  //   await actionSheet.present();
-  // }
+        handler: () => {
+          // Nothing to do, action sheet is automatically closed
+          }
+      }]
+    });
+    await actionSheet.present();
+  }
 
 
   // SubirUnaImagen(emp:Empleado,index = 0)
