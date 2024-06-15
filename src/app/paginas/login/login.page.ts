@@ -66,9 +66,9 @@ export class LoginPage implements OnInit {
     this.imgUsuarioSelecionado = "../../assets/imagenes/supervisor.png";
   }
 
-  Empleado(){
-    this.correo = "empleado@gmail.com";
-    this.clave = "empleado123";
+  Metre(){
+    this.correo = "metre@gmail.com";
+    this.clave = "metre123";
     this.imgUsuarioSelecionado = "../../assets/imagenes/empleado.png";
   }
 
