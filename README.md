@@ -7,9 +7,14 @@
 > ***El enfoque va a estar dado por los usuarios de un RESTAURANTE, el cual apunta todos sus esfuerzos en mejorar la utilización de su servicio por medio de una aplicación para celulares.***
 
 ## Icono de la aplicacion
-![Icono app][def]
+![Icono app][icono-app]
 
-[def]: ./src/assets/imagenes/icon.png
+[icono-app]: ./src/assets/imagenes/icon.png
+
+## Splashscreen de la aplicación
+![Splashscreen][splash-app]
+
+[splash-app]: ./resources/splash.png
 
 
 # Integrantes del equipo
@@ -25,8 +30,8 @@
 | Estado|    Tareas              |
 | ----- |   -------              |
 |   ✔️ | Funcionalidad de Login |
-|   ✖️ | Splashscreen animado
-|   ✖️ | Alta de Clientes |
+|   ✔️ | Splashscreen animado (parcial)|
+|   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
 |   ✖️ | QR de propina|
 |   ✖️ | Encuesta de Cliente|
@@ -51,7 +56,7 @@
 
 | Estado|    Tareas              |
 | ----- |   -------              |
-|   ✖️ | Splashscreen aplicación     |
+|   ✔️ | Splashscreen aplicación     |
 |   ✖️ | Alta de Dueño / Supervisor |
 |   ✖️ | Alta de Mesa|
 |   ✖️ | QR de ingreso al local|
@@ -78,7 +83,7 @@
 | ----- |   -------              |
 |   ✔️ | Icono aplicación      |
 |   ✔️ | Esqueleto Login      |
-|   ✖️ | Alta de Empleados |
+|   ✖️ | Alta de Clientes |
 |   ✖️ | QR de la mesa|
 |   ✖️ | Encuesta de Empleados|
 |   ✖️ | Ingresar al local|
