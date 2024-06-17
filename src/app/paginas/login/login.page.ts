@@ -44,12 +44,12 @@ export class LoginPage implements OnInit {
             if(user.perfil === "Cliente") {
               this.bd.TraerClientePorUid(user.uid).then((cliente : Cliente) => {
                 if(cliente.aprobado) {
-                  this.bd.LogIn(user)
                   this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
                     setTimeout(() => {
                       this.barraCarga = false;
-                      this.navCtrl.navigateRoot(['/home'])
                       navigator.vibrate(500)
+                      this.bd.LogIn(user)
+                      this.navCtrl.navigateRoot(['/home'])
                     },2000)
                   })
                 }else{
@@ -59,12 +59,13 @@ export class LoginPage implements OnInit {
                 }
               })
             } else {
-              this.bd.LogIn(user)
+           
               this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
                 setTimeout(() => {
                   this.barraCarga = false;
-                  this.navCtrl.navigateRoot(['/home'])
                   navigator.vibrate(500)
+                  this.bd.LogIn(user)
+                  this.navCtrl.navigateRoot(['/home'])
                 },2000)
               })
             }

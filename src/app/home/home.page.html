@@ -1,20 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<div id="div_principal">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="card card_div" style="width: 18rem;padding: 0.5px;">
+    <img [src]="usuario.imagen.path">
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center;">{{usuario.nombre}} {{usuario.apellido}}</h5></div>
+    <ul class="list-group list-group-flush" style="font-weight: bolder;font-size: large;" >
+      <li style="background-color: #8AC926;" class="list-group-item">Perfil: {{usuario.perfil}}</li>
+      <li *ngIf="bd.userType === 'Empleado'" style="background-color: #8AC926;" class="list-group-item">Tipo: {{usuario.tipo}}</li>
+      <li  style="background-color: #8AC926;" class="list-group-item">DNI: {{usuario.dni}}</li>
+      <li  *ngIf="bd.userType === 'Empleado' || bd.userType === 'Propietario' || bd.userType === 'Supervisor'" style="background-color: #8AC926;" class="list-group-item">CUIL: {{usuario.cuil}}</li>
+    </ul>
   </div>
-</ion-content>
+
+</div>
+
+<ion-footer [translucent]="true">
+  <ion-button   fill="outline" id="btn_qr"  >
+    <img src="../../../assets/imagenes/qr.png"  id="img_qr">
+  </ion-button>
+</ion-footer>
