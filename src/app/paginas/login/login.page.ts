@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
+import { Cliente } from 'src/app/clases/cliente';
+import { Usuario } from 'src/app/clases/usuario';
+import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { UserAuthService } from 'src/app/servicios/user-auth.service';
 
 @Component({
@@ -10,7 +14,7 @@ import { UserAuthService } from 'src/app/servicios/user-auth.service';
 export class LoginPage implements OnInit {
 
 
-  constructor(private toastController:ToastController,private authService:UserAuthService,private navCtrl:NavController) { } 
+  constructor(private toastController:ToastController,private authService:UserAuthService,private navCtrl:NavController,private ruta : Router,private bd : BaseDatosService) { } 
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {
@@ -31,22 +35,56 @@ export class LoginPage implements OnInit {
         //Faltaria almacenar la info del usuario logueado en el servicio una vez que se inicio sesión
         //para acceder a su rol y datos
         this.authService.SignIn(this.correo,this.clave).then(() => {
-          this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
-            setTimeout(() => {
-              this.barraCarga = false;
-              this.navCtrl.navigateRoot(['/home'])
-            },2000)
+
+          // By JERO: Toma el correo y trae el usuario de la BD, Si es Cliente Verifica que este "Aprobado" sino tira un Error por eso el uso de Try,Catch
+          // Si no es un cliente y si es un cliente aprobado llama al metodo LogIn del servicio BD y setea la variable public log = true, userLogUid = "uid del usuario" y userType = "tipo de usuario"
+          this.bd.TraerUsuariosPorCorreo(this.correo).then((user : Usuario) => {
+            console.log(user)
+    
+            if(user.perfil === "Cliente") {
+              this.bd.TraerClientePorUid(user.uid).then((cliente : Cliente) => {
+                if(cliente.aprobado) {
+                  this.bd.LogIn(user)
+                  this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
+                    setTimeout(() => {
+                      this.barraCarga = false;
+                      this.navCtrl.navigateRoot(['/home'])
+                      navigator.vibrate(500)
+                    },2000)
+                  })
+                }else{
+                  this.presentToast("top","ERROR! Usuario no Aprobado!","danger")
+                  this.barraCarga = false;
+                  navigator.vibrate(1000)
+                }
+              })
+            } else {
+              this.bd.LogIn(user)
+              this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
+                setTimeout(() => {
+                  this.barraCarga = false;
+                  this.navCtrl.navigateRoot(['/home'])
+                  navigator.vibrate(500)
+                },2000)
+              })
+            }
           })
         }).catch((err:any) => {
           this.presentToast("top",this.authService.ObtenerMensajeError(err.code),"danger")
           this.barraCarga = false;
+          navigator.vibrate(1000)
         })
       }
       else{
         this.barraCarga = false;
         this.presentToast("top","¡Asegurese de completar todos los campos!","danger")
+        navigator.vibrate(1000)
       }
     }, 1000);
+  }
+
+  Registrar() {
+    this.ruta.navigateByUrl("registro-cliente")
   }
 
 

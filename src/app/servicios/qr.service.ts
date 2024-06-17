@@ -8,9 +8,10 @@ export class QrService {
 
   // FALTA CONFIGURAR ANDROID MANIFEST
 
-  public scan : any
-  public content_visibility : any
-  public scanResult : any
+  public scan : boolean = false
+  public content_visibility : any = ""
+  public scanResult : any = ""
+
 
   constructor() { }
 
@@ -73,5 +74,6 @@ export class QrService {
     document.querySelector('body')?.classList.remove('scanner-active');
     this.content_visibility = '';
   }
+
 
 }

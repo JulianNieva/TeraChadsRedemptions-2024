@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth,signInWithEmailAndPassword,signOut,AuthErrorCodes } from '@angular/fire/auth';
+import { Auth,signInWithEmailAndPassword,signOut,AuthErrorCodes, createUserWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,11 @@ SignIn(email:string,password:any)
 
 LogOut() {
   return signOut(this.auth);
+}
+
+Registrar(email:any, contrasenia:any)
+{
+  return createUserWithEmailAndPassword(this.auth,email,contrasenia);
 }
 
 ObtenerMensajeError(errorCode: string): string {

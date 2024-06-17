@@ -1,5 +1,6 @@
 export class Usuario 
 {
+    id : string = ""
     uid : string
     correo : string
     clave : string

@@ -23,12 +23,12 @@
       </ion-avatar>
       <h3>Metre</h3>
     </ion-chip>
-    <ion-chip (click)="Cliente()">
+   <!-- <ion-chip (click)="Cliente()">
       <ion-avatar >
         <img src="../../assets/imagenes/cliente.png" />
       </ion-avatar>
-      <h3>Cliente</h3>
-    </ion-chip>
+      <h3>Cliente</h3> 
+    </ion-chip> -->
     <ion-chip (click)="Anonimo()">
       <ion-avatar >
         <img src="../../assets/imagenes/anonimo.png" />
@@ -85,6 +85,6 @@
   
       <ion-button  *ngIf="!barraCarga"  (click)="logIn()"  size="large" fill="solid"  expand="block" id="btn_ingresar">Ingresar</ion-button>
       <ion-button  *ngIf="!barraCarga"  (click)="resetAvatar()"  size="large" fill="outline"  expand="block" id="btn_borrar">Borrar Campos</ion-button>
-      <ion-button  *ngIf="!barraCarga"  size="large" fill="outline"  expand="block" id="btn_registrar">Registrar</ion-button>
+      <ion-button  *ngIf="!barraCarga"  (click)="Registrar()" size="large" fill="outline"  expand="block" id="btn_registrar">Registrar</ion-button>
   </div>
 </div>

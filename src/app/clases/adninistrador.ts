@@ -1,16 +1,16 @@
 import { Usuario } from "./usuario"
 
-export class Duenio extends Usuario 
+export class Administrador extends Usuario 
 {
     nombre : string
     apellido : string
     dni : number
     cuil : number
-    imagen : string
+    imagen : any
 
     
     constructor(uid : string = "", correo : string = "", clave : string = "", perfil : string = "",
-         nombre : string = "", apellido : string = "", dni : number = 0, cuil : number = 0, imagen : string = "") {
+         nombre : string = "", apellido : string = "", dni : number = 0, cuil : number = 0, imagen : any = "") {
         super(uid, correo, perfil, clave)
         this.nombre = nombre
         this.apellido = apellido
