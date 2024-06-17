@@ -5,12 +5,12 @@ export class Cliente extends Usuario
     nombre : string
     apellido : string
     dni : number
-    imagen : string
+    imagen : any
     aprobado : boolean
     enFila : boolean
     
     constructor(uid : string = "", correo : string = "", clave : string = "", perfil : string = "", 
-        nombre : string = "", apellido : string = "", dni : number = 0, imagen : string = "", aprobado : boolean = false, enFila = false) {
+        nombre : string = "", apellido : string = "", dni : number = 0, imagen : any = "", aprobado : boolean = false, enFila = false) {
         super(uid, correo, clave, perfil)
         this.nombre = nombre
         this.apellido = apellido

@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { Storage } from '@angular/fire/storage';
+import { Storage, getDownloadURL, ref, uploadString } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { ToastController } from '@ionic/angular';
 import { Cliente } from 'src/app/clases/cliente';
 import { FotoUsuario } from 'src/app/interfaces/foto-usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { FotoService } from 'src/app/servicios/foto.service';
 import { QrService } from 'src/app/servicios/qr.service';
+import { UserAuthService } from 'src/app/servicios/user-auth.service';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -23,7 +26,7 @@ export class RegistroClientePage  {
   /// FALTA HACER FUNCIONAR FIREBASE STORAGE, FOTO SERVICE, QUER SERVICE
 
   constructor(private fb : FormBuilder,private toastController : ToastController, private bd : BaseDatosService, 
-    public cam : FotoService, private storage : Storage, public qr : QrService) {
+    public cam : FotoService, private storage : Storage, public qr : QrService, private ruta : Router, private auth : UserAuthService) {
     this.bd.TraerClientes().subscribe((clientes)=>{
       this.clientesBd = clientes as Array<Cliente>
     })
@@ -74,12 +77,24 @@ export class RegistroClientePage  {
   nombre:string = "";
   apellido:string = "";
   dni:number = 0;
-  cuil:number = 0;
   clave:string = "";
   correo:string = "";
+  ms_loading : number = 1000
+  
+  BorrarDatos() {
+    this.cam.fotos = []
+    this.fotoTomada = false
+    this.nombre = ""
+    this.apellido = ""
+    this.barraCarga = false
+    this.clave = ""
+    this.correo = ""
+    this.ms_loading = 1000
+  }
 
   Registrar(){
-
+    this.barraCarga = true
+ 
     setTimeout(() => {
       if(!this.forms.invalid){
           let existe = false;
@@ -97,30 +112,66 @@ export class RegistroClientePage  {
               cliente.clave = this.clave;
               cliente.correo = this.correo;
               cliente.perfil = "Cliente"
+              
 
-             // this.SubirUnaImagen(cliente)
+             
+
+             if(this.fotoTomada) {
+              this.SubirUnaImagen(cliente)
+             } else {
+              this.AltaCLiente(cliente)
+             }
 
               /*this.bd.AltaEmpleado(empleado)
               navigator.vibrate(500);
               this.presentToast("top","Empleado registrado con exito!!","success");*/
               
             }else{
+              this.barraCarga = false
               navigator.vibrate(1000);
               this.presentToast("top","ERROR!, Cliente ya existente!!");
             }
       }else{
+        this.barraCarga = false
         navigator.vibrate(1000);
         this.presentToast("top","ERROR!, Faltan datos!!");
       }
     }, 1000);
   }
 
-  ScanQr() {
-    this.qr.StartScan()
+  LogIn() {
+    this.ruta.navigateByUrl("login")
+  }
+
+ async ScanDNI(){
+    await this.qr.StartScan()
+    let arrData = []
+    arrData = this.qr.scanResult?.split('@');
+    this.dni = parseInt(arrData[4]);
+    this.nombre = this.ConvertirNombreValido( arrData[2])
+    this.apellido = this.ConvertirNombreValido(arrData[1])
+    }
+
+  ConvertirNombreValido(nombre:string){
+    
+    let arrN = nombre.split("");
+    let newArr :Array<string> = []
+    let x = 0;
+    arrN.forEach((char)=>{
+      if(x > 0 ){
+        newArr.push(char.toLowerCase())
+      }else{
+        newArr.push(char.toUpperCase())
+      }
+      x++
+    })
+
+    return newArr.join("")
+
   }
 
   TomarFoto(){
-    this.cam.agregarNuevaGaleria('empleado')
+    this.cam.agregarNuevaGaleria('cliente')
     this.fotoTomada = true;
   }
 
@@ -153,61 +204,74 @@ export class RegistroClientePage  {
   }
 
 
-  // SubirUnaImagen(emp:Empleado,index = 0)
-  // {
-  //     const file =  this.cam.fotos[index]
-  //     const imgRef = ref(this.storage,`imagenes/usuarios/${file.rutaArchivo}`);
+  SubirUnaImagen(cli:Cliente,index = 0)
+  {
+      const file =  this.cam.fotos[index]
+      const imgRef = ref(this.storage,`imagenes/usuarios/${file.rutaArchivo}`);
 
-  //     try{
-  //       uploadString(imgRef,file.fotoCap,'data_url').then((rt:any)=>{
+      try{
+        uploadString(imgRef,file.fotoCap,'data_url').then((rt:any)=>{
 
-  //         this.seSubioEnCelu = false;
+          this.seSubioEnCelu = false;
 
-  //         this.TraerImagen(rt.metadata.name,emp)
+          this.TraerImagen(rt.metadata.name,cli)
 
-  //       }).catch((error)=>{
-  //         console.log(error)
-  //       });
-  //      }
-  //      catch{
-  //       this.urlImagenesCel =`imagenes/usuarios/file:/data/user/0/io.ionic.starter/files/` //funciona
-  //       uploadString(imgRef,file.fotoCap,'base64').then((rt:any)=>{
-  //         this.seSubioEnCelu = true;
+        }).catch((error)=>{
+          console.log(error)
+        });
+       }
+       catch{
+        this.urlImagenesCel =`imagenes/usuarios/file:/data/user/0/com.pps.Comanda/files/` //funciona
+        uploadString(imgRef,file.fotoCap,'base64').then((rt:any)=>{
+          this.seSubioEnCelu = true;
 
-  //         this.TraerImagen(rt.metadata.name,emp)
+          this.TraerImagen(rt.metadata.name,cli)
 
-  //       }).catch((error)=>{
-  //         console.log(error)
-  //       });
-  //      }
-  // }
+        }).catch((error)=>{
+          console.log(error)
+        });
+       }
+  }
 
-  // TraerImagen(img:any,emp:Empleado){
+  TraerImagen(img:any,cli:Cliente){
   
-  //     let imgRef = ref(this.storage,'imagenes/usuarios/'+img);
+      let imgRef = ref(this.storage,'imagenes/usuarios/'+img);
 
-  //     if(this.seSubioEnCelu){
-  //       imgRef = ref(this.storage,this.urlImagenesCel+img);
-  //     }
+      if(this.seSubioEnCelu){
+        imgRef = ref(this.storage,this.urlImagenesCel+img);
+      }
   
-  //     getDownloadURL(imgRef).then((url:any) => {
+      getDownloadURL(imgRef).then((url:any) => {
   
-  //       console.log(url)
+        console.log(url)
   
-  //       let imagen : any = {
-  //         path:url,
-  //         name:img,
-  //         dniUser:emp.dni
-  //       }
+        let imagen : any = {
+          path:url,
+          name:img,
+          dniUser:cli.dni
+        }
   
-  //       emp.foto = imagen;
+        cli.imagen = imagen;
+        this.AltaCLiente(cli)
 
-  //       this.bd.AltaEmpleado(emp)
-  //       this.presentToast("top","Empleado registrado con exito!!","success");
-  //       navigator.vibrate(500);
-  //   }).catch((error)=>{
-  //     this.presentToast("top","ERROR!, Fallo al obtener imagen !!" + JSON.stringify(error));
-  //   })
-  // }
+    }).catch((error)=>{
+      this.barraCarga = false
+      this.presentToast("top","ERROR!, Fallo al obtener imagen !!" + JSON.stringify(error));
+    })
+  }
+
+  AltaCLiente(cliente : Cliente) {
+      this.auth.Registrar(cliente.correo,cliente.clave).then( () => {
+        this.bd.AltaCliente(cliente)
+        this.barraCarga = false
+        this.presentToast("top","Cliente registrado con exito!! Espere a ser Validado","success");
+        navigator.vibrate(500);
+        this.ruta.navigateByUrl("login")
+      }).catch((reason) => {
+        console.log(reason)
+        this.presentToast("top",this.auth.ObtenerMensajeError(reason.code));
+        this.barraCarga = false
+      })
+  }
 
 }

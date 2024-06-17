@@ -3,6 +3,7 @@ import { Firestore, updateDoc, } from '@angular/fire/firestore';
 import { getDocs,setDoc,doc,addDoc,collection,deleteDoc,query,where } from 'firebase/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { Cliente } from '../clases/cliente';
+import { Usuario } from '../clases/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,16 @@ export class BaseDatosService {
 
   constructor(private firestore : Firestore) { }
 
+  public log = false
+  public userLogUid = ""
+  public userType = ""
+
   //#region ////////////////// CLIENTE ////////////////////////
 
     // Trae un cliente por DNI
-    async TraerClientePorDNI(dni : number) {
+    async TraerClientePorUid(uid : string) {
       let data:any;
-      const q = query(collection(this.firestore, 'clientes'), where("dni", "==", dni));
+      const q = query(collection(this.firestore, 'clientes'), where("uid", "==", uid));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         data = JSON.parse(JSON.stringify(doc.data()))
@@ -51,6 +56,10 @@ export class BaseDatosService {
       const uid = documento.id;
       cliente.uid = uid
       setDoc(documento,cliente.toFireStore());
+
+      let user = new Usuario(uid,cliente.correo,cliente.clave,cliente.perfil)
+
+      this.AltaUsuario(user)
     }
 
     // Modifica el campo "aprobado" de un cliente en TRUE
@@ -87,9 +96,9 @@ export class BaseDatosService {
   //#region ////////////////// EMPLEADO - DUEÑO ////////////////////////
 
     // Trae un Empleado por DNI
-    async TraerEmpleadoPorDNI(dni : number) {
+    async TraerEmpleadoPorUid(uid : string) {
       let data:any;
-      const q = query(collection(this.firestore, 'empleados'), where("dni", "==", dni));
+      const q = query(collection(this.firestore, 'empleados'), where("uid", "==", uid));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         data = JSON.parse(JSON.stringify(doc.data()))
@@ -110,9 +119,9 @@ export class BaseDatosService {
       return data
     }
 
-    async TraerDuenioPorDNI(dni : number) {
+    async TraerAdministradoresPorUid(uid : string) {
       let data:any;
-      const q = query(collection(this.firestore, 'duenios'), where("dni", "==", dni));
+      const q = query(collection(this.firestore, 'administradores'), where("uid", "==", uid));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         data = JSON.parse(JSON.stringify(doc.data()))
@@ -120,6 +129,65 @@ export class BaseDatosService {
 
       return data
     }
+
+    async TraerAdministradoresPorTipo(tipo : string) {
+      let data:any;
+      const q = query(collection(this.firestore, 'administradores'), where("tipo", "==", tipo));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        data = JSON.parse(JSON.stringify(doc.data()))
+      });
+
+      return data
+    }
+
+
+  //#endregion
+
+  //#region  ////////////////// USUARIO //////////////////////// 
+
+    AltaUsuario(usuario : Usuario)
+    {
+      const coleccion = collection(this.firestore, 'usuarios')
+      const documento = doc(coleccion);
+      const id = documento.id;
+      usuario.id = id
+      setDoc(documento,usuario.toFireStore());
+    }
+
+    async TraerUsuariosPorCorreo(correo : string) {
+      let data:any;
+      const q = query(collection(this.firestore, 'usuarios'), where("correo", "==", correo));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        data = JSON.parse(JSON.stringify(doc.data()))
+      });
+
+      return data
+    }
+
+
+    TraerUsuarios() {
+      const coleccion = collection(this.firestore, 'usuarios')
+      return collectionData(coleccion);
+    }
+
+
+  //#endregion
+
+  //#region ////////////////// LOGIN ////////////////////////
+
+  LogIn(usuario : Usuario)  {
+    this.log = true
+    this.userLogUid = usuario.uid
+    this.userType = usuario.perfil
+  }
+
+  LogOut() {
+    this.log = false
+    this.userLogUid = ""
+    this.userType = ""
+  }
 
   //#endregion
 

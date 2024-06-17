@@ -34,12 +34,27 @@ h3{
     margin-right: auto;
     margin-left: auto;
     margin-top: 2rem;
-    margin-bottom: 0.5rem;
     height: 50px;
     padding: 0%;
     font-weight: bolder;
     --color:#000000;
     --background:#8AC926;
+    --border-color:#8AC926;
+    --background-activated:#FFEBB3;
+    --color-activated:#8AC926;
+    --background-activated-opacity:1;
+    --box-shadow: 0 0.2rem 0.6rem 0 rgb(0, 0, 0, 0.25);
+}
+
+#btn_ingresar{
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0.1rem;
+    margin-bottom: 0.5rem;
+    height: 50px;
+    padding: 0%;
+    font-weight: bolder;
+    --color:#000000;
     --border-color:#8AC926;
     --background-activated:#FFEBB3;
     --color-activated:#8AC926;
@@ -60,13 +75,6 @@ ion-input{
     --placeholder-color:#8AC926;
     font-weight: bold;
 }
-
-ion-loading.custom-loading {
-    --background:#8AC926;
-    --spinner-color: #000000;
-    color: #000000;
-    font-weight: bolder;
-  }
 
 #img_avatar_select{
     width: 100%;
@@ -93,7 +101,6 @@ ion-loading.custom-loading {
 
 #btn_select{
     margin-top: 0.5rem;
-    
     margin-right: auto;
     margin-left: auto;
     margin-top: 1rem;
@@ -110,9 +117,15 @@ ion-loading.custom-loading {
 }
 
 #img_emp{
-    margin-left: 24%;
-    width: 55%;
-    margin-top: 2rem;
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 1rem;
+}
+
+#img_tomada{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 1rem;
 }
 
 #btn_cam{
