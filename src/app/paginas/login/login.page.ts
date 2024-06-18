@@ -52,8 +52,12 @@ export class LoginPage implements OnInit {
                       this.navCtrl.navigateRoot(['/home'])
                     },2000)
                   })
-                }else{
+                }else if(cliente.rechazado){
                   this.presentToast("top","ERROR! Usuario no Aprobado!","danger")
+                  this.barraCarga = false;
+                  navigator.vibrate(1000)
+                } else {
+                  this.presentToast("top","ERROR! Usuario Pendiente a Aprobar!","warning")
                   this.barraCarga = false;
                   navigator.vibrate(1000)
                 }

@@ -48,6 +48,29 @@ export class BaseDatosService {
       return collectionData(coleccion);
     }
 
+    async TraerClientesSinAprobar() {
+      let data:any;
+      const q = query(collection(this.firestore, 'clientes'), where("aprobado", "==", false));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        data = JSON.parse(JSON.stringify(doc.data()))
+      });
+
+      return data
+    }
+
+    async TraerClientesrechazados() {
+      let data:any;
+      const q = query(collection(this.firestore, 'clientes'), where("rechazado", "==", true));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        data = JSON.parse(JSON.stringify(doc.data()))
+      });
+
+      return data
+    }
+
+
     // Registra en la base de datos un Cliente
     AltaCliente(cliente : Cliente)
     {
