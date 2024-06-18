@@ -30,7 +30,8 @@
 | Estado|    Tareas              |
 | ----- |   -------              |
 |   ✔️ | Funcionalidad de Login |
-|   ✔️ | Splashscreen animado (parcial)|
+|   ✔️ | Splashscreen animado|
+|   ✔️ | Implementación de email automatizado|
 |   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
 |   ✖️ | QR de propina|
@@ -83,7 +84,7 @@
 | ----- |   -------              |
 |   ✔️ | Icono aplicación      |
 |   ✔️ | Esqueleto Login      |
-|   ✖️ | Alta de Clientes |
+|   ✔️ | Alta de Clientes |
 |   ✖️ | QR de la mesa|
 |   ✖️ | Encuesta de Empleados|
 |   ✖️ | Ingresar al local|
