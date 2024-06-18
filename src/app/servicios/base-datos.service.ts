@@ -4,6 +4,8 @@ import { getDocs,setDoc,doc,addDoc,collection,deleteDoc,query,where } from 'fire
 import { collectionData } from 'rxfire/firestore';
 import { Cliente } from '../clases/cliente';
 import { Usuario } from '../clases/usuario';
+import { Administrador } from '../clases/administrador';
+import { Empleado } from '../clases/empleado';
 
 @Injectable({
   providedIn: 'root'
