@@ -23,6 +23,12 @@ const routes: Routes = [
     path: 'splashscreen',
     loadChildren: () => import('./paginas/splashscreen/splashscreen.module').then( m => m.SplashscreenPageModule)
   },
+  {
+    path: 'solicitar-mesa',
+    loadChildren: () => import('./paginas/solicitar-mesa/solicitar-mesa.module').then( m => m.SolicitarMesaPageModule)
+  },
+
+
 
 
 ];

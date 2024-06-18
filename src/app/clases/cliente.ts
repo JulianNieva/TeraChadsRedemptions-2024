@@ -8,6 +8,7 @@ export class Cliente extends Usuario
     imagen : any
     aprobado : boolean
     enFila : boolean
+    rechazado : boolean = false
     
     constructor(uid : string = "", correo : string = "", clave : string = "", perfil : string = "", 
         nombre : string = "", apellido : string = "", dni : number = 0, imagen : any = "", aprobado : boolean = false, enFila = false) {

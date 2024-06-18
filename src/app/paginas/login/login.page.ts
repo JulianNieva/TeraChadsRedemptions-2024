@@ -44,27 +44,32 @@ export class LoginPage implements OnInit {
             if(user.perfil === "Cliente") {
               this.bd.TraerClientePorUid(user.uid).then((cliente : Cliente) => {
                 if(cliente.aprobado) {
-                  this.bd.LogIn(user)
                   this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
                     setTimeout(() => {
                       this.barraCarga = false;
-                      this.navCtrl.navigateRoot(['/home'])
                       navigator.vibrate(500)
+                      this.bd.LogIn(user)
+                      this.navCtrl.navigateRoot(['/home'])
                     },2000)
                   })
-                }else{
+                }else if(cliente.rechazado){
                   this.presentToast("top","ERROR! Usuario no Aprobado!","danger")
+                  this.barraCarga = false;
+                  navigator.vibrate(1000)
+                } else {
+                  this.presentToast("top","ERROR! Usuario Pendiente a Aprobar!","warning")
                   this.barraCarga = false;
                   navigator.vibrate(1000)
                 }
               })
             } else {
-              this.bd.LogIn(user)
+           
               this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
                 setTimeout(() => {
                   this.barraCarga = false;
-                  this.navCtrl.navigateRoot(['/home'])
                   navigator.vibrate(500)
+                  this.bd.LogIn(user)
+                  this.navCtrl.navigateRoot(['/home'])
                 },2000)
               })
             }
