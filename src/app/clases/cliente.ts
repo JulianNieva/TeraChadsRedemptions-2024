@@ -21,7 +21,4 @@ export class Cliente extends Usuario
         this.enFila = enFila
     }
 
-    override toFireStore() {
-        return JSON.parse(JSON.stringify(this))
-    }
 }

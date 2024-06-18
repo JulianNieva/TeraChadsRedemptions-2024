@@ -48,27 +48,6 @@ export class BaseDatosService {
       return collectionData(coleccion);
     }
 
-    async TraerClientesSinAprobar() {
-      let data:any;
-      const q = query(collection(this.firestore, 'clientes'), where("aprobado", "==", false));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        data = JSON.parse(JSON.stringify(doc.data()))
-      });
-
-      return data
-    }
-
-    async TraerClientesrechazados() {
-      let data:any;
-      const q = query(collection(this.firestore, 'clientes'), where("rechazado", "==", true));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        data = JSON.parse(JSON.stringify(doc.data()))
-      });
-
-      return data
-    }
 
 
     // Registra en la base de datos un Cliente
@@ -78,7 +57,7 @@ export class BaseDatosService {
       const documento = doc(coleccion);
       const uid = documento.id;
       cliente.uid = uid
-      setDoc(documento,cliente.toFireStore());
+      setDoc(documento, JSON.parse(JSON.stringify(cliente)));
 
       let user = new Usuario(uid,cliente.correo,cliente.clave,cliente.perfil)
 
@@ -110,7 +89,7 @@ export class BaseDatosService {
     {
       const coleccion = collection(this.firestore, 'clientes')
       const documento = doc(coleccion, cliente.uid);
-      updateDoc(documento, cliente.toFireStore());
+      updateDoc(documento, JSON.parse(JSON.stringify(cliente)));
     }
 
   //#endregion 
@@ -175,7 +154,7 @@ export class BaseDatosService {
       const documento = doc(coleccion);
       const id = documento.id;
       usuario.id = id
-      setDoc(documento,usuario.toFireStore());
+      setDoc(documento, JSON.parse(JSON.stringify(usuario)));
     }
 
     async TraerUsuariosPorCorreo(correo : string) {
