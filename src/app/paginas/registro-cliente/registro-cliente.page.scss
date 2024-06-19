@@ -150,3 +150,16 @@ ion-loading.custom-loading {
     color: #000000;
     font-weight: bolder;
   }
+
+// Adaptado para Note 10+
+@media (max-width: 350px) and (max-height: 678px) {
+
+    #btn_registrar{
+        height: 35px;
+    }
+    
+    #btn_ingresar{
+        height: 35px;
+    }
+
+}

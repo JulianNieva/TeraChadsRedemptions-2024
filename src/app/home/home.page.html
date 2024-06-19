@@ -1,7 +1,7 @@
 
 <div id="div_principal">
 
-  <div class="card card_div" style="width: 18rem;padding: 0.5px;">
+  <div *ngIf="!usuario.enFila" class="card card_div" style="width: 18rem;padding: 0.5px;">
     <img [src]="usuario.imagen.path">
     <div class="card-body">
       <h5 class="card-title" style="text-align: center;">{{usuario.nombre}} {{usuario.apellido}}</h5></div>
@@ -15,7 +15,7 @@
 
 </div>
 
-<ion-footer [translucent]="true">
+<ion-footer *ngIf="usuario.perfil === 'Cliente'" [translucent]="true">
   <ion-button   fill="outline" id="btn_qr"  >
     <img src="../../../assets/imagenes/qr.png"  id="img_qr">
   </ion-button>

@@ -19,7 +19,8 @@ export class HomePage implements OnDestroy {
     dni:0,
     cuil:0,
     perfil:"",
-    tipo:""
+    tipo:"",
+    enFila:false
   }
 
   constructor(public bd : BaseDatosService) {
