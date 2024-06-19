@@ -18,7 +18,7 @@
     </ion-chip>
     <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'">
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'" (click)="FilaClientes()">
-      <img src="../assets/imagenes/sillas-y-mesa-de-restaurante.png" (click)="SolicitarMesa()" />
+      <img src="../assets/imagenes/qr-code-scan.svg" (click)="SolicitarMesa()" />
     </ion-chip>
     <br>
     <ion-chip (click)="Salir()">

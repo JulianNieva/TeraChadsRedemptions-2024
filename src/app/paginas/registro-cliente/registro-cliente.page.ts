@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 import { Cliente } from 'src/app/clases/cliente';
 import { FotoUsuario } from 'src/app/interfaces/foto-usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
+import { EmailService } from 'src/app/servicios/email.service';
 import { FotoService } from 'src/app/servicios/foto.service';
 import { QrService } from 'src/app/servicios/qr.service';
 import { UserAuthService } from 'src/app/servicios/user-auth.service';
@@ -26,7 +27,7 @@ export class RegistroClientePage  {
   /// FALTA HACER FUNCIONAR FIREBASE STORAGE, FOTO SERVICE, QUER SERVICE
 
   constructor(private fb : FormBuilder,private toastController : ToastController, private bd : BaseDatosService, 
-    public cam : FotoService, private storage : Storage, public qr : QrService, private ruta : Router, private auth : UserAuthService) {
+    public cam : FotoService, private storage : Storage, public qr : QrService, private ruta : Router, private auth : UserAuthService, private email : EmailService) {
     this.bd.TraerClientes().subscribe((clientes)=>{
       this.clientesBd = clientes as Array<Cliente>
     })
@@ -54,7 +55,7 @@ export class RegistroClientePage  {
       correo : ['',[
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(20),
+        Validators.maxLength(30),
       ]],
     })
 
@@ -119,6 +120,9 @@ export class RegistroClientePage  {
              if(this.fotoTomada) {
               this.SubirUnaImagen(cliente)
              } else {
+              // Imagen Default
+              let imagen = {path:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fcliente.png?alt=media&token=5156f6b6-679d-48da-8f71-ae5f6031cf66"}
+              cliente.imagen = imagen 
               this.AltaCLiente(cliente)
              }
 
@@ -264,7 +268,10 @@ export class RegistroClientePage  {
       this.auth.Registrar(cliente.correo,cliente.clave).then( () => {
         this.bd.AltaCliente(cliente)
         this.barraCarga = false
-        this.presentToast("top","Cliente registrado con exito!! Espere a ser Validado","success");
+        this.presentToast("top","Cliente registrado con exito!! Espere a ser Validado","primary");
+        // Envia Correo a Cliente
+        this.email.EnviarEmailAprobacionPendiente(cliente)
+      
         navigator.vibrate(500);
         this.ruta.navigateByUrl("login")
       }).catch((reason) => {

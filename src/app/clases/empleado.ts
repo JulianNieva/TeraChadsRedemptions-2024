@@ -21,7 +21,4 @@ export class Empleado extends Usuario
        this.tipo = tipo
    }
 
-    override toFireStore() {
-        return JSON.parse(JSON.stringify(this))
-    }
 }

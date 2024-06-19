@@ -9,6 +9,8 @@ export class Cliente extends Usuario
     aprobado : boolean
     enFila : boolean
     rechazado : boolean = false
+    mesa_asignada : number = 0;
+    
     
     constructor(uid : string = "", correo : string = "", clave : string = "", perfil : string = "", 
         nombre : string = "", apellido : string = "", dni : number = 0, imagen : any = "", aprobado : boolean = false, enFila = false) {
@@ -21,7 +23,4 @@ export class Cliente extends Usuario
         this.enFila = enFila
     }
 
-    override toFireStore() {
-        return JSON.parse(JSON.stringify(this))
-    }
 }

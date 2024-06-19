@@ -19,7 +19,4 @@ export class Administrador extends Usuario
         this.imagen = imagen
     }
 
-    override toFireStore() {
-        return JSON.parse(JSON.stringify(this))
-    }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Usuario } from '../clases/usuario';
 import { Administrador } from '../clases/administrador';
 import { Empleado } from '../clases/empleado';
@@ -10,7 +10,7 @@ import { Cliente } from '../clases/cliente';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnDestroy {
 
   usuario : any = {
     nombre:"",
@@ -53,5 +53,11 @@ export class HomePage {
       break;
     }
    }
+
+   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+   ngOnDestroy(){
+    
+  }
+
 
 }

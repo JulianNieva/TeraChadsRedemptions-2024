@@ -20,7 +20,7 @@ export class AppComponent {
   }
 
   AprobarClientes() {
-    //this.navCtrl.navigateRoot(['/home'])
+    this.navCtrl.navigateRoot(['/aprobacion-clientes'])
   }
 
   FilaClientes() {

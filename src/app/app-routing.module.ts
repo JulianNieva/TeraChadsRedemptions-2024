@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'solicitar-mesa',
     loadChildren: () => import('./paginas/solicitar-mesa/solicitar-mesa.module').then( m => m.SolicitarMesaPageModule)
   },
+  {
+    path: 'aprobacion-clientes',
+    loadChildren: () => import('./paginas/aprobacion-clientes/aprobacion-clientes.module').then( m => m.AprobacionClientesPageModule)
+  },
+
 
 
 

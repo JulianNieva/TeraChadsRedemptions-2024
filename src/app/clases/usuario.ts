@@ -13,8 +13,5 @@ export class Usuario
         this.perfil = perfil
     }
 
-    toFireStore() {
-        return JSON.parse(JSON.stringify(this))
-    }
 
 }
