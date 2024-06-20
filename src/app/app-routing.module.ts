@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/solicitar-mesa/solicitar-mesa.module').then( m => m.SolicitarMesaPageModule)
   },
   {
+    path: 'encuesta-cliente',
+    loadChildren: () => import('./componentes/encuesta-cliente/encuesta-cliente.module').then( m => m.EncuestaClientePageModule)
+  },
+  {
     path: 'aprobacion-clientes',
     loadChildren: () => import('./paginas/aprobacion-clientes/aprobacion-clientes.module').then( m => m.AprobacionClientesPageModule)
   },
@@ -39,10 +43,6 @@ const routes: Routes = [
     path: 'mesa-cliente',
     loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
   },
-
-
-
-
 
 
 ];
