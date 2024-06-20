@@ -18,17 +18,7 @@ export class BaseDatosService {
   public userType = ""
   public usuarioLogueado:any
 
-  constructor(private firestore : Firestore) {
-    const userString = localStorage.getItem("user");
-    const user = userString ? JSON.parse(userString) : null; 
-    if(user)
-    {
-      this.userType = user.perfil
-      this.userLogUid = user.uid
-      this.usuarioLogueado = user;
-      console.info(this.usuarioLogueado)
-    }
-   }
+  constructor(private firestore : Firestore) {}
 
   //#region ////////////////// CLIENTE ////////////////////////
 
@@ -193,26 +183,25 @@ export class BaseDatosService {
 
   //#region ////////////////// LOGIN ////////////////////////
 
-  LogIn(usuario : Usuario)  {
+  async LogIn(usuario : Usuario)  {
     this.log = true
     this.userLogUid = usuario.uid
     this.userType = usuario.perfil
     switch(this.userType){
       //By Juli, lo que hago es dependiendo del uid obtenido, traigo al usuario y lo seteo en el localstorage
-      //
       case "Supervisor":
       case "Propietario":
-        this.TraerAdministradoresPorUid(this.userLogUid).then((user : any) => {
+        await this.TraerAdministradoresPorUid(this.userLogUid).then((user : any) => {
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
       case "Empleado":
-        this.TraerEmpleadoPorUid(this.userLogUid).then((user : any) => {
+        await this.TraerEmpleadoPorUid(this.userLogUid).then((user : any) => {
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
       case "Cliente":
-        this.TraerClientePorUid(this.userLogUid).then((user : any) => {
+        await this.TraerClientePorUid(this.userLogUid).then((user : any) => {
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;

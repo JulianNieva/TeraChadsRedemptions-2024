@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     setTimeout(() => {
       if(this.correo != "" || this.clave != "")
       {
-        this.authService.SignIn(this.correo,this.clave).then(() => {
+        this.authService.SignIn(this.correo,this.clave).then((res:any) => {
           // By JERO: Toma el correo y trae el usuario de la BD, Si es Cliente Verifica que este "Aprobado" sino tira un Error por eso el uso de Try,Catch
           // Si no es un cliente y si es un cliente aprobado llama al metodo LogIn del servicio BD y setea la variable public log = true, userLogUid = "uid del usuario" y userType = "tipo de usuario"
           this.bd.TraerUsuariosPorCorreo(this.correo).then((user : Usuario) => {
@@ -41,13 +41,11 @@ export class LoginPage implements OnInit {
               this.bd.TraerClientePorUid(user.uid).then((cliente : Cliente) => {
                 if(cliente.aprobado) {
                   this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
-                    setTimeout(() => {
+                    setTimeout(async () => {
+                      await this.bd.LogIn(user)
                       navigator.vibrate(500)
-                      setTimeout(async () => {
-                        await this.bd.LogIn(user)
-                        this.barraCarga = false;
-                        this.navCtrl.navigateRoot(['/home'])
-                      }, 1500);  
+                      this.barraCarga = false;
+                      this.navCtrl.navigateRoot(['/home'])
                     },2000)
                   })
                 }else if(cliente.rechazado){
@@ -62,14 +60,12 @@ export class LoginPage implements OnInit {
               })
             } else {
               this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
-                setTimeout(() => {
+                setTimeout(async () => {
                   console.log("Hola")
                   navigator.vibrate(500)
-                  setTimeout(async () => {
-                    await this.bd.LogIn(user)
-                    this.barraCarga = false;
-                    this.navCtrl.navigateRoot(['/home'])
-                  }, 1500);
+                  await this.bd.LogIn(user)
+                  this.barraCarga = false;
+                  this.navCtrl.navigateRoot(['/home'])
                 },2000)
               })
             }
@@ -124,6 +120,24 @@ export class LoginPage implements OnInit {
     this.correo = "anonimo@gmail.com";
     this.clave = "anonimo123";
     this.imgUsuarioSelecionado = "../../assets/imagenes/anonimo.png";
+  }
+
+  Cocinero(){
+    this.correo = "cocinero@gmail.com";
+    this.clave = "123456";
+    this.imgUsuarioSelecionado = "../../assets/imagenes/cocinero.png";
+  }
+
+  Bartender(){
+    this.correo = "bartender@gmail.com";
+    this.clave = "123456";
+    this.imgUsuarioSelecionado = "../../assets/imagenes/bartender.png";
+  }
+
+  Mozo(){
+    this.correo = "mozo@gmail.com";
+    this.clave = "123456";
+    this.imgUsuarioSelecionado = "../../assets/imagenes/mozo.png";
   }
 
   Default(){

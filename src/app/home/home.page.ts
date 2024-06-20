@@ -32,18 +32,21 @@ export class HomePage implements OnDestroy {
 
   constructor(public bd : BaseDatosService, public qr : QrService, public auth : UserAuthService, private navCtrl: NavController, private toastController : ToastController) {
     this.loading = true;
-
-    if(this.bd.usuarioLogueado)
-    {
-      this.usuario = this.bd.usuarioLogueado;
-      console.info(this.usuario)
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    if(user){
+      console.info(user)
+      this.usuario = user;
       this.noUser = false;
+      if(user.perfil == "Cliente")
+      {
+        this.cliente = user;
+      }
     }
 
     setTimeout(() => {
       this.loading = false;
     }, 1500);
-    //this.TraerUsuario()
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
