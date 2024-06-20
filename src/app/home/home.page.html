@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div *ngIf="cliente.enFila || cliente.mesa_asignada !== 0">
+  <div *ngIf="cliente.enFila || cliente.mesa_asignada !== 0 && usuario.perfil === 'Cliente'">
     <ion-button *ngIf="cliente.mesa_asignada === 0"  (click)="SalirDeFila()"  size="large" fill="solid"  expand="block" id="btn_cancelar">Cancelar Solicitud</ion-button>
     <ion-button  *ngIf="cliente.mesa_asignada !== 0" (click)="MiMesa()"  size="large" fill="solid"  expand="block" id="btn_cancelar">Mi Mesa</ion-button>
     <ion-button   (click)="VerEncuestas()"  size="large" fill="outline"  expand="block" id="btn_encuestas">Ver Encuestas</ion-button>

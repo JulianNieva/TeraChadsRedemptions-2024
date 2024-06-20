@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { IonThumbnail, ToastController } from '@ionic/angular';
 import { Cliente } from 'src/app/clases/cliente';
 import { Mesa } from 'src/app/clases/mesa';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
@@ -18,20 +18,21 @@ export class MesaClientePage {
 
   constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService) {
     ///Obtengo la mesa del user logeado pero primero traigo el cliente logeado (corregir cuando se maneje el nuevo log)
-    this.bd.TraerClientePorUid(this.bd.userLogUid).then((user) => {
-      this.cliente = user
-        this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((m) => {
-          this.mesa = m
 
-          if(this.mesa.cliente_uid === this.cliente.uid){
-              this.presentToast("top","Bienvenido a su mesa","primary")
-              this.mesaVinculada = true
-          }else{
-              this.presentToast("top","Mesa Aun no Vinculada! Escanee su qr","warning")
-          }
+    let cli = this.bd.Getlog()
+    if(cli !== null){
+      this.cliente = cli as Cliente
+      this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((m) => {
+        this.mesa = m
 
-        })
-    })
+        if(this.mesa.cliente_uid === this.cliente.uid){
+            this.presentToast("top","Bienvenido a su mesa","primary")
+            this.mesaVinculada = true
+        }else{
+            this.presentToast("top","Mesa Aun no Vinculada! Escanee su qr","warning")
+        }
+      })
+    }
    }
 
    async presentToast(position : 'top' | 'middle', message = "", color = "danger"){

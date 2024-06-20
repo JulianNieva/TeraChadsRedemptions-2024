@@ -9,19 +9,11 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
 
-  user:any
+
 
   constructor(public bd : BaseDatosService, private navCtrl: NavController, private auth : UserAuthService) {}
-
-  ngOnInit(): void {
-    //Podemos quitar la validacion necesaria del bd.log, ya que a la hora de inyectar el servicio, ya se lee el usaurio en el localstorage
-    if(this.bd.userLogUid != "")
-    {
-      this.user = this.bd.usuarioLogueado
-    }
-  }
 
   Salir() {
     navigator.vibrate(500)

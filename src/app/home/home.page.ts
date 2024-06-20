@@ -32,18 +32,14 @@ export class HomePage implements OnDestroy {
 
   constructor(public bd : BaseDatosService, public qr : QrService, public auth : UserAuthService, private navCtrl: NavController, private toastController : ToastController) {
     this.loading = true;
-    const userString = localStorage.getItem("user");
-    const user = userString ? JSON.parse(userString) : null;
-    if(user){
-      console.info(user)
-      this.usuario = user;
-      this.noUser = false;
-      if(user.perfil == "Cliente")
-      {
-        this.cliente = user;
-      }
-    }
 
+    let user = this.bd.Getlog()
+    if(user){
+      this.usuario = user
+      this.cliente = user as Cliente
+      this.noUser = false
+    }
+    
     setTimeout(() => {
       this.loading = false;
     }, 1500);

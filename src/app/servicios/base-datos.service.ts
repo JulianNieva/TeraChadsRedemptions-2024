@@ -192,16 +192,19 @@ export class BaseDatosService {
       case "Supervisor":
       case "Propietario":
         await this.TraerAdministradoresPorUid(this.userLogUid).then((user : any) => {
+          this.usuarioLogueado = user as Administrador
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
       case "Empleado":
         await this.TraerEmpleadoPorUid(this.userLogUid).then((user : any) => {
+          this.usuarioLogueado = user as Empleado
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
       case "Cliente":
         await this.TraerClientePorUid(this.userLogUid).then((user : any) => {
+          this.usuarioLogueado = user as Cliente
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
@@ -213,6 +216,13 @@ export class BaseDatosService {
     this.log = false
     this.userLogUid = ""
     this.userType = ""
+    this.usuarioLogueado = new Usuario
+  }
+
+  Getlog(){
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    return user
   }
 
   //#endregion

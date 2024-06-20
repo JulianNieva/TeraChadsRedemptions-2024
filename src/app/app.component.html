@@ -1,23 +1,23 @@
 <ion-menu *ngIf="bd.log" menuType="overlay" contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>{{user.perfil}}</ion-title>
+      <ion-title>{{bd.userType}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <ion-chip (click)="HomePage()">
       <img src="../assets/imagenes/house-door.svg" />
     </ion-chip>
-    <br *ngIf="user.perfil === 'Supervisor' || user.perfil === 'Propietario'">
-    <ion-chip *ngIf="user.perfil === 'Supervisor' || user.perfil === 'Propietario'" (click)="AprobarClientes()">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'">
+    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="AprobarClientes()">
       <img src="../assets/imagenes/person-fill-check.svg" />
     </ion-chip>
-    <br *ngIf="user.perfil === 'Supervisor' || user.perfil === 'Propietario' || user.perfil === 'Empleado'">
-    <ion-chip *ngIf="user.perfil === 'Supervisor' || user.perfil === 'Propietario' || user.perfil === 'Empleado'" (click)="FilaClientes()">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'">
+    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'" (click)="FilaClientes()">
       <img src="../assets/imagenes/person-lines-fill.svg" />
     </ion-chip>
-    <br *ngIf="user.perfil === 'Supervisor' || user.perfil === 'Propietario' || user.perfil === 'Empleado'">
-    <ion-chip *ngIf="user.perfil === 'Supervisor' || user.perfil === 'Propietario' || user.perfil === 'Empleado'" (click)="SolicitarMesa()">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'">
+    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'" (click)="SolicitarMesa()">
       <img src="../assets/imagenes/qr-code-scan.svg"  />
     </ion-chip>
     <br>
