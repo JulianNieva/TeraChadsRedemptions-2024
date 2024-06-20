@@ -6,6 +6,7 @@ import { Cliente } from '../clases/cliente';
 import { Usuario } from '../clases/usuario';
 import { Administrador } from '../clases/administrador';
 import { Empleado } from '../clases/empleado';
+import { Mesa } from '../clases/mesa';
 
 @Injectable({
   providedIn: 'root'
@@ -198,9 +199,17 @@ export class BaseDatosService {
 
   //#region  ////////////////// MESA ////////////////////////
     
-    // TraerMesas
+    TraerMesas(){
+      const coleccion = collection(this.firestore, 'mesas')
+      return collectionData(coleccion);
+    }
 
-    // TraerMesa por su numero
+    ModificarMesa(mesa : Mesa)
+    {
+      const coleccion = collection(this.firestore, 'mesas')
+      const documento = doc(coleccion, mesa.uid);
+      updateDoc(documento, JSON.parse(JSON.stringify(mesa)));
+    }
 
     // Modificar cliente mesa
 

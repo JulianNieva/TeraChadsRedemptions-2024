@@ -23,8 +23,9 @@ export class HomePage implements OnDestroy {
     cuil:0,
     perfil:"",
     tipo:"",
-    enFila:false,
   }
+
+  noUser = true
 
   cliente : Cliente = new Cliente
 
@@ -42,18 +43,21 @@ export class HomePage implements OnDestroy {
       case "Propietario":
         this.bd.TraerAdministradoresPorUid(this.bd.userLogUid).then((user : Administrador) => {
           this.usuario = user
+          this.noUser = false
         })
       break
 
       case "Supervisor":
         this.bd.TraerAdministradoresPorUid(this.bd.userLogUid).then((user : Administrador) => {
           this.usuario = user
+          this.noUser = false
         })
       break;
 
       case "Empleado":
         this.bd.TraerEmpleadoPorUid(this.bd.userLogUid).then((user : Empleado) => {
           this.usuario = user
+          this.noUser = false
         })
       break;
 
@@ -61,6 +65,7 @@ export class HomePage implements OnDestroy {
         this.bd.TraerClientePorUid(this.bd.userLogUid).then((user : Cliente) => {
           this.usuario = user
           this.cliente = user
+          this.noUser = false
         })
       break;
     }
@@ -76,7 +81,6 @@ export class HomePage implements OnDestroy {
           let rtobj = JSON.parse(this.qr.scanResult)
     
           if(rtobj.solicitar_mesa){
-            this.usuario.enFila = true
             this.cliente.enFila = true
             this.bd.ModificarFilaCliente(this.cliente.uid,true)
           }
@@ -104,7 +108,10 @@ export class HomePage implements OnDestroy {
       this.cliente = cli
       this.usuario = cli
       if(this.cliente.mesa_asignada === mesa) {
-        this.presentToast("middle","Mesa Asiganda!","success")
+        this.presentToast("middle","Mesa Asiganda!","primary")
+
+        //Vincular la mesa y llevar al usuario al apartado de la mesa
+
       } else if(this.cliente.mesa_asignada === 0){
         this.presentToast("middle","No Tiene Mesa Asiganda!")
       } else {
@@ -115,7 +122,6 @@ export class HomePage implements OnDestroy {
    }
 
    SalirDeFila(){
-    this.usuario.enFila = false
     this.cliente.enFila = false
     this.bd.ModificarFilaCliente(this.cliente.uid,false)
   }
