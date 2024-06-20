@@ -12,12 +12,23 @@ import { Mesa } from '../clases/mesa';
   providedIn: 'root'
 })
 export class BaseDatosService {
-
-  constructor(private firestore : Firestore) { }
-
+  
   public log = false
   public userLogUid = ""
   public userType = ""
+  public usuarioLogueado:any
+
+  constructor(private firestore : Firestore) {
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null; 
+    if(user)
+    {
+      this.userType = user.perfil
+      this.userLogUid = user.uid
+      this.usuarioLogueado = user;
+      console.info(this.usuarioLogueado)
+    }
+   }
 
   //#region ////////////////// CLIENTE ////////////////////////
 
@@ -186,9 +197,30 @@ export class BaseDatosService {
     this.log = true
     this.userLogUid = usuario.uid
     this.userType = usuario.perfil
+    switch(this.userType){
+      //By Juli, lo que hago es dependiendo del uid obtenido, traigo al usuario y lo seteo en el localstorage
+      //
+      case "Supervisor":
+      case "Propietario":
+        this.TraerAdministradoresPorUid(this.userLogUid).then((user : any) => {
+          localStorage.setItem("user",JSON.stringify(user))
+        })
+      break;
+      case "Empleado":
+        this.TraerEmpleadoPorUid(this.userLogUid).then((user : any) => {
+          localStorage.setItem("user",JSON.stringify(user))
+        })
+      break;
+      case "Cliente":
+        this.TraerClientePorUid(this.userLogUid).then((user : any) => {
+          localStorage.setItem("user",JSON.stringify(user))
+        })
+      break;
+    }
   }
 
   LogOut() {
+    localStorage.removeItem("user")
     this.log = false
     this.userLogUid = ""
     this.userType = ""

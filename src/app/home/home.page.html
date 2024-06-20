@@ -30,6 +30,12 @@
 
 </div>
 
+<!-- ******************************* SPINNER *******************************-->
+<div *ngIf="loading" class="custom-spinner">
+  <h1 class="spinnerh1">Cargando...</h1>
+  <img src="../../assets/icon/icon-splash.png" alt="Custom Spinner" />
+</div>
+
 <ion-footer *ngIf="cliente.perfil === 'Cliente'" [translucent]="true">
   <ion-button  (click)="ScanQrLocal()"  fill="outline" id="btn_qr"  >
     <img src="../../../assets/imagenes/qr.png"  id="img_qr">

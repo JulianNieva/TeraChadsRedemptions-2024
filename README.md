@@ -32,11 +32,11 @@
 |   ✔️ | Funcionalidad de Login |
 |   ✔️ | Splashscreen animado|
 |   ✔️ | Implementación de email automatizado|
+|   ✖️ | Realizar pedidos|
 |   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
 |   ✖️ | QR de propina|
 |   ✖️ | Encuesta de Cliente|
-|   ✖️ | Agregar un nuevo cliente registrado|
 |   ✖️ |  Push Ingreso al local|
 |   ✖️ |  Push Confirmar realizacion del pedido|
 |   ✖️ |  Juego para obtener 15% de descuento|  
@@ -58,11 +58,12 @@
 | Estado|    Tareas              |
 | ----- |   -------              |
 |   ✔️ | Splashscreen aplicación     |
+|   ✖️ | Confirmar pedidos|
+|   ✖️ | Chat General|
 |   ✖️ | Alta de Dueño / Supervisor |
 |   ✖️ | Alta de Mesa|
 |   ✖️ | QR de ingreso al local|
 |   ✖️ | Encuesta de Supervisor|
-|   ✖️ | Realizar pedidos|
 |   ✖️ |  Push Agregar cliente nuevo|
 |   ✖️ |  Juego para obtener 10% de descuento|  
 
@@ -85,10 +86,10 @@
 |   ✔️ | Icono aplicación      |
 |   ✔️ | Esqueleto Login      |
 |   ✔️ | Alta de Clientes |
+|   ✔️ | Agregar un nuevo cliente registrado|
+|   ✔️ | Ingresar al local|
 |   ✖️ | QR de la mesa|
 |   ✖️ | Encuesta de Empleados|
-|   ✖️ | Ingresar al local|
-|   ✖️ | Confirmar pedidos|
 |   ✖️ |  Push Consultar al mozo|
 |   ✖️ |  Push Confirmar pedido|
 |   ✖️ |  Juego para obtener 20% de descuento|  

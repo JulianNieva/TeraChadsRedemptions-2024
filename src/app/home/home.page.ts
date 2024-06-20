@@ -27,17 +27,27 @@ export class HomePage implements OnDestroy {
   }
 
   noUser = true
-
+  loading = false;
   cliente : Cliente = new Cliente
 
   constructor(public bd : BaseDatosService, public qr : QrService, public auth : UserAuthService, private navCtrl: NavController, private toastController : ToastController) {
-      this.TraerUsuario()
-   }
+    this.loading = true;
+
+    if(this.bd.usuarioLogueado)
+    {
+      this.usuario = this.bd.usuarioLogueado;
+      console.info(this.usuario)
+      this.noUser = false;
+    }
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 1500);
+    //this.TraerUsuario()
+  }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 
    TraerUsuario() {
     switch(this.bd.userType){
