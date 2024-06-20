@@ -22,10 +22,10 @@
       <h5 class="card-title">{{estado_clientes}}</h5>
 
       <!--/////////////////////////////// LISTA //////////////////////////////// -->
-      <div style="overflow: scroll;height: 300px;margin-bottom: 1rem;">
+      <div  class="div-lista">
         <ion-list *ngFor="let cliente of list; let index">
           
-          <ion-item (click)="SelectCli(cliente)">
+          <ion-item (click)="SelectCli(cliente)" class="item-cli">
             <ion-thumbnail slot="start">
               <img  *ngIf="cliente.imagen !== null" alt="Silhouette of mountains" [src]="cliente.imagen.path" />
             </ion-thumbnail>
@@ -39,9 +39,9 @@
 
       <div class="card card-usuario" *ngIf="cliente.uid !== '' ">
         <ion-avatar style="margin-left: auto;margin-right: auto;margin-top: 0.5rem;">
-          <img *ngIf="cliente.imagen !== null" alt="Silhouette of a person's head" [src]="cliente.imagen.path" />
+          <img id="img-cli-select" *ngIf="cliente.imagen !== null" alt="Silhouette of a person's head" [src]="cliente.imagen.path" />
         </ion-avatar>
-        <div class="card-body">
+        <div class="card-body card-body-cli">
           <h5 class="card-title">{{cliente.nombre}} {{cliente.apellido}}</h5>
           <p class="card-text">DNI: {{cliente.dni}}</p>
         </div>

@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   FilaClientes() {
-    //this.navCtrl.navigateRoot(['/home'])
+    this.navCtrl.navigateRoot(['/fila-clientes'])
   }
 
   SolicitarMesa() {

@@ -45,6 +45,8 @@ export class AprobacionClientesPage {
       this.clientes_denegados = false
       this.clientes_aceptados = false
       this.estado_clientes = "Clientes Pendientes" 
+
+      this.DesSelect()
    }
 
    ClientesDenegados() {
@@ -58,6 +60,8 @@ export class AprobacionClientesPage {
       this.clientes_denegados = true
       this.clientes_aceptados = false
       this.estado_clientes = "Clientes Rechazados"
+
+      this.DesSelect()
    }
 
    ClientesAprobados() {
@@ -71,6 +75,8 @@ export class AprobacionClientesPage {
       this.clientes_denegados = false
       this.clientes_aceptados = true
       this.estado_clientes = "Clientes Aprobados"
+
+      this.DesSelect()
    }
 
    SelectCli(cli : Cliente) {

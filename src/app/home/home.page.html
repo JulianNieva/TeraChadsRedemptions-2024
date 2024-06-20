@@ -1,7 +1,7 @@
 
-<div id="div_principal">
+<div id="div_principal" *ngIf="!qr.scan">
 
-  <div class="card card_div" style="width: 18rem;padding: 0.5px;">
+  <div *ngIf="!cliente.enFila && !noUser" class="card card_div" style="width: 18rem;padding: 0.5px;">
     <img [src]="usuario.imagen.path">
     <div class="card-body">
       <h5 class="card-title" style="text-align: center;">{{usuario.nombre}} {{usuario.apellido}}</h5></div>
@@ -10,13 +10,28 @@
       <li *ngIf="bd.userType === 'Empleado'" style="background-color: #8AC926;" class="list-group-item">Tipo: {{usuario.tipo}}</li>
       <li  style="background-color: #8AC926;" class="list-group-item">DNI: {{usuario.dni}}</li>
       <li  *ngIf="bd.userType === 'Empleado' || bd.userType === 'Propietario' || bd.userType === 'Supervisor'" style="background-color: #8AC926;" class="list-group-item">CUIL: {{usuario.cuil}}</li>
+      <li  *ngIf="bd.userType === 'Cliente' && cliente.mesa_asignada !== 0" style="background-color: #8AC926;" class="list-group-item">Mesa Asignada N°: {{cliente.mesa_asignada}}</li>
+
     </ul>
+  </div>
+
+  <div *ngIf="cliente.enFila" class="card card_div" style="width: 18rem;padding: 0.5px;">
+    <img src="../../assets/imagenes/gifCargaMesa.gif">
+    <div class="card-body">
+
+    </div>
+  </div>
+
+  <div *ngIf="cliente.enFila || cliente.mesa_asignada !== 0">
+    <ion-button *ngIf="cliente.mesa_asignada === 0"  (click)="SalirDeFila()"  size="large" fill="solid"  expand="block" id="btn_cancelar">Cancelar Solicitud</ion-button>
+    <ion-button   (click)="VerEncuestas()"  size="large" fill="outline"  expand="block" id="btn_encuestas">Ver Encuestas</ion-button>
+
   </div>
 
 </div>
 
-<ion-footer [translucent]="true">
-  <ion-button   fill="outline" id="btn_qr"  >
+<ion-footer *ngIf="cliente.perfil === 'Cliente'" [translucent]="true">
+  <ion-button  (click)="ScanQrLocal()"  fill="outline" id="btn_qr"  >
     <img src="../../../assets/imagenes/qr.png"  id="img_qr">
   </ion-button>
 </ion-footer>

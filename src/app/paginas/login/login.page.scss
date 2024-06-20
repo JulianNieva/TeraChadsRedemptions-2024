@@ -122,3 +122,21 @@ ion-loading.custom-loading {
     margin-left: auto;
     margin-right: auto;
 }
+
+// Adaptado para Note 10+
+@media (max-width: 350px) and (max-height: 678px) {
+
+    #img_avatar_select{
+        width: 75%;
+    }
+
+    ion-chip{
+        height: 4rem;
+    }
+
+    ion-avatar{
+        width: 3rem;
+        height: 3rem;
+    }
+
+}
