@@ -211,7 +211,16 @@ export class BaseDatosService {
       updateDoc(documento, JSON.parse(JSON.stringify(mesa)));
     }
 
-    // Modificar cliente mesa
+    async TraerUnaMesaPorNumero(numero : number){
+      let data:any;
+      const q = query(collection(this.firestore, 'mesas'), where("numero", "==", numero));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        data = JSON.parse(JSON.stringify(doc.data()))
+      });
+
+      return data
+    }
 
 
   //#endregion

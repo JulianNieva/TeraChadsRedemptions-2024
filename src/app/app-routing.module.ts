@@ -30,9 +30,14 @@ const routes: Routes = [
   {
     path: 'aprobacion-clientes',
     loadChildren: () => import('./paginas/aprobacion-clientes/aprobacion-clientes.module').then( m => m.AprobacionClientesPageModule)
-  },  {
+  },
+  {
     path: 'fila-clientes',
     loadChildren: () => import('./paginas/fila-clientes/fila-clientes.module').then( m => m.FilaClientesPageModule)
+  },
+  {
+    path: 'mesa-cliente',
+    loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
   },
 
 

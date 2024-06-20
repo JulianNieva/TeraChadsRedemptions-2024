@@ -7,6 +7,7 @@ import { Cliente } from '../clases/cliente';
 import { QrService } from '../servicios/qr.service';
 import { UserAuthService } from '../servicios/user-auth.service';
 import { NavController, ToastController } from '@ionic/angular';
+import { Mesa } from '../clases/mesa';
 
 @Component({
   selector: 'app-home',
@@ -73,7 +74,7 @@ export class HomePage implements OnDestroy {
 
    async ScanQrLocal(){
 
-    if(!this.cliente.enFila) {
+    if(!this.cliente.enFila && this.cliente.mesa_asignada === 0) {
         // Al no estar en Fila Busca Scanear el QR de Ingreso
         await this.qr.StartScan()
         try {
@@ -107,10 +108,20 @@ export class HomePage implements OnDestroy {
     this.bd.TraerClientePorUid(this.cliente.uid).then((cli) => {
       this.cliente = cli
       this.usuario = cli
-      if(this.cliente.mesa_asignada === mesa) {
-        this.presentToast("middle","Mesa Asiganda!","primary")
-
+      if(this.cliente.mesa_asignada === mesa) {     
         //Vincular la mesa y llevar al usuario al apartado de la mesa
+        this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((mesa) => {
+          this.presentToast("middle","Mesa Vinculada! Redirigiendo...","primary")
+          let mesaCliente = new Mesa
+          mesaCliente = mesa as Mesa
+
+          mesaCliente.cliente_uid = this.cliente.uid
+          this.bd.ModificarMesa(mesaCliente)
+          navigator.vibrate(500)
+          this.navCtrl.navigateRoot(['/mesa-cliente'])
+        })
+        //asignar usuario
+        //
 
       } else if(this.cliente.mesa_asignada === 0){
         this.presentToast("middle","No Tiene Mesa Asiganda!")
@@ -128,6 +139,11 @@ export class HomePage implements OnDestroy {
 
   VerEncuestas(){
 
+  }
+
+  MiMesa(){
+      navigator.vibrate(500)
+      this.navCtrl.navigateRoot(['/mesa-cliente'])
   }
 
   // Salir(){
