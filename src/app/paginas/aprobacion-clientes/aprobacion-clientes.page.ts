@@ -95,11 +95,11 @@ export class AprobacionClientesPage {
     if(this.cliente.uid !== " ") {
       this.cliente.aprobado = true
       this.bd.ModificarCliente(this.cliente)
-      this.presentToast("top","Cliente Aprobado","primary")
+      this.presentToast("middle","Cliente Aprobado","primary")
           this.email.EnviarEmailCuentaAprobada(this.cliente)
           this.DesSelect()
     } else {
-      this.presentToast("top","ERROR! Seleccione un Cliente!","warning")
+      this.presentToast("middle","ERROR! Seleccione un Cliente!","warning")
     }
    }
 
@@ -107,15 +107,15 @@ export class AprobacionClientesPage {
     if(this.cliente.uid !== " ") {
       this.cliente.rechazado = true
       this.bd.ModificarCliente(this.cliente)
-      this.presentToast("top","Cliente Rechazado","danger")
+      this.presentToast("middle","Cliente Rechazado","danger")
           this.email.EnviarEmailCuentaInhabilitada(this.cliente)
           this.DesSelect()
     } else {
-      this.presentToast("top","ERROR! Seleccione un Cliente!","warning")
+      this.presentToast("middle","ERROR! Seleccione un Cliente!","warning")
     }
    }
 
-   async presentToast(position:"top", message = "", color = "danger"){
+   async presentToast(position:"middle", message = "", color = "danger"){
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
