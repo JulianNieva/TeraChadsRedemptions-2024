@@ -113,25 +113,24 @@ export class HomePage implements OnDestroy {
     }
 
     MesaAsignada(mesa: number){
-    
     this.bd.TraerClientePorUid(this.cliente.uid).then((cli) => {
       this.cliente = cli
       this.usuario = cli
+      this.bd.ActualizarLog(this.cliente)
       if(this.cliente.mesa_asignada === mesa) {     
         //Vincular la mesa y llevar al usuario al apartado de la mesa
         this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((mesa) => {
-          this.presentToast("middle","Mesa Vinculada! Redirigiendo...","primary")
           let mesaCliente = new Mesa
           mesaCliente = mesa as Mesa
-
           mesaCliente.cliente_uid = this.cliente.uid
-          this.bd.ModificarMesa(mesaCliente)
-          navigator.vibrate(500)
-          this.navCtrl.navigateRoot(['/mesa-cliente'])
+          this.presentToast("middle","Mesa Vinculada! Redirigiendo...","primary",3000)
+          this.bd.ModificarMesa(mesaCliente).then(() => {
+            navigator.vibrate(500)
+            this.navCtrl.navigateRoot(['/mesa-cliente'])
+          })
         })
         //asignar usuario
         //
-
       } else if(this.cliente.mesa_asignada === 0){
         this.presentToast("middle","No Tiene Mesa Asiganda!")
       } else {
@@ -163,10 +162,10 @@ export class HomePage implements OnDestroy {
   // }
 
 
-  async presentToast(position : 'top' | 'middle', message = "", color = "danger"){
+  async presentToast(position : 'top' | 'middle', message = "", color = "danger",duration = 2000){
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
+      duration: duration,
       position: position,
       color : color,
     });

@@ -105,7 +105,7 @@ export class FilaClientesPage {
     if(this.cliente.uid !== " ") {
         this.seleccionar_mesa = true
     } else {
-      this.presentToast("top","ERROR! Seleccione un Cliente!","warning")
+      this.presentToast("middle","ERROR! Seleccione un Cliente!","warning")
     }
    }
 
@@ -116,7 +116,7 @@ export class FilaClientesPage {
 
       this.bd.ModificarCliente(this.cliente)
 
-      this.presentToast('top',"Mesa Asiganda a Cliente!","success")
+      this.presentToast('middle',"Mesa Asiganda a Cliente!","success")
       this.Cancelar()
    }
 
@@ -127,7 +127,7 @@ export class FilaClientesPage {
    }
 
 
-   async presentToast(position:"top", message = "", color = "danger"){
+   async presentToast(position:"middle", message = "", color = "danger"){
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,

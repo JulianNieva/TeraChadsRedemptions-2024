@@ -211,6 +211,10 @@ export class BaseDatosService {
     }
   }
 
+  ActualizarLog(user : Cliente | Administrador | Empleado){
+    localStorage.setItem("user",JSON.stringify(user))
+  }
+
   LogOut() {
     localStorage.removeItem("user")
     this.log = false
@@ -239,7 +243,7 @@ export class BaseDatosService {
     {
       const coleccion = collection(this.firestore, 'mesas')
       const documento = doc(coleccion, mesa.uid);
-      updateDoc(documento, JSON.parse(JSON.stringify(mesa)));
+      return updateDoc(documento, JSON.parse(JSON.stringify(mesa)));
     }
 
     async TraerUnaMesaPorNumero(numero : number){
