@@ -4,6 +4,7 @@ import { NavController, ToastController } from '@ionic/angular';
 import { Cliente } from 'src/app/clases/cliente';
 import { Usuario } from 'src/app/clases/usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
+import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 import { UserAuthService } from 'src/app/servicios/user-auth.service';
 
 @Component({
@@ -14,7 +15,9 @@ import { UserAuthService } from 'src/app/servicios/user-auth.service';
 export class LoginPage implements OnInit {
 
 
-  constructor(private toastController:ToastController,private authService:UserAuthService,private navCtrl:NavController,private ruta : Router,private bd : BaseDatosService) { } 
+  constructor(private toastController:ToastController, private authService:UserAuthService, private navCtrl:NavController,
+    private ruta : Router,private bd : BaseDatosService) {
+     } 
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {

@@ -14,7 +14,7 @@ ion-toolbar{
 #div_principal{
     width: 100%;
     height: 150%;
-    background-color:#FFEBB3 ;
+    background-color:#313131 ;
     padding-top: 1rem;
     padding-bottom: 0.5rem;
     padding-left: 2rem;
@@ -34,9 +34,9 @@ ion-title{
 
 ion-chip{
     width: 100%;
-    height: 6rem;
+    height: 5rem;
     margin-bottom: 1rem;
-    background-color: #FFEBB3;
+    background-color: #8AC926;
     color: #000000;
     margin-top: 1rem;
 }
@@ -46,8 +46,8 @@ ion-chip:active{
 }
 
 ion-avatar{
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     margin-right: 2rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
@@ -69,7 +69,7 @@ h3{
     --color:#000000;
     --background:#8AC926;
     --border-color:#8AC926;
-    --background-activated:#FFEBB3;
+    --background-activated:#313131;
     --color-activated:#8AC926;
     --background-activated-opacity:1;
     --box-shadow: 0 0.2rem 0.6rem 0 rgb(0, 0, 0, 0.25);
@@ -77,21 +77,21 @@ h3{
 
 #btn_borrar{
     --border-color:#8AC926;
-    --color-activated:#FFEBB3;
+    --color-activated:#313131;
     --background-activated:#8AC926;
     margin-bottom: 0.5rem;
     font-weight: bolder;
-    --color:#000000;
+    --color:#95ee05;
     --background-activated-opacity:1;
     --box-shadow: 0 0.2rem 0.6rem 0 rgb(0, 0, 0, 0.25);
 }
 
 #btn_registrar{
     --border-color:#8AC926;
-    --color-activated:#FFEBB3;
+    --color-activated:#313131;
     --background-activated:#8AC926;
     font-weight: bolder;
-    --color:#000000;
+    --color:#95ee05;
     --background-activated-opacity:1;
     --box-shadow: 0 0.2rem 0.6rem 0 rgb(0, 0, 0, 0.25);
 }
@@ -99,7 +99,7 @@ h3{
 ion-input{
     margin-right: auto;
     margin-left: auto;
-    --color:#000000;
+    --color:#95ee05;
     width: 100%;
     margin-top: 1%;
     margin-bottom: 1%;

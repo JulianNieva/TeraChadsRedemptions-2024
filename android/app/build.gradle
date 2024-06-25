@@ -1,4 +1,9 @@
+
 apply plugin: 'com.android.application'
+
+// ---> inserto un pligin de servicios google
+apply plugin: 'com.google.gms.google-services'
+
 
 android {
     namespace "com.pps.Comanda"
@@ -40,6 +45,11 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+
+    // ----> Implementando dependencias
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 apply from: 'capacitor.build.gradle'

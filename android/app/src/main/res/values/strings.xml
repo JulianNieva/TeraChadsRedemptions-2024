@@ -4,4 +4,5 @@
     <string name="title_activity_main">El Restaurante</string>
     <string name="package_name">com.pps.Comanda</string>
     <string name="custom_url_scheme">com.pps.Comanda</string>
+    <string name="default_notification_channel_id" />
 </resources>

@@ -148,6 +148,21 @@ export class BaseDatosService {
     }
 
 
+    ModificarEmpleado(emp : Empleado)
+    {
+      const coleccion = collection(this.firestore, 'empleados')
+      const documento = doc(coleccion, emp.uid);
+      updateDoc(documento, JSON.parse(JSON.stringify(emp)));
+    }
+
+    ModificarAdministrador(adm : Administrador)
+    {
+      const coleccion = collection(this.firestore, 'administradores')
+      const documento = doc(coleccion, adm.uid);
+      updateDoc(documento, JSON.parse(JSON.stringify(adm)));
+    }
+
+
   //#endregion
 
   //#region  ////////////////// USUARIO //////////////////////// 
@@ -178,11 +193,11 @@ export class BaseDatosService {
       return collectionData(coleccion);
     }
 
+  
 
   //#endregion
 
   //#region ////////////////// LOGIN ////////////////////////
-
   async LogIn(usuario : Usuario)  {
     this.log = true
     this.userLogUid = usuario.uid
@@ -210,6 +225,8 @@ export class BaseDatosService {
       break;
     }
   }
+
+
 
   ActualizarLog(user : Cliente | Administrador | Empleado){
     localStorage.setItem("user",JSON.stringify(user))

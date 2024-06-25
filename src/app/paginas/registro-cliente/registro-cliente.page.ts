@@ -9,6 +9,7 @@ import { FotoUsuario } from 'src/app/interfaces/foto-usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { EmailService } from 'src/app/servicios/email.service';
 import { FotoService } from 'src/app/servicios/foto.service';
+import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 import { QrService } from 'src/app/servicios/qr.service';
 import { UserAuthService } from 'src/app/servicios/user-auth.service';
 
@@ -27,7 +28,7 @@ export class RegistroClientePage  {
   /// FALTA HACER FUNCIONAR FIREBASE STORAGE, FOTO SERVICE, QUER SERVICE
 
   constructor(private fb : FormBuilder,private toastController : ToastController, private bd : BaseDatosService, 
-    public cam : FotoService, private storage : Storage, public qr : QrService, private ruta : Router, private auth : UserAuthService, private email : EmailService) {
+    public cam : FotoService, private storage : Storage, public qr : QrService, private ruta : Router, private auth : UserAuthService, private email : EmailService, private push_notification : PushNotificationService) {
     this.bd.TraerClientes().subscribe((clientes)=>{
       this.clientesBd = clientes as Array<Cliente>
     })
@@ -57,6 +58,11 @@ export class RegistroClientePage  {
         Validators.minLength(6),
         Validators.maxLength(30),
       ]],
+      reclave : ['',[
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(15),
+      ]],
     })
 
    }
@@ -72,7 +78,6 @@ export class RegistroClientePage  {
   }
 
 
-
   fotoTomada = false;
   barraCarga = false;
   nombre:string = "";
@@ -81,6 +86,7 @@ export class RegistroClientePage  {
   clave:string = "";
   correo:string = "";
   ms_loading : number = 1000
+  reclave:string = "";
   
   BorrarDatos() {
     this.cam.fotos = []
@@ -89,6 +95,7 @@ export class RegistroClientePage  {
     this.apellido = ""
     this.barraCarga = false
     this.clave = ""
+    this.reclave = ""
     this.correo = ""
     this.ms_loading = 1000
   }
@@ -98,6 +105,7 @@ export class RegistroClientePage  {
  
     setTimeout(() => {
       if(!this.forms.invalid){
+        if(this.reclave === this.clave) {
           let existe = false;
           for(let user of this.clientesBd){
               if(user.dni === this.dni){
@@ -135,6 +143,11 @@ export class RegistroClientePage  {
               navigator.vibrate(1000);
               this.presentToast("top","ERROR!, Cliente ya existente!!");
             }
+          } else {
+            this.barraCarga = false
+            navigator.vibrate(1000);
+            this.presentToast("top","ERROR!, Las claves no son iguales!");
+          }
       }else{
         this.barraCarga = false
         navigator.vibrate(1000);
@@ -266,12 +279,16 @@ export class RegistroClientePage  {
 
   AltaCLiente(cliente : Cliente) {
       this.auth.Registrar(cliente.correo,cliente.clave).then( () => {
-        this.bd.AltaCliente(cliente)
+
         this.barraCarga = false
         this.presentToast("top","Cliente registrado con exito!! Espere a ser Validado","primary");
         // Envia Correo a Cliente
         this.email.EnviarEmailAprobacionPendiente(cliente)
-      
+        // Notifica a los ADMS
+        this.push_notification.NuevoCliente(cliente).subscribe((response) => {
+          this.bd.AltaCliente(response)
+        })
+
         navigator.vibrate(500);
         this.ruta.navigateByUrl("login")
       }).catch((reason) => {
