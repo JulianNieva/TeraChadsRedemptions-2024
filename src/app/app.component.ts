@@ -1,8 +1,9 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseDatosService } from './servicios/base-datos.service';
 import { UserAuthService } from './servicios/user-auth.service';
-import { NavController } from '@ionic/angular';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { NavController, Platform } from '@ionic/angular';
+import { PushNotificationService } from './servicios/push-notification.service';
+
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,17 @@ export class AppComponent {
 
 
 
-  constructor(public bd : BaseDatosService, private navCtrl: NavController, private auth : UserAuthService) {}
+  constructor(public bd : BaseDatosService, private navCtrl: NavController, private auth : UserAuthService, private notifiaciones : PushNotificationService, private plataform : Platform) {
+
+    this.plataform.ready().then(() => {
+      if(this.plataform.is('android')){
+        this.notifiaciones.addListeners()
+        this.notifiaciones.registerNotifications()
+        this.notifiaciones.getDeliveredNotifications()
+      }
+    })
+
+  }
 
   Salir() {
     navigator.vibrate(500)
@@ -38,5 +49,7 @@ export class AppComponent {
     this.navCtrl.navigateRoot(['/home'])
   }
 
-
 }
+
+
+

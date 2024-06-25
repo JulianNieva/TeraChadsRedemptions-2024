@@ -5,6 +5,7 @@ export class Usuario
     correo : string
     clave : string
     perfil : string
+    token_mensajes : string = ""
 
     constructor(uid : string = "", correo : string = "", clave : string = "", perfil : string = "") { 
         this.uid = uid

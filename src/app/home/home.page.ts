@@ -8,6 +8,7 @@ import { QrService } from '../servicios/qr.service';
 import { UserAuthService } from '../servicios/user-auth.service';
 import { NavController, ToastController } from '@ionic/angular';
 import { Mesa } from '../clases/mesa';
+import { PushNotificationService } from '../servicios/push-notification.service';
 
 @Component({
   selector: 'app-home',
@@ -17,20 +18,23 @@ import { Mesa } from '../clases/mesa';
 export class HomePage implements OnDestroy {
 
   usuario : any = {
-    nombre:"",
-    apellido:"",
-    imagen:{path:""},
-    dni:0,
-    cuil:0,
-    perfil:"",
-    tipo:"",
+    nombre : "",
+    apellido : "",
+    imagen : {path:""},
+    dni : 0,
+    cuil : 0,
+    perfil : "",
+    tipo : "",
+    token_mensajes : ""
   }
 
   noUser = true
   loading = false;
   cliente : Cliente = new Cliente
+  mi_token = ""
 
-  constructor(public bd : BaseDatosService, public qr : QrService, public auth : UserAuthService, private navCtrl: NavController, private toastController : ToastController) {
+  constructor(public bd : BaseDatosService, public qr : QrService, public auth : UserAuthService, 
+    private navCtrl: NavController, private toastController : ToastController, private push_notification : PushNotificationService) {
     this.loading = true;
 
     let user = this.bd.Getlog()
@@ -39,10 +43,28 @@ export class HomePage implements OnDestroy {
       this.cliente = user as Cliente
       this.noUser = false
     }
-    
+
+    console.log(this.usuario)
+
+    this.mi_token = localStorage.getItem("token_device") as string
+    if(!(this.mi_token === this.usuario.token_mensajes)) {
+      this.usuario.token_mensajes = this.mi_token
+      if(this.usuario.perfil === "Cliente") {
+        this.cliente.token_mensajes = this.mi_token
+        this.bd.ModificarCliente(this.cliente)
+      } else if(this.usuario.perfil === "Empleado") {
+        this.bd.ModificarEmpleado(this.usuario as Empleado)
+      } else if(this.usuario.perfil === "Propietario" || this.usuario.perfil === "Supervisor") {
+        this.bd.ModificarAdministrador(this.usuario as Administrador)
+      }
+
+      this.bd.ActualizarLog(this.usuario)
+    } 
+
     setTimeout(() => {
       this.loading = false;
     }, 1500);
+
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
@@ -93,6 +115,10 @@ export class HomePage implements OnDestroy {
           if(rtobj.solicitar_mesa){
             this.cliente.enFila = true
             this.bd.ModificarFilaCliente(this.cliente.uid,true)
+            //Notifica a Metres
+            this.push_notification.ClienteIngresaLocal(this.cliente).subscribe((response) => {
+              console.log(response)
+            })
           }
 
         }

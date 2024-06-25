@@ -4,6 +4,7 @@ import { Cliente } from 'src/app/clases/cliente';
 import { Mesa } from 'src/app/clases/mesa';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { EmailService } from 'src/app/servicios/email.service';
+import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 
 @Component({
   selector: 'app-fila-clientes',
@@ -25,7 +26,7 @@ export class FilaClientesPage {
   listOfAllMesas : Mesa[] = []
 
 
-  constructor(private bd : BaseDatosService, private toastController : ToastController, private email : EmailService) {
+  constructor(private bd : BaseDatosService, private toastController : ToastController, private email : EmailService,  private push_notification : PushNotificationService) {
     this.bd.TraerClientes().subscribe((clientes : any) => {
       this.listOfAll = clientes as Array<Cliente>
       this.ClientesEnFila()
@@ -115,6 +116,10 @@ export class FilaClientesPage {
       this.cliente.enFila = false
 
       this.bd.ModificarCliente(this.cliente)
+      //SE notifica al cliente si esta su token
+      if(this.cliente.token_mensajes !== null || this.cliente.token_mensajes !== ""){
+        this.push_notification.MesaAsignada(this.cliente.token_mensajes,this.cliente.mesa_asignada).subscribe(response => console.log(response))
+      }
 
       this.presentToast('middle',"Mesa Asiganda a Cliente!","success")
       this.Cancelar()
