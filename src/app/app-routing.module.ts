@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { MemoriaComponent } from './componentes/juegos/juego_20_desc/memoria/memoria.component';
 
 const routes: Routes = [
   {
@@ -38,10 +39,18 @@ const routes: Routes = [
   {
     path: 'mesa-cliente',
     loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
-  },  {
+  },
+  {
+    path:'juego-20-desc/memoria',
+    component: MemoriaComponent 
+  },
+  {
     path: 'chat',
     loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
   },
+
+
+];
 
 
 

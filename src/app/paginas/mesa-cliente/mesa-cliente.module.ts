@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MesaClientePageRoutingModule } from './mesa-cliente-routing.module';
 
 import { MesaClientePage } from './mesa-cliente.page';
+import { MemoriaComponent } from 'src/app/componentes/juegos/juego_20_desc/memoria/memoria.component';
 import { ListadoProductosComponent } from 'src/app/componentes/listado-productos/listado-productos.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -18,7 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     IonicModule,
     MesaClientePageRoutingModule
   ],
-  declarations: [MesaClientePage,ListadoProductosComponent],
+  declarations: [MesaClientePage,ListadoProductosComponent,MemoriaComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MesaClientePageModule {}

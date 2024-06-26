@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MesaClientePage } from './mesa-cliente.page';
 
+
 const routes: Routes = [
   {
     path: '',
-    component: MesaClientePage
-  }
+    component: MesaClientePage,
+  },
 ];
 
 @NgModule({
