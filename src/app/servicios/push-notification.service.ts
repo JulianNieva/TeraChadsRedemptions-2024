@@ -79,18 +79,26 @@ export class PushNotificationService  {
   public MesaAsignada(token : string, mesa : any) : Observable<any> {
 
     let message = {
-         title : `Se le asigno la Mesa ${mesa}, escanee el QR`,
-          Body : "Un cliente ingreso al local",
+         title : `Se le asignó la Mesa ${mesa}, escanee el QR`,
+          Body : "Un cliente ingresó al local",
           token : token
     }
 
     return this.htpp.post<any>(`${this.urlApi}notify`,message);
   }
-  
+
+  public MesaRealizoUnPedido(mesa:string){
+    let message = {
+      title : `La mesa: ${mesa}, realizó un pedido`,
+      Body : "Por favor, revise el listado de pedidos para aceptar el mismo",
+      tipo : "Mozo"
+    }
+
+    return this.htpp.post<any>(`${this.urlApi}notify-employes-type`,message);
+  }
 
 
-  //#endregion
-  
+  //#endregion  
 
   async addListeners(){
 
