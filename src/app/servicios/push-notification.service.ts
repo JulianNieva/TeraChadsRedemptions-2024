@@ -87,16 +87,21 @@ export class PushNotificationService  {
     return this.htpp.post<any>(`${this.urlApi}notify`,message);
   }
 
-  public MesaRealizoUnPedido(mesa:string){
+  //By Juli, encapsulo la notificacion de chat y realizar pedido para el mozo
+  public MesaNotificacionAMozo(title:string,body:string){
+    // let message = {
+    //   title : `La mesa: ${mesa}, realizó un pedido`,
+    //   Body : "Revise el listado de pedidos",
+    //   tipo : "Mozo"
+    // }
     let message = {
-      title : `La mesa: ${mesa}, realizó un pedido`,
-      Body : "Por favor, revise el listado de pedidos para aceptar el mismo",
-      tipo : "Mozo"
+      title: title,
+      Body: body,
+      tipo:"Mozo"
     }
 
     return this.htpp.post<any>(`${this.urlApi}notify-employes-type`,message);
   }
-
 
   //#endregion  
 

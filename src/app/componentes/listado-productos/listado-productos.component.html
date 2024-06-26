@@ -2,25 +2,19 @@
 <div *ngIf="!mostrarPedido" class="mt-7">
   <ion-fab>
     <ion-fab-button (click)="CambiarVista('otro')">
-      <ion-icon name="cart"></ion-icon>
+      <ion-icon name="newspaper"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <p class="text-center" style="color: white;font-size: 21px;font-weight: 600;letter-spacing: 1px;">IMPORTE TOTAL: ${{importeTotal}}</p>
+  <p class="text-center titulo" >IMPORTE TOTAL: ${{importeTotal}}</p>
   <div class="container">
     <div class="card" *ngFor="let producto of productos" >
-      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img [src]="producto.fotos.path1"  class="d-block w-100" style="border-radius: 6px 6px 0px 0px;" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img [src]="producto.fotos.path2"  class="d-block w-100" style="border-radius: 6px 6px 0px 0px;" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img [src]="producto.fotos.path3"  class="d-block w-100" style="border-radius: 6px 6px 0px 0px;" alt="...">
-          </div>
-        </div>
-      </div>
+      <swiper-container
+        [pagination]="true"
+        (swiper)="onSwipe($event)">
+        <swiper-slide *ngFor="let foto of producto.fotos | keyvalue">
+          <img [src]="foto.value" class="imagen">
+        </swiper-slide>
+      </swiper-container>
       <div class="card-body">
         <p class="nombre">{{producto.nombre}}</p>
         <p class="descripcion">{{producto.descripcion}}</p>
@@ -39,11 +33,11 @@
 <div *ngIf="mostrarPedido">
   <ion-fab>
     <ion-fab-button (click)="CambiarVista('pedir')">
-      <ion-icon name="newspaper"></ion-icon>
+      <ion-icon name="cart"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <p class="text-center" style="color: white;font-size: 21px;font-weight: 600;letter-spacing: 1px;margin-bottom: 40px;">MI PEDIDO</p>
+  <p class="text-center titulo">MI PEDIDO</p>
   <div class="contenedor-pedido">
     <table class="table table-bordered caption-top" style="color: #ffffff;">
       <caption style="color: white; font-size: 20px;">Resumen de su pedido

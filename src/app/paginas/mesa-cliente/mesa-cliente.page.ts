@@ -4,7 +4,10 @@ import { Cliente } from 'src/app/clases/cliente';
 import { Mesa } from 'src/app/clases/mesa';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { QrService } from 'src/app/servicios/qr.service';
+import { NavController } from '@ionic/angular';
+import { register } from 'swiper/element/bundle';
 
+register();
 @Component({
   selector: 'app-mesa-cliente',
   templateUrl: './mesa-cliente.page.html',
@@ -20,7 +23,7 @@ export class MesaClientePage {
   listadoProductos = false;
   pedido:any = null;
 
-  constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService) {
+  constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService, private navCtrl: NavController) {
     ///Obtengo la mesa del user logeado pero primero traigo el cliente logeado (corregir cuando se maneje el nuevo log)
     this.loading = true
     let cli = this.bd.Getlog()
@@ -32,8 +35,11 @@ export class MesaClientePage {
         console.info(this.mesa)
 
         this.bd.TraerUnPedidoPorMesa(this.mesa.numero).subscribe((res) => {
-          this.pedido = res;
-          console.info(this.pedido)
+          if(res.length != 0)
+          {
+            this.pedido = res;
+            console.info(this.pedido)
+          }
           this.loading = false
         })
 
@@ -61,7 +67,7 @@ export class MesaClientePage {
 
   //Consulta al Mozo, Te redirige al chat general para mandar un mensaje
   ConsultarMozo(){
-    
+    this.navCtrl.navigateRoot(["/chat"])
   }
 
   //Ver encuestas
@@ -94,7 +100,7 @@ export class MesaClientePage {
         this.pedido = res;
         console.info(this.pedido)
         this.loading = false;
-        this.presentToast("middle","Pedido realizado con éxito!. Compruebe su estado escaneando el QR","primary")
+        this.presentToast("middle","Pedido realizado con éxito!. Compruebe el estado de su pedido escaneando el QR","primary")
     })
   }
 

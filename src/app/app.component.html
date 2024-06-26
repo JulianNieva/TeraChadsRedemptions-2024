@@ -20,6 +20,14 @@
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'" (click)="SolicitarMesa()">
       <img src="../assets/imagenes/qr-code-scan.svg"  />
     </ion-chip>
+    <br *ngIf="bd.userRol === 'Mozo'">
+    <ion-chip *ngIf="bd.userRol === 'Mozo'" (click)="MostrarChat()">
+      <img src="../assets/imagenes/chat.svg" />
+    </ion-chip>
+    <br *ngIf="bd.userType === 'Cliente'">
+    <ion-chip *ngIf="bd.userType === 'Cliente'" (click)="MostrarMesaCliente()">
+      <img src="../assets/imagenes/sillas-y-mesa-de-restaurante.png" />
+    </ion-chip>
     <br>
     <ion-chip (click)="Salir()">
         <img src="../assets/imagenes/door-open-fill.svg" />

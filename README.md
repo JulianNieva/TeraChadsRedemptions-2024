@@ -35,10 +35,10 @@
 |   ✔️ | Realizar pedidos (Implementacion parcial)|
 |   ✔️ | QR de propina|
 |   ✔️ | Push Confirmar realizacion del pedido|
+|   ✔️ | Push Consultar al mozo|
 |   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
 |   ✖️ | Encuesta de Cliente|
-|   ✖️ | Push Consultar al mozo|
 |   ✖️ | Juego para obtener 15% de descuento|  
 
 ***[Branch de ALFA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/alfa)***
@@ -90,8 +90,8 @@
 |   ✔️ | QR de la mesa|
 |   ✔️ | Push Ingreso al local
 |   ✔️ | Push Agregar cliente nuevo|
-|   ✖️ | Encuesta de Empleados|
-|   ✖️ | Juego para obtener 20% de descuento|  
+|   ✔️ | Juego para obtener 20% de descuento| 
+|   ✖️ | Encuesta de Empleados| 
 
 ***[Branch de GAMMA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/gamma)***
 

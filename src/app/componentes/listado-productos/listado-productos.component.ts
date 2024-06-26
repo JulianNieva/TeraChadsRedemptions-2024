@@ -126,7 +126,7 @@ export class ListadoProductosComponent  implements OnInit {
       };
 
       await this.bdSrv.SubirPedido(this.pedidoFormato);
-      this.pushSrv.MesaRealizoUnPedido(this.numeroMesa)
+      this.pushSrv.MesaNotificacionAMozo(`La mesa: ${this.numeroMesa}, realizó un pedido`,"Revise el listado de pedidos")
       this.pedidoFinalizado.emit(this.pedidoFormato)
       this.loading = false;
     } catch (error) {
@@ -139,6 +139,15 @@ export class ListadoProductosComponent  implements OnInit {
       this.productosAPedir = [];
       this.importeTotal = 0;
       this.pedidoFormato = {};
+    }
+  }
+
+  onSwipe(swiper:any){
+    if (!swiper.isEnd) {
+      swiper.allowSlideNext = true;
+    }
+    if (!swiper.isBeginning) {
+      swiper.allowSlidePrev = true;
     }
   }
 }

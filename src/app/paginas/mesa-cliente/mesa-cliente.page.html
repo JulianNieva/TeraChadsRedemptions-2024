@@ -25,7 +25,7 @@
   <img src="../../assets/icon/empresa.png" alt="Custom Spinner" />
 </div>
 
-<ion-footer *ngIf="cliente.perfil === 'Cliente'" [translucent]="true">
+<ion-footer *ngIf="cliente.perfil === 'Cliente' && !listadoProductos" [translucent]="true">
   <ion-button  (click)="ScanMesa()"  fill="outline" id="btn_qr"  >
     <img src="../../../assets/imagenes/qr.png"  id="img_qr">
   </ion-button>

@@ -43,7 +43,15 @@ const routes: Routes = [
   {
     path:'juego-20-desc/memoria',
     component: MemoriaComponent 
-  }
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
+  },
+
+
+];
+
 
 
 ];

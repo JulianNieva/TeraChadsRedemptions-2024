@@ -39,6 +39,7 @@ export class HomePage implements OnDestroy {
 
     let user = this.bd.Getlog()
     if(user){
+      console.log(this.bd.userRol)
       console.info(user)
       this.usuario = user
       this.cliente = user as Cliente
