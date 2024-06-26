@@ -8,6 +8,7 @@ import { MesaClientePageRoutingModule } from './mesa-cliente-routing.module';
 
 import { MesaClientePage } from './mesa-cliente.page';
 import { MemoriaComponent } from 'src/app/componentes/juegos/juego_20_desc/memoria/memoria.component';
+import { ListadoProductosComponent } from 'src/app/componentes/listado-productos/listado-productos.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { MemoriaComponent } from 'src/app/componentes/juegos/juego_20_desc/memor
     IonicModule,
     MesaClientePageRoutingModule
   ],
-  declarations: [MesaClientePage, MemoriaComponent]
+  declarations: [MesaClientePage, MemoriaComponent,ListadoProductosComponent]
 })
 export class MesaClientePageModule {}

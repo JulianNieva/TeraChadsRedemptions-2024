@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  imgUsuarioSelecionado = "../../assets/imagenes/icon.png";
+  imgUsuarioSelecionado = "../../assets/icon/empresa.png";
   barraCarga = false;
 
   correo = "";
@@ -146,7 +146,7 @@ export class LoginPage implements OnInit {
   Default(){
     this.correo = "";
     this.clave = "";
-    this.imgUsuarioSelecionado = "../../assets/imagenes/icon.png";
+    this.imgUsuarioSelecionado = "../../assets/icon/empresa.png";
   }
 
   BarraCarga(){
