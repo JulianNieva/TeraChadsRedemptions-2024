@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MesaClientePageRoutingModule } from './mesa-cliente-routing.module';
 
 import { MesaClientePage } from './mesa-cliente.page';
+import { ListadoProductosComponent } from 'src/app/componentes/listado-productos/listado-productos.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MesaClientePage } from './mesa-cliente.page';
     IonicModule,
     MesaClientePageRoutingModule
   ],
-  declarations: [MesaClientePage]
+  declarations: [MesaClientePage,ListadoProductosComponent]
 })
 export class MesaClientePageModule {}

@@ -16,6 +16,7 @@ export class BaseDatosService {
   public log = false
   public userLogUid = ""
   public userType = ""
+  public userRol = ""
   public usuarioLogueado:any
 
   constructor(private firestore : Firestore) {}
@@ -208,18 +209,21 @@ export class BaseDatosService {
       case "Propietario":
         await this.TraerAdministradoresPorUid(this.userLogUid).then((user : any) => {
           this.usuarioLogueado = user as Administrador
+          this.userRol = this.usuarioLogueado.tipo
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
       case "Empleado":
         await this.TraerEmpleadoPorUid(this.userLogUid).then((user : any) => {
           this.usuarioLogueado = user as Empleado
+          this.userRol = this.usuarioLogueado.tipo
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
       case "Cliente":
         await this.TraerClientePorUid(this.userLogUid).then((user : any) => {
           this.usuarioLogueado = user as Cliente
+          this.userRol = this.usuarioLogueado.tipo
           localStorage.setItem("user",JSON.stringify(user))
         })
       break;
@@ -279,7 +283,11 @@ export class BaseDatosService {
 
   //#region  ////////////////// PRODUCTOS (COMIDA) ////////////////////////
 
-    // TraerProductos
+    TraerProductos()
+    {
+      const coleccion = collection(this.firestore,'productos');
+      return collectionData(coleccion);
+    }
 
   //#endregion
 
@@ -294,6 +302,23 @@ export class BaseDatosService {
   //#region  ////////////////// PEDIDOS //////////////////////// (A CONFIRMAR)
 
     // SubirPedido
+    async SubirPedido(pedido:any)
+    {
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion);
+      setDoc(documento, JSON.parse(JSON.stringify(pedido)));
+    }
+
+    TraerPedidos()
+    {
+      const coleccion = collection(this.firestore,'pedidos');
+      return collectionData(coleccion);
+    }
+
+    TraerUnPedidoPorMesa(mesa:number){
+      const q = query(collection(this.firestore,'pedidos'),where('mesa','==',mesa));
+      return collectionData(q)
+    }
 
   //#endregion
 

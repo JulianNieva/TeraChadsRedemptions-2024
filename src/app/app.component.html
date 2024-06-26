@@ -12,12 +12,12 @@
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="AprobarClientes()">
       <img src="../assets/imagenes/person-fill-check.svg" />
     </ion-chip>
-    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'">
-    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'" (click)="FilaClientes()">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'">
+    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="FilaClientes()">
       <img src="../assets/imagenes/person-lines-fill.svg" />
     </ion-chip>
-    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'">
-    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Empleado'" (click)="SolicitarMesa()">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Metre'">
+    <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'" (click)="SolicitarMesa()">
       <img src="../assets/imagenes/qr-code-scan.svg"  />
     </ion-chip>
     <br>

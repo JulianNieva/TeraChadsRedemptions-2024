@@ -126,12 +126,16 @@ ion-loading.custom-loading {
 // Adaptado para Note 10+
 @media screen and (max-width: 385px) and (max-height: 700px) {
 
+    ion-header{
+        height: 3.3rem;
+    }
+
     #img_avatar_select{
         width: 75%;
     }
 
     ion-chip{
-        height: 4rem;
+        height: 3.3rem;
     }
 
     ion-avatar{

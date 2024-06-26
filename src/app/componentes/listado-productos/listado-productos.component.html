@@ -1,0 +1,89 @@
+<!-- LISTADO DE PRODUCTOS -->
+<div *ngIf="!mostrarPedido" class="mt-7">
+  <ion-fab>
+    <ion-fab-button (click)="CambiarVista('otro')">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <p class="text-center" style="color: white;font-size: 21px;font-weight: 600;letter-spacing: 1px;">IMPORTE TOTAL: ${{importeTotal}}</p>
+  <div class="container">
+    <div class="card" *ngFor="let producto of productos" >
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img [src]="producto.fotos.path1"  class="d-block w-100" style="border-radius: 6px 6px 0px 0px;" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img [src]="producto.fotos.path2"  class="d-block w-100" style="border-radius: 6px 6px 0px 0px;" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img [src]="producto.fotos.path3"  class="d-block w-100" style="border-radius: 6px 6px 0px 0px;" alt="...">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="nombre">{{producto.nombre}}</p>
+        <p class="descripcion">{{producto.descripcion}}</p>
+        <p class="tiempo">Tiempo estimado: <span style="font-weight: bold;">{{producto.duracion}} minutos</span></p>
+        <p class="precio">Precio: ${{producto.precio}}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-success" (click)="AgregarProductoAlPedido(producto)">Agregar</button>
+        <button class="btn btn-danger" (click)="QuitarProductoDelPedido(producto)">Quitar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--INFORME DEL PEDIDO-->
+<div *ngIf="mostrarPedido">
+  <ion-fab>
+    <ion-fab-button (click)="CambiarVista('pedir')">
+      <ion-icon name="newspaper"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <p class="text-center" style="color: white;font-size: 21px;font-weight: 600;letter-spacing: 1px;margin-bottom: 40px;">MI PEDIDO</p>
+  <div class="contenedor-pedido">
+    <table class="table table-bordered caption-top" style="color: #ffffff;">
+      <caption style="color: white; font-size: 20px;">Resumen de su pedido
+        <ion-icon name="newspaper"></ion-icon>
+      </caption>
+      <thead>
+        <tr>
+          <th>PRODUCTO</th>
+          <th>CANTIDAD</th>
+          <th>PRECIO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let producto of AgruparProductos(productosAPedir)">
+          <tr>
+            <td>{{producto.nombre}}</td>
+            <td *ngIf="producto.cantidad > 1">{{producto.cantidad}}</td>
+            <td *ngIf="producto.cantidad === 1">1</td>
+            <td>${{producto.precio * producto.cantidad}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;">TOTAL: ${{importeTotal}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;">TIEMPO ESTIMADO: {{tiempoMaximo}} minutos</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div>
+    <ion-button *ngIf="productosAPedir.length > 0" (click)="FinalizarPedido()"  size="large" fill="solid"  expand="block" id="btn_consultar">Completar Pedido</ion-button>
+  </div>
+</div>
+
+<!-- ******************************* SPINNER *******************************-->
+<div *ngIf="loading" class="custom-spinner">
+  <h1 class="spinnerh1">Cargando...</h1>
+  <img src="../../assets/icon/empresa.png" alt="Custom Spinner" />
+</div>

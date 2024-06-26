@@ -32,14 +32,14 @@
 |   ✔️ | Funcionalidad de Login |
 |   ✔️ | Splashscreen animado|
 |   ✔️ | Implementación de email automatizado|
-|   ✖️ | Realizar pedidos|
+|   ✔️ | Realizar pedidos (Implementacion parcial)|
+|   ✔️ | QR de propina|
+|   ✔️ | Push Confirmar realizacion del pedido|
 |   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
-|   ✖️ | QR de propina|
 |   ✖️ | Encuesta de Cliente|
-|   ✖️ |  Push Ingreso al local|
-|   ✖️ |  Push Confirmar realizacion del pedido|
-|   ✖️ |  Juego para obtener 15% de descuento|  
+|   ✖️ | Push Consultar al mozo|
+|   ✖️ | Juego para obtener 15% de descuento|  
 
 ***[Branch de ALFA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/alfa)***
 
@@ -58,13 +58,12 @@
 | Estado|    Tareas              |
 | ----- |   -------              |
 |   ✔️ | Splashscreen aplicación     |
+|   ✔️ | QR de ingreso al local|
 |   ✖️ | Confirmar pedidos|
-|   ✖️ | Chat General|
 |   ✖️ | Alta de Dueño / Supervisor |
 |   ✖️ | Alta de Mesa|
-|   ✖️ | QR de ingreso al local|
 |   ✖️ | Encuesta de Supervisor|
-|   ✖️ |  Push Agregar cliente nuevo|
+|   ✖️ | Push Confirmar pedido|
 |   ✖️ |  Juego para obtener 10% de descuento|  
 
 ***[Branch de BETA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/beta)***
@@ -88,11 +87,11 @@
 |   ✔️ | Alta de Clientes |
 |   ✔️ | Agregar un nuevo cliente registrado|
 |   ✔️ | Ingresar al local|
-|   ✖️ | QR de la mesa|
+|   ✔️ | QR de la mesa|
+|   ✔️ | Push Ingreso al local
+|   ✔️ | Push Agregar cliente nuevo|
 |   ✖️ | Encuesta de Empleados|
-|   ✖️ |  Push Consultar al mozo|
-|   ✖️ |  Push Confirmar pedido|
-|   ✖️ |  Juego para obtener 20% de descuento|  
+|   ✖️ | Juego para obtener 20% de descuento|  
 
 ***[Branch de GAMMA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/gamma)***
 

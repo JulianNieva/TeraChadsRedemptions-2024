@@ -11,7 +11,6 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment'
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
