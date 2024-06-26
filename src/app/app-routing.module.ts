@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'mesa-cliente',
     loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
+  },  {
+    path: 'chat',
+    loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
   },
+
 
 
 ];

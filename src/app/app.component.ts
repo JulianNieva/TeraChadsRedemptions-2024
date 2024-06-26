@@ -11,9 +11,6 @@ import { PushNotificationService } from './servicios/push-notification.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
-
-
   constructor(public bd : BaseDatosService, private navCtrl: NavController, private auth : UserAuthService, private notifiaciones : PushNotificationService, private plataform : Platform) {
 
     this.plataform.ready().then(() => {
@@ -47,6 +44,16 @@ export class AppComponent {
 
   HomePage(){
     this.navCtrl.navigateRoot(['/home'])
+  }
+
+  MostrarChat()
+  {
+    this.navCtrl.navigateRoot(['/chat'])
+  }
+
+  MostrarMesaCliente()
+  {
+    this.navCtrl.navigateRoot(['/mesa-cliente'])
   }
 
 }

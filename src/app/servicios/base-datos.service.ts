@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, updateDoc, } from '@angular/fire/firestore';
-import { getDocs,setDoc,doc,addDoc,collection,deleteDoc,query,where } from 'firebase/firestore';
+import { getDocs,setDoc,doc,addDoc,collection,deleteDoc,query,where,orderBy } from 'firebase/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { Cliente } from '../clases/cliente';
 import { Usuario } from '../clases/usuario';
@@ -325,8 +325,18 @@ export class BaseDatosService {
   //#region  ////////////////// CHAT ////////////////////////
 
     // SubirMensaje
+    SubirMensaje(mensaje:any)
+    {
+      const coleccion = collection(this.firestore, 'chatMozos')
+      const documento = doc(coleccion);
+      return setDoc(documento, JSON.parse(JSON.stringify(mensaje)));
+    }
 
     // TraerMensajes
+    TraerMensajes(){
+      const q = query(collection(this.firestore,'chatMozos'),orderBy('fecha','asc'))
+      return collectionData(q)
+    }
 
   //#endregion
 
