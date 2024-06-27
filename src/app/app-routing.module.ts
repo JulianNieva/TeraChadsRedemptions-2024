@@ -48,12 +48,10 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
   },
-
-
-];
-
-
-
+  {
+    path: 'listado-pedidos-mozo',
+    loadChildren: () => import('./paginas/listado-pedidos-mozo/listado-pedidos-mozo.module').then( m => m.ListadoPedidosMozoPageModule)
+  },
 ];
 
 @NgModule({

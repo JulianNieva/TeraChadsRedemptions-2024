@@ -61,12 +61,16 @@ ion-input{
   margin-left: 2%;
   float:left;
   text-align: left;
+  background-color: #5A2328;
+  .timestamp{
+    color:#C8BFC7;
+  }
 }
 
 .autor_nombre
 {
   font-size: large;
-  color: #F2E9DC;
+  color: #DE6E4B;
 }
 
 .posttime {

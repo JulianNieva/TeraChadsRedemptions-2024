@@ -33,6 +33,13 @@ export class MesaClientePage {
         this.mesa = m
 
         console.info(this.mesa)
+        this.bd.TraerProductos().subscribe((data) => {
+          if(data)
+            {
+              this.productos = data
+              console.info(this.productos)
+            }
+        })
 
         this.bd.TraerUnPedidoPorMesa(this.mesa.numero).subscribe((res) => {
           if(res.length != 0)
@@ -46,8 +53,10 @@ export class MesaClientePage {
         if(this.mesa.cliente_uid === this.cliente.uid){
           this.presentToast("top","Bienvenido a su mesa","primary")
           this.mesaVinculada = true
+          this.loading = false;
         }else{
-            this.presentToast("top","Mesa Aun no Vinculada! Escanee su QR","warning")
+          this.presentToast("top","Mesa Aun no Vinculada! Escanee su QR","warning")
+          this.loading = false;
         }
       })
     }
@@ -76,17 +85,17 @@ export class MesaClientePage {
   }
 
   MostrarProductos(){
-    this.loading = true;
+    this.listadoProductos = true;
     this.mesaVinculada = false;
-    this.bd.TraerProductos().subscribe((data) => {
-      if(data)
-        {
-          this.loading = false;
-          this.productos = data
-          this.listadoProductos = true;
-          console.info(this.productos)
-        }
-    })
+    // this.bd.TraerProductos().subscribe((data) => {
+    //   if(data)
+    //     {
+    //       this.loading = false;
+    //       this.productos = data
+    //       this.listadoProductos = true;
+    //       console.info(this.productos)
+    //     }
+    // })
   }
 
   PedidoCargado($event:any)
@@ -94,14 +103,8 @@ export class MesaClientePage {
     this.loading = true;
     this.listadoProductos = false;
     this.mesaVinculada = true;
-    const pedidoParcial = $event;
-    this.bd.TraerUnPedidoPorMesa(pedidoParcial.mesa).subscribe((res) => {
-      if(res)
-        this.pedido = res;
-        console.info(this.pedido)
-        this.loading = false;
-        this.presentToast("middle","Pedido realizado con éxito!. Compruebe el estado de su pedido escaneando el QR","primary")
-    })
+    this.pedido = $event
+    this.presentToast("middle","Pedido realizado con éxito!. Compruebe el estado de su pedido escaneando el QR","primary")
   }
 
   // Escan del qr para poder ver la carta y realizar el pedido.
@@ -124,16 +127,22 @@ export class MesaClientePage {
   {
     if(resultado == this.mesa.numero)
     {
-      switch (this.pedido.estado) {
-        case "revision":
-          this.presentToast("middle","Su pedido está en proceso de revisión","primary")
+      if(this.pedido != null)
+      {
+        switch (this.pedido.estado) {
+          case "revision":
+            this.presentToast("middle","Su pedido está en proceso de revisión","primary")
+            break;
+          case "preparacion":
+            this.presentToast("middle",`Su pedido está siendo preparado. Tiene un tiempo estimado de: ${this.pedido.tiempoPreparacion} minutos`,"primary")
+            break;
+          case "cocinado":
+            this.presentToast("middle",`Su pedido está listo. Espere a recibirlo`,"primary")
           break;
-        case "preparacion":
-          this.presentToast("middle",`Su pedido está siendo preparado. Tiene un tiempo estimado de: ${this.pedido.tiempoPreparacion} minutos`,"primary")
-          break;
-        case "cocinado":
-          this.presentToast("middle",`Su pedido está listo. Espere a recibirlo`,"primary")
-        break;
+        } 
+      }
+      else{
+        this.MostrarProductos()
       }
     }
     else{
