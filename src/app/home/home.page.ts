@@ -65,7 +65,7 @@ export class HomePage implements OnDestroy {
 
     setTimeout(() => {
       this.loading = false;
-    }, 1500);
+    }, 1000);
 
   }
 

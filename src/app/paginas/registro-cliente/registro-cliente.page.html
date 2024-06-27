@@ -18,7 +18,7 @@
   </form>
  
   <ion-grid style="margin-bottom: 0rem;margin-top: 0rem;" *ngIf="fotoTomada">
-      <ion-col   style="margin-bottom: 0rem;margin-top: 0rem;" size="7" *ngFor="let foto of cam.fotos; index as position" >
+      <ion-col style="margin-bottom: 0rem;margin-top: 0rem;" size="7" *ngFor="let foto of cam.fotos; index as position" >
         <ion-img (click)="showActionSheet(foto,0)" id="img_tomada" style="margin-bottom: 0rem;" [src]="foto.webVistaRuta" ></ion-img>
       </ion-col>
   </ion-grid>

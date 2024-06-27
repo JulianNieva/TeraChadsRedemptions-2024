@@ -56,6 +56,11 @@ export class AppComponent {
     this.navCtrl.navigateRoot(['/mesa-cliente'])
   }
 
+  MostrarPedidosMozo()
+  {
+    this.navCtrl.navigateRoot(['/listado-pedidos-mozo'])
+  }
+
 }
 
 

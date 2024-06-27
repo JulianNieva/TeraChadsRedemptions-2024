@@ -18,10 +18,27 @@ export class ChatPage implements OnInit {
   esMozo:boolean = false;
   nombreMensaje:string = ""
 
-  constructor(private pushSrv:PushNotificationService,private bdSrv:BaseDatosService) { }
+  constructor(private pushSrv:PushNotificationService,private bdSrv:BaseDatosService) { 
+    this.loading = true;
+    this.bdSrv.TraerMensajes().subscribe((res) => {
+      if(res)
+        {
+          this.chat = res.sort(function(a:any,b:any){
+            if(a.fecha > b.fecha){
+              return 1
+            }if(a.fecha < b.fecha){
+              return -1
+            }
+            return 0
+          });
+          console.info(this.chat)
+          this.loading = false;
+          this.scrollToTheLastElementByClassName();
+        }
+    })
+  }
 
   ngOnInit() { 
-    this.loading = true;
     this.usuarioActual = this.bdSrv.Getlog()
 
     if(this.usuarioActual)
@@ -36,15 +53,6 @@ export class ChatPage implements OnInit {
       }
 
       console.info(this.usuarioActual)
-      this.bdSrv.TraerMensajes().subscribe((res) => {
-        if(res)
-          {
-            this.chat = res;
-            console.info(this.chat)
-            this.loading = false;
-            this.scrollToTheLastElementByClassName();
-          }
-      })
     }
   }
 
@@ -61,23 +69,20 @@ export class ChatPage implements OnInit {
 
       this.bdSrv.SubirMensaje(nuevoMensaje).then(() => {
         if(this.esCliente)
-          this.pushSrv.MesaNotificacionAMozo(`La mesa: ${this.usuarioActual.mesa_asignada}, realizó una consulta`,"Revise la casilla de mensajes")
+          this.pushSrv.MesaNotificacionAMozo(`[Mesa: ${this.usuarioActual.mesa_asignada}] Realizó una consulta`,"Revise la casilla de mensajes").subscribe((res) => {
+            console.info(res)
+          })
       })
       this.mensaje = '';
       this.scrollToTheLastElementByClassName();
   }
 
   scrollToTheLastElementByClassName() {
-    const elements = document.getElementsByClassName('mensajes');
-    const lastElement: any = elements[elements.length - 1];
-    const contenedorMensajes = document.getElementById('fondo');
-    let toppos: any = [];
-    if (lastElement != null) {
-      toppos = lastElement.offsetTop;
-    }
-    if (contenedorMensajes != null) {
-      contenedorMensajes.scrollTop = toppos;
-    }
+      let elements = document.getElementsByClassName('mensajes');
+      let ultimo:any = elements[(elements.length - 1)];
+      let toppos = ultimo.offsetTop;
+      //@ts-ignore
+      document.getElementById('card-body').scrollTop = toppos;
   }
 
 }
