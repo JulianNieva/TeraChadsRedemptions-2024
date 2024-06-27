@@ -8,7 +8,7 @@
 
   <div *ngIf="mesaVinculada">
     <ion-button  (click)="ConsultarMozo()"  size="large" fill="solid"  expand="block" id="btn_consultar">Consulta al Mozo</ion-button>
-    <ion-button  *ngIf="pedido == null" (click)="MostrarProductos()"  size="large" fill="solid"  expand="block" id="btn_consultar">Hacer un pedido</ion-button>
+    <ion-button  *ngIf="pedido === null" (click)="MostrarProductos()"  size="large" fill="solid"  expand="block" id="btn_consultar">Hacer un pedido</ion-button>
     <!-- Escondo el boton de encuesta porque en si es innecesario que el cliente pueda ver las encuestas una vez que entro al local, como mucho antes de tener una mesa asignada -->
     <!-- <ion-button  (click)="VerEncuestas()"  size="large" fill="outline"  expand="block" id="btn_encuestas">Ver Encuestas</ion-button> -->
   </div>

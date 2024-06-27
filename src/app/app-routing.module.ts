@@ -43,7 +43,11 @@ const routes: Routes = [
   {
     path:'juego-20-desc/memoria',
     component: MemoriaComponent 
+  },  {
+    path: 'ver-encuestas',
+    loadChildren: () => import('./paginas/ver-encuestas/ver-encuestas.module').then( m => m.VerEncuestasPageModule)
   }
+
 
 
 ];
