@@ -100,10 +100,11 @@ export class PedidosBarPage {
         this.bd.ModificarEstadoPedidoCocina(this.pedido)
         this.presentToast("middle", "Pedido en cocion", "primary")
         this.DesSelect()
-        this.pushNotification.MesaNotificacionAMozo("[Mesa " + this.pedido.mesa + "] Listo para entregar", "Hay un pedido para entregar");
+        this.pushNotification.MesaNotificacionAMozo("[Mesa " + this.pedido.mesa + "] Listo para entregar", "Hay un pedido para entregar").subscribe((res) => {console.log()});
       }
       else {
         this.bd.ModificarEstadoPedidoCocina(this.pedido)
+        this.DesSelect()
       }
     } else {
       this.presentToast("middle", "ERROR! Seleccione un pedido!", "warning")

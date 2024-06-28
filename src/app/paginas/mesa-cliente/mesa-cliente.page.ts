@@ -21,13 +21,18 @@ export class MesaClientePage {
   loading:boolean = false;
   mesaVinculada = false
   listadoProductos = false;
-  pedido:any = null;
+  pedido:any;
+  estadoPedido:any;
+  qrEscaneado:boolean = false;
+  noRealizoPedido:boolean = true;
 
   constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService, private navCtrl: NavController) {
     ///Obtengo la mesa del user logeado pero primero traigo el cliente logeado (corregir cuando se maneje el nuevo log)
     this.loading = true
     let cli = this.bd.Getlog()
+    console.log(cli)
     if(cli !== null){
+      console.log(cli)
       this.cliente = cli as Cliente
       this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((m) => {
         this.mesa = m
@@ -37,17 +42,18 @@ export class MesaClientePage {
           if(data)
             {
               this.productos = data
-              console.info(this.productos)
             }
         })
 
-        this.bd.TraerUnPedidoPorMesa(this.mesa.numero).subscribe((res) => {
+        this.bd.TraerUnPedidoPorMesa(this.mesa.numero).subscribe((res:any) => {
           if(res.length != 0)
           {
-            this.pedido = res;
-            console.info(this.pedido)
+            this.pedido = res[0];
+            this.estadoPedido = this.pedido.estado;
+            this.noRealizoPedido = false;
+            this.qrEscaneado = true;
+            this.loading = false
           }
-          this.loading = false
         })
 
         if(this.mesa.cliente_uid === this.cliente.uid){
@@ -81,21 +87,17 @@ export class MesaClientePage {
 
   //Ver encuestas
   VerEncuestas(){
-
+    console.info(this.pedido)
   }
 
   MostrarProductos(){
     this.listadoProductos = true;
     this.mesaVinculada = false;
-    // this.bd.TraerProductos().subscribe((data) => {
-    //   if(data)
-    //     {
-    //       this.loading = false;
-    //       this.productos = data
-    //       this.listadoProductos = true;
-    //       console.info(this.productos)
-    //     }
-    // })
+  }
+
+  PedidoRecibido()
+  {
+    this.bd.ModificarEstadoPedido(this.pedido,"recibido")
   }
 
   PedidoCargado($event:any)
@@ -103,43 +105,36 @@ export class MesaClientePage {
     this.loading = true;
     this.listadoProductos = false;
     this.mesaVinculada = true;
-    this.pedido = $event
+    this.pedido = $event;
+    this.bd.TraerPedidoPorUid(this.pedido.uid).subscribe((res) => {
+      this.pedido = res;
+      this.qrEscaneado = false;
+    })
     this.presentToast("middle","Pedido realizado con éxito!. Compruebe el estado de su pedido escaneando el QR","primary")
   }
 
   // Escan del qr para poder ver la carta y realizar el pedido.
   // Una vez realizado poder ver el estado del pedido...
   async ScanMesa(){
-    await this.qr.StartScan()
     try{
-      let resultado = this.qr.scanResult;
-      //this.loading = false;
-      if(resultado){
-        await this.RevisarPedido(resultado)
+      await this.qr.StartScan().then((res) => {
+        const data = this.qr.scanResult;
         //this.loading = false;
-      }
+        this.RevisarEstadoPedido(data.content)
+      })
+      //this.loading = false;
     } catch(error) {
       console.log(error)
     }
   }
 
-  async RevisarPedido(resultado:any)
+  RevisarEstadoPedido(resultado:any)
   {
-    if(resultado == this.mesa.numero)
+    if(resultado.toString() == this.mesa.numero.toString())
     {
       if(this.pedido != null)
       {
-        switch (this.pedido.estado) {
-          case "revision":
-            this.presentToast("middle","Su pedido está en proceso de revisión","primary")
-            break;
-          case "preparacion":
-            this.presentToast("middle",`Su pedido está siendo preparado. Tiene un tiempo estimado de: ${this.pedido.tiempoPreparacion} minutos`,"primary")
-            break;
-          case "cocinado":
-            this.presentToast("middle",`Su pedido está listo. Espere a recibirlo`,"primary")
-          break;
-        } 
+        this.estadoPedido = this.pedido.estado
       }
       else{
         this.MostrarProductos()

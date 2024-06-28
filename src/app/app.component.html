@@ -16,7 +16,7 @@
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="FilaClientes()">
       <img src="../assets/imagenes/person-lines-fill.svg" />
     </ion-chip>
-    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Metre'">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'">
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'" (click)="SolicitarMesa()">
       <img src="../assets/imagenes/qr-code-scan.svg"  />
     </ion-chip>
@@ -37,7 +37,7 @@
       <img src="../assets/imagenes/tragos.svg" />
     </ion-chip>
     <br *ngIf="bd.userType === 'Cliente'">
-    <ion-chip *ngIf="bd.userType === 'Cliente'" (click)="MostrarMesaCliente()">
+    <ion-chip *ngIf="bd.userType === 'Cliente' && usuario.mesa_asignada != 0" (click)="MostrarMesaCliente()">
       <img src="../assets/imagenes/sillas-y-mesa-de-restaurante.png" />
     </ion-chip>
     <br>

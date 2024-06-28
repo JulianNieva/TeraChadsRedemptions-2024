@@ -335,6 +335,12 @@ export class BaseDatosService {
       return collectionData(q)
     }
 
+    TraerPedidoPorUid(uid:string)
+    {
+      const q = query(collection(this.firestore,'pedidos'),where('uid','==',uid));
+      return collectionData(q)
+    }
+
     ModificarEstadoPedido(pedido:any,estado:string){
       const coleccion = collection(this.firestore, 'pedidos')
       const documento = doc(coleccion, pedido.uid)

@@ -23,6 +23,7 @@ export class ChatPage implements OnInit {
     this.bdSrv.TraerMensajes().subscribe((res) => {
       if(res)
         {
+          this.loading = false;
           this.chat = res.sort(function(a:any,b:any){
             if(a.fecha > b.fecha){
               return 1
@@ -32,8 +33,7 @@ export class ChatPage implements OnInit {
             return 0
           });
           console.info(this.chat)
-          this.loading = false;
-          this.scrollToTheLastElementByClassName();
+          //this.scrollToTheLastElementByClassName();
         }
     })
   }
@@ -74,7 +74,7 @@ export class ChatPage implements OnInit {
           })
       })
       this.mensaje = '';
-      this.scrollToTheLastElementByClassName();
+      //this.scrollToTheLastElementByClassName();
   }
 
   scrollToTheLastElementByClassName() {

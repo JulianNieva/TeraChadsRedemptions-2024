@@ -48,15 +48,26 @@
     margin-bottom: 1rem;
 }
 
+.listado-productos{
+    overflow: scroll;   
+    max-height: 18rem;
+    min-height: 10rem;
+}
+
 // Adaptado para Note 10+
 @media screen and (max-width: 385px) and (max-height: 700px) {
+
+    .listado-productos{
+        max-height: 12rem;
+        min-height: 8rem;
+    }
 
     .card-usuario{
         width: 15rem;
     }
 
     .div-lista{
-        height: 250px;
+        height: 10rem;
     }
 
     .item-cli{

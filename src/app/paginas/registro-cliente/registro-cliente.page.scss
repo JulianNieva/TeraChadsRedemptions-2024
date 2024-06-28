@@ -154,9 +154,9 @@ ion-loading.custom-loading {
 // Adaptado para Note 10+
 @media screen and (max-width: 385px) and (max-height: 700px) {
 
-    #img_emp{
-        width: 22%;
-        margin-left: 39%;
+    #img-tomada,#img_emp{
+        max-width: 20%;
+        margin-left: 41%;
     }
 
     #btn_registrar{

@@ -31,7 +31,6 @@
 | ----- |   -------              |
 |   ✔️ | Funcionalidad de Login |
 |   ✔️ | Splashscreen animado|
-|   ✔️ | Implementación de email automatizado|
 |   ✔️ | Realizar pedidos (Implementacion parcial)|
 |   ✔️ | QR de propina|
 |   ✔️ | Push Confirmar realizacion del pedido|
@@ -59,11 +58,11 @@
 | ----- |   -------              |
 |   ✔️ | Splashscreen aplicación     |
 |   ✔️ | QR de ingreso al local|
-|   ✖️ | Confirmar pedidos|
+|   ✔️ | Confirmar pedidos|
+|   ✔️ | Push Confirmar pedido|
 |   ✖️ | Alta de Dueño / Supervisor |
 |   ✖️ | Alta de Mesa|
 |   ✖️ | Encuesta de Supervisor|
-|   ✖️ | Push Confirmar pedido|
 |   ✖️ |  Juego para obtener 10% de descuento|  
 
 ***[Branch de BETA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/beta)***
@@ -91,7 +90,7 @@
 |   ✔️ | Push Ingreso al local
 |   ✔️ | Push Agregar cliente nuevo|
 |   ✔️ | Juego para obtener 20% de descuento| 
-|   ✖️ | Encuesta de Empleados| 
+|   ✖️ | Grafico encuesta de cliente| 
 
 ***[Branch de GAMMA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/gamma)***
 
