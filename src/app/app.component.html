@@ -28,6 +28,14 @@
     <ion-chip *ngIf="bd.userRol === 'Mozo'" (click)="MostrarPedidosMozo()">
       <img src="../assets/imagenes/pedidos.svg" />
     </ion-chip>
+    <br *ngIf="bd.userRol === 'Cocinero'">
+    <ion-chip *ngIf="bd.userRol === 'Cocinero'" (click)="MostrarCocinaCocineros()">
+      <img src="../assets/imagenes/cocina.svg" />
+    </ion-chip>
+    <br *ngIf="bd.userRol === 'Bartender'">
+    <ion-chip *ngIf="bd.userRol === 'Bartender'" (click)="MostrarBarBartender()">
+      <img src="../assets/imagenes/tragos.svg" />
+    </ion-chip>
     <br *ngIf="bd.userType === 'Cliente'">
     <ion-chip *ngIf="bd.userType === 'Cliente'" (click)="MostrarMesaCliente()">
       <img src="../assets/imagenes/sillas-y-mesa-de-restaurante.png" />

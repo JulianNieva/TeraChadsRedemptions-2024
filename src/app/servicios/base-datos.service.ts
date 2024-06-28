@@ -342,6 +342,22 @@ export class BaseDatosService {
         estado:estado
       });
     }
+
+    ModificarEstadoPedidoCocina(pedido:any){
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        cocinaOk:true
+      });
+    }
+
+    ModificarEstadoPedidoBar(pedido:any){
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        bartenderOk:true
+      });
+    }
   //#endregion
 
   //#region  ////////////////// CHAT ////////////////////////

@@ -41,16 +41,20 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
   },
   {
-    path:'juego-20-desc/memoria',
-    component: MemoriaComponent 
-  },
-  {
     path: 'chat',
     loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
   },
   {
     path: 'listado-pedidos-mozo',
     loadChildren: () => import('./paginas/listado-pedidos-mozo/listado-pedidos-mozo.module').then( m => m.ListadoPedidosMozoPageModule)
+  },
+  {
+    path: 'pedidos-cocina',
+    loadChildren: () => import('./paginas/pedidos-cocina/pedidos-cocina.module').then( m => m.PedidosCocinaPageModule)
+  },
+  {
+    path: 'pedidos-bar',
+    loadChildren: () => import('./paginas/pedidos-bar/pedidos-bar.module').then( m => m.PedidosBarPageModule)
   },
 ];
 

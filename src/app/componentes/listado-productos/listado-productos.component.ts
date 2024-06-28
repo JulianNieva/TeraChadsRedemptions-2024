@@ -123,6 +123,8 @@ export class ListadoProductosComponent  implements OnInit {
         uidCliente: this.cliente.uid,
         soloCocinero: this.soloCocinero,
         soloBartender: this.soloBartender,
+        cocinaOk: false,
+        bartenderOk: false,
         uid:""
       };
 
