@@ -12,7 +12,7 @@
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="AprobarClientes()">
       <img src="../assets/imagenes/person-fill-check.svg" />
     </ion-chip>
-    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'">
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="FilaClientes()">
       <img src="../assets/imagenes/person-lines-fill.svg" />
     </ion-chip>
