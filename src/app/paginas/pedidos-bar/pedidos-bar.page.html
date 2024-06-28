@@ -31,9 +31,11 @@
       <div class="card card-usuario" *ngIf="pedido.uid !== '' ">
         <div class="card-body card-body-cli">
           <h5 class="card-title">Mesa {{pedido.mesa}}</h5>
-          <ion-item *ngFor="let producto of AgruparProductos(pedido.productos); let index" (click)="SelectPed(pedido)" class="item-cli">
-            <ion-label>{{producto.nombre}} x {{producto.cantidad}}</ion-label>            
-          </ion-item>
+          <div class="listado-productos">
+            <ion-item *ngFor="let producto of AgruparProductos(pedido.productos); let index" (click)="SelectPed(pedido)" class="item-cli">
+              <ion-label>{{producto.nombre}} x {{producto.cantidad}}</ion-label>            
+            </ion-item>
+          </div>
         </div>
         <div class="btn-group btn-group-lg" role="group">
           <button (click)="Listo()" type="button" id="btn-aprobado" class="btn"><img width="40" src="../../../assets/imagenes/aceptar-el-contorno-del-boton-circular.png" alt=""></button>          

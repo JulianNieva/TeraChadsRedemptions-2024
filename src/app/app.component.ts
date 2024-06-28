@@ -11,7 +11,13 @@ import { PushNotificationService } from './servicios/push-notification.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  usuario:any
+
   constructor(public bd : BaseDatosService, private navCtrl: NavController, private auth : UserAuthService, private notifiaciones : PushNotificationService, private plataform : Platform) {
+
+    this.usuario = this.bd.Getlog()
+    console.info(this.usuario)
 
     this.plataform.ready().then(() => {
       if(this.plataform.is('android')){

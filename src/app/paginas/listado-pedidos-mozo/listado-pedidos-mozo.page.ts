@@ -51,22 +51,13 @@ export class ListadoPedidosMozoPage implements OnInit {
       })
 
       //traigo los pedidos que estan cocinados
-      this.bdSrv.TraerPedidosConEstado('preparacion').subscribe((pedidos) => {
+      this.bdSrv.TraerPedidosConEstado('cocinado').subscribe((pedidos) => {
         //Lo que hago es filtrar los pedidos que tengan estado de cocinado
-        this.listadoPedidosAEntregar = pedidos.filter((pedido: any) => {
-          //Verifico que el tanto el cocinero y el bartender "cocinaron" el pedido
-          //Y si el pedido es solamente para uno o el otro
-          if (pedido.bartenderOk && pedido.cocineroOk) {
-            return true;
+        if(pedidos)
+          {
+            console.info(pedidos)
+            this.listadoPedidosAEntregar = pedidos
           }
-          if (pedido.bartenderOk && !pedido.cocineroOk && pedido.soloBartender && !pedido.soloCocinero) {
-            return true;
-          }
-          if (!pedido.bartenderOk && pedido.cocineroOk && pedido.soloCocinero && !pedido.soloBartender) {
-            return true;
-          }
-          return false;
-        });
       });
 
       //Pedidos en espera a cobrar
@@ -98,6 +89,11 @@ export class ListadoPedidosMozoPage implements OnInit {
       this.loading = false;
     })
   }
+
+  // PedidoEntregado(pedido:any)
+  // {
+  //   this.bdSrv.ModificarEstadoPedido(pedido, 'entregado')
+  // }
 
   MostrarPedidosEnRevision()
   {

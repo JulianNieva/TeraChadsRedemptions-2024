@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
             if(user.perfil === "Cliente") {
               this.bd.TraerClientePorUid(user.uid).then((cliente : Cliente) => {
                 if(cliente.aprobado) {
-                  this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
+                  this.presentToast("middle","Sesión iniciada con éxito!","success").then(() => {
                     setTimeout(async () => {
                       await this.bd.LogIn(user)
                       navigator.vibrate(500)
@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
                 }
               })
             } else {
-              this.presentToast("top","Sesión iniciada con éxito!","success").then(() => {
+              this.presentToast("middle","Sesión iniciada con éxito!","success").then(() => {
                 setTimeout(async () => {
                   console.log("Hola")
                   navigator.vibrate(500)
@@ -158,7 +158,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async presentToast(position:"top", message = "", color = "danger"){
+  async presentToast(position:"top" | "middle", message = "", color = "danger"){
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
