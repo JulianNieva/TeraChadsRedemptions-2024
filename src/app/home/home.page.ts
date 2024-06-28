@@ -174,7 +174,7 @@ export class HomePage implements OnDestroy {
   }
 
   VerEncuestas(){
-
+    this.navCtrl.navigateRoot(['/ver-encuestas'])
   }
 
   MiMesa(){

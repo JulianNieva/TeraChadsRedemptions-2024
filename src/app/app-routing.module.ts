@@ -41,6 +41,10 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
   },
   {
+    path:'juego-20-desc/memoria',
+    component: MemoriaComponent 
+  },
+  {
     path: 'chat',
     loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
   },
@@ -56,6 +60,11 @@ const routes: Routes = [
     path: 'pedidos-bar',
     loadChildren: () => import('./paginas/pedidos-bar/pedidos-bar.module').then( m => m.PedidosBarPageModule)
   },
+
+  {
+    path: 'ver-encuestas',
+    loadChildren: () => import('./paginas/ver-encuestas/ver-encuestas.module').then( m => m.VerEncuestasPageModule)
+  }
 ];
 
 @NgModule({
