@@ -12,9 +12,12 @@ import { PushNotificationService } from './servicios/push-notification.service';
 })
 export class AppComponent {
 
-
+  usuario:any
 
   constructor(public bd : BaseDatosService, private navCtrl: NavController, private auth : UserAuthService, private notifiaciones : PushNotificationService, private plataform : Platform) {
+
+    this.usuario = this.bd.Getlog()
+    console.info(this.usuario)
 
     this.plataform.ready().then(() => {
       if(this.plataform.is('android')){
@@ -49,6 +52,30 @@ export class AppComponent {
     this.navCtrl.navigateRoot(['/home'])
   }
 
+  MostrarChat()
+  {
+    this.navCtrl.navigateRoot(['/chat'])
+  }
+
+  MostrarMesaCliente()
+  {
+    this.navCtrl.navigateRoot(['/mesa-cliente'])
+  }
+
+  MostrarPedidosMozo()
+  {
+    this.navCtrl.navigateRoot(['/listado-pedidos-mozo'])
+  }
+
+  MostrarCocinaCocineros()
+  {
+    this.navCtrl.navigateRoot(['/pedidos-cocina'])
+  }
+
+  MostrarBarBartender()
+  {
+    this.navCtrl.navigateRoot(['/pedidos-bar'])
+  }
 }
 
 

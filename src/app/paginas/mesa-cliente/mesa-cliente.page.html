@@ -7,10 +7,54 @@
   </div>
 
   <div *ngIf="mesaVinculada">
-    <ion-button  (click)="ConsultarMozo()"  size="large" fill="solid"  expand="block" id="btn_consultar">Consulta al Mozo</ion-button>
-    <ion-button  *ngIf="pedido === null" (click)="MostrarProductos()"  size="large" fill="solid"  expand="block" id="btn_consultar">Hacer un pedido</ion-button>
+    <ion-fab slot="fixed" vertical="top" horizontal="end" >
+      <ion-fab-button class="btn_selec_categoria" class="boton-fab">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="bottom" class="fabs-list">
+        <ion-fab-button class="fabs-btns" (click)="ConsultarMozo()">
+          <ion-icon name="chatbubbles"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado'">
+          <ion-icon name="game-controller"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado'">
+          <ion-icon name="bar-chart"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'recibido'">
+          <ion-icon name="card"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    <!-- <ion-button  (click)="ConsultarMozo()"  size="large" fill="solid"  expand="block" id="btn_consultar">Consulta al Mozo</ion-button>
+    <ion-button  *ngIf="pedido == null" (click)="MostrarProductos()"  size="large" fill="solid"  expand="block" id="btn_consultar">Hacer un pedido</ion-button> -->
     <!-- Escondo el boton de encuesta porque en si es innecesario que el cliente pueda ver las encuestas una vez que entro al local, como mucho antes de tener una mesa asignada -->
     <!-- <ion-button  (click)="VerEncuestas()"  size="large" fill="outline"  expand="block" id="btn_encuestas">Ver Encuestas</ion-button> -->
+
+    <div class="contenedor-estado-pedido" *ngIf="noRealizoPedido">
+      <div *ngIf="noRealizoPedido">
+        <p>Haga su pedido escaneando el QR de su mesa</p>
+        <ion-icon name="qr-code" class="icono-estado"></ion-icon>
+      </div>
+      <div *ngIf="estadoPedido === 'revision'">
+        <p>Su pedido está en proceso de revisión</p>
+        <ion-icon name="alert-circle" class="icono-estado"></ion-icon>
+      </div>
+      <div *ngIf="estadoPedido === 'preparacion'">
+        <p>Su pedido esta siendo preparado. <br>Tiene un tiempo estimado de {{pedido.tiempoPreparacion}} minutos</p>
+        <ion-spinner></ion-spinner>
+      </div>
+      <div *ngIf="estadoPedido === 'cocinado'">
+        <p>¡Su pedido esta listo!. En un momento se lo llevaremos</p>
+        <ion-button (click)="PedidoRecibido()">
+          <ion-icon name="notifications" class="icono-estado"></ion-icon>
+        </ion-button>
+      </div>
+      <div *ngIf="estadoPedido === 'recibido'">
+        <p>¡Disfrute de la comida!</p>
+        <ion-icon name="restaurant" class="icono-estado"></ion-icon>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="listadoProductos" class="contenedor-menu">
@@ -25,7 +69,7 @@
   <img src="../../assets/icon/empresa.png" alt="Custom Spinner" />
 </div>
 
-<ion-footer *ngIf="cliente.perfil === 'Cliente'" [translucent]="true">
+<ion-footer *ngIf="cliente.perfil === 'Cliente' && !listadoProductos" [translucent]="true">
   <ion-button  (click)="ScanMesa()"  fill="outline" id="btn_qr"  >
     <img src="../../../assets/imagenes/qr.png"  id="img_qr">
   </ion-button>

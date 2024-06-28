@@ -16,9 +16,29 @@
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario'" (click)="FilaClientes()">
       <img src="../assets/imagenes/person-lines-fill.svg" />
     </ion-chip>
-    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userType === 'Metre'">
+    <br *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'">
     <ion-chip *ngIf="bd.userType === 'Supervisor' || bd.userType === 'Propietario' || bd.userRol === 'Metre'" (click)="SolicitarMesa()">
       <img src="../assets/imagenes/qr-code-scan.svg"  />
+    </ion-chip>
+    <br *ngIf="bd.userRol === 'Mozo'">
+    <ion-chip *ngIf="bd.userRol === 'Mozo'" (click)="MostrarChat()">
+      <img src="../assets/imagenes/chat.svg" />
+    </ion-chip>
+    <br *ngIf="bd.userRol === 'Mozo'">
+    <ion-chip *ngIf="bd.userRol === 'Mozo'" (click)="MostrarPedidosMozo()">
+      <img src="../assets/imagenes/pedidos.svg" />
+    </ion-chip>
+    <br *ngIf="bd.userRol === 'Cocinero'">
+    <ion-chip *ngIf="bd.userRol === 'Cocinero'" (click)="MostrarCocinaCocineros()">
+      <img src="../assets/imagenes/cocina.svg" />
+    </ion-chip>
+    <br *ngIf="bd.userRol === 'Bartender'">
+    <ion-chip *ngIf="bd.userRol === 'Bartender'" (click)="MostrarBarBartender()">
+      <img src="../assets/imagenes/tragos.svg" />
+    </ion-chip>
+    <br *ngIf="bd.userType === 'Cliente'">
+    <ion-chip *ngIf="bd.userType === 'Cliente' && usuario.mesa_asignada != 0" (click)="MostrarMesaCliente()">
+      <img src="../assets/imagenes/sillas-y-mesa-de-restaurante.png" />
     </ion-chip>
     <br>
     <ion-chip (click)="Salir()">

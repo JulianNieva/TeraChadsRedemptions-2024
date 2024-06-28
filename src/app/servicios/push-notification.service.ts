@@ -87,16 +87,38 @@ export class PushNotificationService  {
     return this.htpp.post<any>(`${this.urlApi}notify`,message);
   }
 
-  public MesaRealizoUnPedido(mesa:string){
+  //By Juli, encapsulo la notificacion de chat y realizar pedido para el mozo
+  public MesaNotificacionAMozo(title:string,body:string): Observable<any>{
     let message = {
-      title : `La mesa: ${mesa}, realizó un pedido`,
-      Body : "Por favor, revise el listado de pedidos para aceptar el mismo",
-      tipo : "Mozo"
+      title: title,
+      Body: body,
+      tipo:"Mozo"
     }
 
     return this.htpp.post<any>(`${this.urlApi}notify-employes-type`,message);
   }
 
+  //By Juli, creo dos metodos de notificacion para bartender y cocinero
+  //Ya que un pedido puede ser preparado por un cocinero o bartender
+  public NuevoPedidoCocineros(title:string,body:string): Observable<any>{
+    let message = {
+      title: title,
+      Body: body,
+      tipo:"Cocinero"
+    }
+
+    return this.htpp.post<any>(`${this.urlApi}notify-employes-type`,message);
+  }
+
+  public NuevoPedidoBartender(title:string,body:string): Observable<any>{
+    let message = {
+      title: title,
+      Body: body,
+      tipo:"Bartender"
+    }
+
+    return this.htpp.post<any>(`${this.urlApi}notify-employes-type`,message);
+  }
 
   //#endregion  
 

@@ -114,8 +114,10 @@ export class FilaClientesPage {
    Asignar(mesa : Mesa){
       this.cliente.mesa_asignada = mesa.numero
       this.cliente.enFila = false
-
+      mesa.cliente_uid = this.cliente.uid;
       this.bd.ModificarCliente(this.cliente)
+      this.bd.ModificarMesa(mesa)
+
       //SE notifica al cliente si esta su token
       if(this.cliente.token_mensajes !== null || this.cliente.token_mensajes !== ""){
         this.push_notification.MesaAsignada(this.cliente.token_mensajes,this.cliente.mesa_asignada).subscribe(response => console.log(response))

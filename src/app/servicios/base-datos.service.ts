@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore, updateDoc, } from '@angular/fire/firestore';
-import { getDocs,setDoc,doc,addDoc,collection,deleteDoc,query,where } from 'firebase/firestore';
+import { Firestore, documentId, updateDoc, } from '@angular/fire/firestore';
+import { getDocs,setDoc,doc,addDoc,collection,deleteDoc,query,where,orderBy } from 'firebase/firestore';
 import { collectionData } from 'rxfire/firestore';
 import { Cliente } from '../clases/cliente';
 import { Usuario } from '../clases/usuario';
@@ -306,7 +306,16 @@ export class BaseDatosService {
     {
       const coleccion = collection(this.firestore, 'pedidos')
       const documento = doc(coleccion);
+      const uid = documento.id
+      pedido.uid = uid
       setDoc(documento, JSON.parse(JSON.stringify(pedido)));
+    }
+
+    EliminarPedido(pedido:any)
+    {
+      const coleccion = collection(this.firestore,'pedidos')
+      const documento = doc(coleccion,pedido.uid)
+      return deleteDoc(documento)
     }
 
     TraerPedidos()
@@ -315,18 +324,63 @@ export class BaseDatosService {
       return collectionData(coleccion);
     }
 
+    TraerPedidosConEstado(estado:string)
+    {
+      const q = query(collection(this.firestore,'pedidos'),where('estado','==',estado));
+      return collectionData(q);
+    }
+
     TraerUnPedidoPorMesa(mesa:number){
       const q = query(collection(this.firestore,'pedidos'),where('mesa','==',mesa));
       return collectionData(q)
     }
 
+    TraerPedidoPorUid(uid:string)
+    {
+      const q = query(collection(this.firestore,'pedidos'),where('uid','==',uid));
+      return collectionData(q)
+    }
+
+    ModificarEstadoPedido(pedido:any,estado:string){
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        estado:estado
+      });
+    }
+
+    ModificarEstadoPedidoCocina(pedido:any){
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        cocinaOk:true
+      });
+    }
+
+    ModificarEstadoPedidoBar(pedido:any){
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        bartenderOk:true
+      });
+    }
   //#endregion
 
   //#region  ////////////////// CHAT ////////////////////////
 
     // SubirMensaje
+    SubirMensaje(mensaje:any)
+    {
+      const coleccion = collection(this.firestore, 'chatMozos')
+      const documento = doc(coleccion);
+      return setDoc(documento, JSON.parse(JSON.stringify(mensaje)));
+    }
 
     // TraerMensajes
+    TraerMensajes(){
+      const coleccion = collection(this.firestore,'chatMozos')
+      return collectionData(coleccion)
+    }
 
   //#endregion
 

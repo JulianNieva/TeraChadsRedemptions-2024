@@ -122,13 +122,17 @@ export class ListadoProductosComponent  implements OnInit {
         porcentajePropina: 0,
         uidCliente: this.cliente.uid,
         soloCocinero: this.soloCocinero,
-        soloBartender: this.soloBartender
+        soloBartender: this.soloBartender,
+        cocinaOk: false,
+        bartenderOk: false,
+        uid:""
       };
 
-      await this.bdSrv.SubirPedido(this.pedidoFormato);
-      this.pushSrv.MesaRealizoUnPedido(this.numeroMesa)
-      this.pedidoFinalizado.emit(this.pedidoFormato)
-      this.loading = false;
+      this.bdSrv.SubirPedido(this.pedidoFormato).then(() => {
+        this.pushSrv.MesaNotificacionAMozo(`[Mesa: ${this.numeroMesa}] Realizó un pedido`,"Revise el listado de pedidos").subscribe((res) => {console.log(res)})
+        this.pedidoFinalizado.emit(this.pedidoFormato)
+        this.loading = false;
+      })
     } catch (error) {
       console.log('Error en hacer el pedido:', error);
     }
@@ -139,6 +143,15 @@ export class ListadoProductosComponent  implements OnInit {
       this.productosAPedir = [];
       this.importeTotal = 0;
       this.pedidoFormato = {};
+    }
+  }
+
+  onSwipe(swiper:any){
+    if (!swiper.isEnd) {
+      swiper.allowSlideNext = true;
+    }
+    if (!swiper.isBeginning) {
+      swiper.allowSlidePrev = true;
     }
   }
 }

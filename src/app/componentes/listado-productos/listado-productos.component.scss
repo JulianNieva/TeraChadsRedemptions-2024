@@ -1,5 +1,5 @@
 .container{
-    height: 75vh;
+    height: 82vh;
     width: 23rem;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,7 @@
     border: inset 7px blanchedalmond;
     border-radius: 8px;
     font-family: "Lato", sans-serif;
+    margin-top: 2rem;
 }
 
 .card-footer{
@@ -20,6 +21,23 @@
     margin-bottom: 3%;
     --bs-card-spacer-y: 0rem;
     --bs-card-bg: #A9CEF4;
+}
+
+swiper-container{
+    width: 100%;
+    height: 100%;
+}
+
+.imagen{
+    height: 15rem; /* La altura deseada */
+    width: 100%;   /* El ancho se ajusta automáticamente para mantener la proporción */
+}
+
+.titulo{
+    color: white;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 ion-fab-button{
@@ -61,6 +79,7 @@ p{
 }
 
 .contenedor-pedido{
+    margin-top: 3rem;
     padding: 0% 3% 2% 3%;
     background-color: #799f52;
     border: inset 4px blanchedalmond;
@@ -126,3 +145,24 @@ p{
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
+
+@media screen and (max-width: 385px) and (max-height: 700px) {
+
+    .container{
+        height: 80vh;
+        width: 20rem;
+    }
+
+    .table>:not(caption)>*>*{
+        padding: .2rem .2rem;
+    }
+
+    .titulo{
+        font-size: 18px;
+        letter-spacing: unset;
+    }
+
+    .imagen{
+       height: 10rem;
+    }
+}
