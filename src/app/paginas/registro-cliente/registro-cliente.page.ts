@@ -12,6 +12,7 @@ import { FotoService } from 'src/app/servicios/foto.service';
 import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 import { QrService } from 'src/app/servicios/qr.service';
 import { UserAuthService } from 'src/app/servicios/user-auth.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -29,7 +30,9 @@ export class RegistroClientePage  {
 
   constructor(private fb : FormBuilder,private toastController : ToastController, private bd : BaseDatosService, 
     public cam : FotoService, private storage : Storage, public qr : QrService, private ruta : Router, private auth : UserAuthService, private email : EmailService, private push_notification : PushNotificationService) {
-    this.bd.TraerClientes().subscribe((clientes)=>{
+      console.log(window.screen.width);
+      console.log(window.screen.height)
+      this.bd.TraerClientes().subscribe((clientes)=>{
       this.clientesBd = clientes as Array<Cliente>
     })
     this.forms = this.fb.group({
