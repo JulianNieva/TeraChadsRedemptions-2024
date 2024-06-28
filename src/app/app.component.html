@@ -37,7 +37,7 @@
       <img src="../assets/imagenes/tragos.svg" />
     </ion-chip>
     <br *ngIf="bd.userType === 'Cliente'">
-    <ion-chip *ngIf="bd.userType === 'Cliente' && usuario.mesa_asignada != 0" (click)="MostrarMesaCliente()">
+    <ion-chip *ngIf="bd.userType === 'Cliente'" (click)="MostrarMesaCliente()">
       <img src="../assets/imagenes/sillas-y-mesa-de-restaurante.png" />
     </ion-chip>
     <br>

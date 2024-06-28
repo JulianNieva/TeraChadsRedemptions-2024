@@ -17,6 +17,7 @@ export class BaseDatosService {
   public userLogUid = ""
   public userType = ""
   public userRol = ""
+  public userMesa = 0
   public usuarioLogueado:any
 
   constructor(private firestore : Firestore) {}
