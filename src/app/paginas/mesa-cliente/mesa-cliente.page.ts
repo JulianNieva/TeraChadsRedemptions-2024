@@ -40,9 +40,9 @@ export class MesaClientePage {
         console.info(this.mesa)
         this.bd.TraerProductos().subscribe((data) => {
           if(data)
-            {
-              this.productos = data
-            }
+          {
+            this.productos = data
+          }
         })
 
         this.bd.TraerUnPedidoPorMesa(this.mesa.numero).subscribe((res:any) => {
@@ -117,11 +117,10 @@ export class MesaClientePage {
   // Una vez realizado poder ver el estado del pedido...
   async ScanMesa(){
     try{
-      await this.qr.StartScan().then((res) => {
-        const data = this.qr.scanResult;
-        //this.loading = false;
-        this.RevisarEstadoPedido(data.content)
-      })
+      await this.qr.StartScan()
+      const data = this.qr.scanResult;
+      //this.loading = false;
+      this.RevisarEstadoPedido(data)
       //this.loading = false;
     } catch(error) {
       console.log(error)
@@ -130,7 +129,7 @@ export class MesaClientePage {
 
   RevisarEstadoPedido(resultado:any)
   {
-    if(resultado.toString() == this.mesa.numero.toString())
+    if(resultado == this.mesa.numero)
     {
       if(this.pedido != null)
       {
@@ -139,9 +138,8 @@ export class MesaClientePage {
       else{
         this.MostrarProductos()
       }
-    }
-    else{
-      this.presentToast("middle","¡No es su mesa asignada!","danger")
+    }else{
+    this.presentToast("middle","¡No es su mesa asignada!","danger")
     }
   }
 
