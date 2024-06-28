@@ -61,6 +61,15 @@ export class AppComponent {
     this.navCtrl.navigateRoot(['/listado-pedidos-mozo'])
   }
 
+  MostrarCocinaCocineros()
+  {
+    this.navCtrl.navigateRoot(['/pedidos-cocina'])
+  }
+
+  MostrarBarBartender()
+  {
+    this.navCtrl.navigateRoot(['/pedidos-bar'])
+  }
 }
 
 
