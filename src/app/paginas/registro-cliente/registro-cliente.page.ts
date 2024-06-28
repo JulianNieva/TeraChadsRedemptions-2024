@@ -289,7 +289,7 @@ export class RegistroClientePage  {
         this.email.EnviarEmailAprobacionPendiente(cliente)
         // Notifica a los ADMS
         this.push_notification.NuevoCliente(cliente).subscribe((response) => {
-          this.bd.AltaCliente(response)
+          this.bd.AltaCliente(cliente)
         })
 
         navigator.vibrate(500);
