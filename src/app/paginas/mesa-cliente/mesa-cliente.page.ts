@@ -64,6 +64,7 @@ export class MesaClientePage {
                       this.qrEscaneado = true;
                     } else if(pe.estado === "recibido") {
                       this.qrEscaneado = true;
+                      this.estadoPedido = "recibido"
                     } else {
                       this.qrEscaneado = false;
                     }
@@ -115,8 +116,6 @@ export class MesaClientePage {
 
   PedidoRecibido()
   {
-    this.pedido.estado = "recibido"
-    this.qrEscaneado = true
     this.bd.ModificarEstadoPedido(this.pedido,"recibido")
   }
 

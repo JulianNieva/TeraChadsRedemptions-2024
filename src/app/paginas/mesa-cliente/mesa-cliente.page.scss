@@ -119,6 +119,15 @@
   h2{
     color: #000000;
   }
+
+  #btn_confirmar_pedido{
+    --background:rgb(191 120 255);
+    --background-activated:rgb(84, 63, 104);
+  }
+
+  #btn_confirmar_pedido:active{
+    transform: scale(0.8);
+  }
   
   // Adaptado para Note 10+
   @media screen and (max-width: 385px) and (max-height: 700px) {

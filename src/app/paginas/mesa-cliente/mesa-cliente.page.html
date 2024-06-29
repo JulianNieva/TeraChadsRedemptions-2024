@@ -46,7 +46,7 @@
       </div>
       <div *ngIf="estadoPedido === 'cocinado'">
         <p>¡Su pedido esta listo!. En un momento se lo llevaremos</p>
-        <ion-button (click)="PedidoRecibido()">
+        <ion-button (click)="PedidoRecibido()" id="btn_confirmar_pedido">
           <ion-icon name="notifications" class="icono-estado"></ion-icon>
         </ion-button>
       </div>
