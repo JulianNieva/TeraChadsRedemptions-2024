@@ -56,8 +56,18 @@ export class MesaClientePage {
                   if(pe.estado !== "finalizado") {
                     this.pedido = pe
                     this.noRealizoPedido = false;
-                    this.qrEscaneado = false;
                     this.loading = false
+                    
+                    if(pe.estado === "preparacion") {
+                      this.qrEscaneado = true;
+                    } else if(pe.estado === "cocinado") {
+                      this.qrEscaneado = true;
+                    } else if(pe.estado === "recibido") {
+                      this.qrEscaneado = true;
+                    } else {
+                      this.qrEscaneado = false;
+                    }
+
                   }
               });
 
