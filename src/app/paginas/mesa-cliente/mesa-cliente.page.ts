@@ -115,6 +115,8 @@ export class MesaClientePage {
 
   PedidoRecibido()
   {
+    this.pedido.estado = "recibido"
+    this.qrEscaneado = true
     this.bd.ModificarEstadoPedido(this.pedido,"recibido")
   }
 
