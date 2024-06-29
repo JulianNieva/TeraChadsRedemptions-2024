@@ -94,7 +94,7 @@ export class PedidosBarPage {
 
   Listo() {
     if (this.pedido.uid !== " ") {
-      if (this.pedido.cocinaOk === true || this.pedido.soloBartender === false) {
+      if (this.pedido.cocinaOk === true || this.pedido.soloCocinero === false) {
         this.pedido.bartenderOk = true;
         this.bd.ModificarEstadoPedido(this.pedido, "cocinado")
         this.bd.ModificarEstadoPedidoCocina(this.pedido)
