@@ -116,40 +116,44 @@ export class HomePage implements OnDestroy {
     
           if(rtobj.solicitar_mesa){
             this.cliente.enFila = true
+            this.bd.ActualizarLog( this.cliente)
             this.bd.ModificarFilaCliente(this.cliente.uid,true)
             //Notifica a Metres
             this.push_notification.ClienteIngresaLocal(this.cliente).subscribe((response) => {
               console.log(response)
             })
           }
-
         }
         catch(e) {
             this.presentToast("top","QR Invalido!")
         }
     } else {
         // Al estar en Fila busca escanear el QR de una Mesa
-        await this.qr.StartScan()
-        try {
-          this.MesaAsignada(parseInt(this.qr.scanResult))
-        }
-        catch(e) {
-            this.presentToast("top","QR Invalido!")
-        }
-
+        await this.qr.StartScan().then(() => {
+          try {
+            console.log("Por entrar a mesa asiganda")
+            this.MesaAsignada(parseInt(this.qr.scanResult))
+          }
+          catch(e) {
+              this.presentToast("top","QR Invalido!")
+          }
+        })
       }
     }
 
     MesaAsignada(mesa: number){
+    console.log(this.cliente.uid)
     this.bd.TraerClientePorUid(this.cliente.uid).then((cli) => {
-      this.cliente = cli
-      this.usuario = cli
+      console.log(cli)
+      console.log(mesa)
+      this.cliente = cli as Cliente
+      this.usuario = cli as Cliente
       this.bd.ActualizarLog(this.cliente)
       if(this.cliente.mesa_asignada === mesa) {     
         //Vincular la mesa y llevar al usuario al apartado de la mesa
-        this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((mesa) => {
+        this.bd.TraerUnaMesaPorNumero(this.cliente.mesa_asignada).then((mesa_asing) => {
           let mesaCliente = new Mesa
-          mesaCliente = mesa as Mesa
+          mesaCliente = mesa_asing as Mesa
           mesaCliente.cliente_uid = this.cliente.uid
           this.presentToast("middle","Mesa Vinculada! Redirigiendo...","primary",3000)
           this.bd.ModificarMesa(mesaCliente).then(() => {
