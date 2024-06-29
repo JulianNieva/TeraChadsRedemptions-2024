@@ -46,7 +46,7 @@ export class PedidosCocinaPage {
   PedidosTerminados() {
     this.list = []
     this.listOfAll.forEach((pedido: Pedido) => {
-      if (pedido.estado === "cocinado"  && pedido.soloBartender === false) {
+      if (pedido.estado === "cocinado"  && (pedido.soloBartender === false && pedido.soloCocinero === true)) {
         this.list.push(pedido)
       }
     });

@@ -31,7 +31,7 @@ export class PedidosBarPage {
   PedidosPendientes() {
     this.list = []
     this.listOfAll.forEach((pedido: Pedido) => {
-      if (pedido.estado === "preparacion" && pedido.soloCocinero === false) {
+      if (pedido.estado === "preparacion" && (pedido.soloCocinero === false && pedido.soloBartender === true)) {
         this.list.push(pedido)
       }
     })
