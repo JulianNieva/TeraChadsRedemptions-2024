@@ -94,16 +94,16 @@ export class PedidosBarPage {
 
   Listo() {
     if (this.pedido.uid !== " ") {
-      if (this.pedido.cocinaOk === true || this.pedido.soloCocinero === false) {
-        this.pedido.bartenderOk = true;
+      this.pedido.bartenderOk = true;
+      if ((this.pedido.bartenderOk === true && this.pedido.soloCocinero === false) || (this.pedido.cocinaOk === true && this.pedido.bartenderOk === true)) {
+        this.bd.ModificarEstadoPedidoBar(this.pedido)
         this.bd.ModificarEstadoPedido(this.pedido, "cocinado")
-        this.bd.ModificarEstadoPedidoCocina(this.pedido)
         this.presentToast("middle", "Pedido en cocion", "primary")
         this.DesSelect()
         this.pushNotification.MesaNotificacionAMozo("[Mesa " + this.pedido.mesa + "] Listo para entregar", "Hay un pedido para entregar").subscribe((res) => {console.log()});
       }
       else {
-        this.bd.ModificarEstadoPedidoCocina(this.pedido)
+        this.bd.ModificarEstadoPedidoBar(this.pedido)
         this.DesSelect()
       }
     } else {
