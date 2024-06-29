@@ -6,6 +6,7 @@ import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { QrService } from 'src/app/servicios/qr.service';
 import { NavController } from '@ionic/angular';
 import { register } from 'swiper/element/bundle';
+import { Pedido } from 'src/app/clases/pedido';
 
 register();
 @Component({
@@ -23,7 +24,7 @@ export class MesaClientePage {
   listadoProductos = false;
   pedido:any;
   estadoPedido:any;
-  qrEscaneado:boolean = false;
+  qrEscaneado:boolean = true;
   noRealizoPedido:boolean = true;
 
   constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService, private navCtrl: NavController) {
@@ -46,13 +47,20 @@ export class MesaClientePage {
         })
 
         this.bd.TraerUnPedidoPorMesa(this.mesa.numero).subscribe((res:any) => {
+
+          console.log(res)
+
           if(res.length != 0)
           {
-            this.pedido = res[0];
-            this.estadoPedido = this.pedido.estado;
-            this.noRealizoPedido = false;
-            this.qrEscaneado = true;
-            this.loading = false
+              res.forEach((pe : Pedido) => {
+                  if(pe.estado !== "finalizado") {
+                    this.pedido = pe
+                    this.noRealizoPedido = false;
+                    this.qrEscaneado = false;
+                    this.loading = false
+                  }
+              });
+
           }
         })
 
@@ -133,6 +141,7 @@ export class MesaClientePage {
     {
       if(this.pedido != null)
       {
+        this.qrEscaneado = true
         this.estadoPedido = this.pedido.estado
       }
       else{

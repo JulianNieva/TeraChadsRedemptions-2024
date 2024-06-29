@@ -31,7 +31,7 @@
     <!-- Escondo el boton de encuesta porque en si es innecesario que el cliente pueda ver las encuestas una vez que entro al local, como mucho antes de tener una mesa asignada -->
     <!-- <ion-button  (click)="VerEncuestas()"  size="large" fill="outline"  expand="block" id="btn_encuestas">Ver Encuestas</ion-button> -->
 
-    <div class="contenedor-estado-pedido" *ngIf="noRealizoPedido">
+    <div class="contenedor-estado-pedido" *ngIf="qrEscaneado">
       <div *ngIf="noRealizoPedido">
         <p>Haga su pedido escaneando el QR de su mesa</p>
         <ion-icon name="qr-code" class="icono-estado"></ion-icon>
