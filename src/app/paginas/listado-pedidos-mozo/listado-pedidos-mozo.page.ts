@@ -61,7 +61,7 @@ export class ListadoPedidosMozoPage implements OnInit {
       });
 
       //Pedidos en espera a cobrar
-      this.bdSrv.TraerPedidosConEstado('esperando').subscribe((pedidos) => {
+      this.bdSrv.TraerPedidosConEstado('pendiente-pago').subscribe((pedidos) => {
         this.listadoPedidosACobrar = pedidos;
       });
     }
@@ -145,5 +145,10 @@ export class ListadoPedidosMozoPage implements OnInit {
     });
 
     return productosAgrupados;
+  }
+
+  AprobarPago(pedido:any)
+  {
+    this.bdSrv.ModificarEstadoPedido(pedido,"finalizado")
   }
 }

@@ -98,6 +98,15 @@ export class BaseDatosService {
       updateDoc(documento, JSON.parse(JSON.stringify(cliente)));
     }
 
+    ModificarClienteMesa(uidCliente:string,numeroMesa:number)
+    {
+      const coleccion = collection(this.firestore, 'clientes')
+      const documento = doc(coleccion, uidCliente);
+      updateDoc(documento,{
+        mesa_asignada:numeroMesa
+      });
+    }
+
   //#endregion 
 
   
@@ -295,8 +304,31 @@ export class BaseDatosService {
   //#region  ////////////////// ENCUESTAS ////////////////////////
 
     //  SubirEncuesta
+    // Se le pasa el tipo de encuestas que corresponda
+    SubirEncuesta(encuesta:any,tipoEncuesta:string):Promise<any>
+    {
+      const coleccion = collection(this.firestore,tipoEncuesta)
+      const documento = doc(coleccion);
+      const id = documento.id;
+      encuesta.uid = id;
+      return setDoc(documento, JSON.parse(JSON.stringify(encuesta)));
+    }
 
     // TraerEncuestas
+    TraerEncuestas(tipoEncuesta:string)
+    {
+      const coleccion = collection(this.firestore,tipoEncuesta)
+      return collectionData(coleccion);
+    }
+
+    ModificarEncuestaPedido(encuesta:boolean,pedido:any)
+    {
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        realizoEncuesta:encuesta
+      });
+    }
 
   //#endregion
 
@@ -347,6 +379,16 @@ export class BaseDatosService {
       const documento = doc(coleccion, pedido.uid)
       return updateDoc(documento,{
         estado:estado
+      });
+    }
+
+    CargarPropinaPedido(pedido:any,porcentajePropina:number,propina:number)
+    {
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,{
+        porcentajePropina:porcentajePropina,
+        propina:propina
       });
     }
 

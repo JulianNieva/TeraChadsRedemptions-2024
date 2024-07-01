@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="btn-group btn-group-lg" role="group">
-          <button (click)="Listo()" type="button" id="btn-aprobado" class="btn"><img width="40" src="../../../assets/imagenes/aceptar-el-contorno-del-boton-circular.png" alt=""></button>          
+          <button *ngIf="!pedido.cocinaOk" (click)="Listo()" type="button" id="btn-aprobado" class="btn"><img width="40" src="../../../assets/imagenes/aceptar-el-contorno-del-boton-circular.png" alt=""></button>          
         </div>
       </div>
 
