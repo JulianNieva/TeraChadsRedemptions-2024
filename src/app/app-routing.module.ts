@@ -64,7 +64,11 @@ const routes: Routes = [
   {
     path: 'ver-encuestas',
     loadChildren: () => import('./paginas/ver-encuestas/ver-encuestas.module').then( m => m.VerEncuestasPageModule)
+  },  {
+    path: 'juego-10-desc',
+    loadChildren: () => import('./componentes/juegos/juego-10-desc/juego-10-desc.module').then( m => m.Juego10DescPageModule)
   }
+
 ];
 
 @NgModule({
