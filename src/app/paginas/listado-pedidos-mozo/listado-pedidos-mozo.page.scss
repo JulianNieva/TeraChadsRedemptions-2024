@@ -31,6 +31,20 @@ ion-fab-button{
     --background:#8ac926;
 }
 
+#btn-aprobado{
+    background-color: #3a71c1;
+    border: 1px solid #000000;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    margin-bottom: 0.5rem;
+}
+
+#btn-aprobado:active{
+    transform: scale(0.8);
+    background-color: #8ac926;
+}
+
 .card{
     --bs-card-bg:#6BBF59;
     border: 7px double black;

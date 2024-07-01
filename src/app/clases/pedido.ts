@@ -17,6 +17,7 @@ export class Pedido {
     total: number;
     uid: string;
     uidCliente: string;
+    realizoEncuesta:boolean;
 
     constructor() {
         this.comienzo = new Date();
@@ -35,5 +36,6 @@ export class Pedido {
         this.total = 0;
         this.uid = "";
         this.uidCliente = "";
+        this.realizoEncuesta = false;
     }
 }

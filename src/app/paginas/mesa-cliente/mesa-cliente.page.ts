@@ -7,6 +7,7 @@ import { QrService } from 'src/app/servicios/qr.service';
 import { NavController } from '@ionic/angular';
 import { register } from 'swiper/element/bundle';
 import { Pedido } from 'src/app/clases/pedido';
+import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 
 register();
 @Component({
@@ -26,8 +27,11 @@ export class MesaClientePage {
   estadoPedido:any;
   qrEscaneado:boolean = true;
   noRealizoPedido:boolean = true;
+  realizoEncuesta:boolean = false;
+  mostrarEncuesta:boolean = false;
 
-  constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService, private navCtrl: NavController) {
+  constructor(public bd : BaseDatosService, private toastController : ToastController, public qr : QrService, private navCtrl: NavController,
+    private pushSrv:PushNotificationService) {
     ///Obtengo la mesa del user logeado pero primero traigo el cliente logeado (corregir cuando se maneje el nuevo log)
     this.loading = true
     let cli = this.bd.Getlog()
@@ -57,6 +61,7 @@ export class MesaClientePage {
                     this.pedido = pe
                     this.noRealizoPedido = false;
                     this.loading = false
+                    this.realizoEncuesta = pe.realizoEncuesta;
                     
                     if(pe.estado === "preparacion") {
                       this.qrEscaneado = true;
@@ -65,7 +70,10 @@ export class MesaClientePage {
                     } else if(pe.estado === "recibido") {
                       this.qrEscaneado = true;
                       this.estadoPedido = "recibido"
-                    } else {
+                    } else if(pe.estado === "cuenta" || pe.estado === "pendiente-pago") {
+                      this.NavegarCuentaDelPedido()
+                    }
+                    else {
                       this.qrEscaneado = false;
                     }
 
@@ -153,7 +161,13 @@ export class MesaClientePage {
       if(this.pedido != null)
       {
         this.qrEscaneado = true
+        //Se hace un check para ver si muestro el grafico de las encuestas o no
+        if(this.estadoPedido === "recibido" && this.realizoEncuesta)
+        {
+          this.navCtrl.navigateForward(['/ver-encuestas'])
+        }
         this.estadoPedido = this.pedido.estado
+        
       }
       else{
         this.MostrarProductos()
@@ -161,6 +175,43 @@ export class MesaClientePage {
     }else{
     this.presentToast("middle","¡No es su mesa asignada!","danger")
     }
+  }
+
+  PedirCuenta(){
+    this.loading = true;
+    this.pushSrv.MesaNotificacionAMozo(`[Mesa ${this.mesa.numero}] Pidio la cuenta`,"Verifique el listado de pedidos para cobrar a la mesa").subscribe((res) => console.log(res))
+    this.bd.ModificarEstadoPedido(this.pedido,"cuenta").then((res) => {
+      this.NavegarCuentaDelPedido()
+    })
+  }
+
+  NavegarCuentaDelPedido()
+  {
+    localStorage.setItem("pedido",JSON.stringify(this.pedido))
+    this.navCtrl.navigateRoot(['/cuenta'])
+  }
+
+  MostrarEncuesta()
+  {
+    this.mesaVinculada = false;
+    this.mostrarEncuesta = true;
+  }
+
+  EncuestaCompletada($event:any)
+  {
+    this.pedido = $event
+    this.realizoEncuesta = $event.realizoEncuesta
+    if(this.pedido.realizoEncuesta){
+      this.mostrarEncuesta = false;
+      this.mesaVinculada = true;
+      this.bd.ModificarEncuestaPedido(true,this.pedido)
+    }
+  }
+
+  //TODO: Mostrar la interfaz necesaria para mostrarle al cliente que su pedido esta en proceso de aceptacion
+  PedidoEsperaEnAceptacion($event:any)
+  {
+
   }
 
 }

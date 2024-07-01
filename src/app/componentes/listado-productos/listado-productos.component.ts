@@ -125,7 +125,8 @@ export class ListadoProductosComponent  implements OnInit {
         soloBartender: this.soloBartender,
         cocinaOk: false,
         bartenderOk: false,
-        uid:""
+        uid:"",
+        realizoEncuesta:false
       };
 
       this.bdSrv.SubirPedido(this.pedidoFormato).then(() => {

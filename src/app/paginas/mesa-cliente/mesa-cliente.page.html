@@ -18,18 +18,14 @@
         <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado'">
           <ion-icon name="game-controller"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado'">
-          <ion-icon name="bar-chart"></ion-icon>
+        <ion-fab-button class="fabs-btns" *ngIf="(estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado') && !realizoEncuesta" (click)="MostrarEncuesta()">
+          <ion-icon name="create"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'recibido'">
+        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'recibido'" (click)="PedirCuenta()">
           <ion-icon name="card"></ion-icon>
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
-    <!-- <ion-button  (click)="ConsultarMozo()"  size="large" fill="solid"  expand="block" id="btn_consultar">Consulta al Mozo</ion-button>
-    <ion-button  *ngIf="pedido == null" (click)="MostrarProductos()"  size="large" fill="solid"  expand="block" id="btn_consultar">Hacer un pedido</ion-button> -->
-    <!-- Escondo el boton de encuesta porque en si es innecesario que el cliente pueda ver las encuestas una vez que entro al local, como mucho antes de tener una mesa asignada -->
-    <!-- <ion-button  (click)="VerEncuestas()"  size="large" fill="outline"  expand="block" id="btn_encuestas">Ver Encuestas</ion-button> -->
 
     <div class="contenedor-estado-pedido" *ngIf="qrEscaneado">
       <div *ngIf="noRealizoPedido">
@@ -57,6 +53,10 @@
     </div>
   </div>
 
+  <div *ngIf="mostrarEncuesta">
+    <app-encuesta-cliente (encuestaCompletada)="EncuestaCompletada($event)" [pedidoRecibido]="pedido"></app-encuesta-cliente>
+  </div>
+
   <div *ngIf="listadoProductos" class="contenedor-menu">
     <app-listado-productos [productos]="productos" [numeroMesa]="mesa.numero" (pedidoFinalizado)="PedidoCargado($event)"></app-listado-productos>
   </div>
@@ -69,7 +69,7 @@
   <img src="../../assets/icon/empresa.png" alt="Custom Spinner" />
 </div>
 
-<ion-footer *ngIf="cliente.perfil === 'Cliente' && !listadoProductos" [translucent]="true">
+<ion-footer *ngIf="cliente.perfil === 'Cliente' && !listadoProductos && !mostrarEncuesta" [translucent]="true">
   <ion-button  (click)="ScanMesa()"  fill="outline" id="btn_qr"  >
     <img src="../../../assets/imagenes/qr.png"  id="img_qr">
   </ion-button>

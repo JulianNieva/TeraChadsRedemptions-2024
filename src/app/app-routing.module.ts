@@ -60,11 +60,15 @@ const routes: Routes = [
     path: 'pedidos-bar',
     loadChildren: () => import('./paginas/pedidos-bar/pedidos-bar.module').then( m => m.PedidosBarPageModule)
   },
-
   {
     path: 'ver-encuestas',
     loadChildren: () => import('./paginas/ver-encuestas/ver-encuestas.module').then( m => m.VerEncuestasPageModule)
+  },
+  {
+    path: 'cuenta',
+    loadChildren: () => import('./paginas/cuenta/cuenta.module').then( m => m.CuentaPageModule)
   }
+
 ];
 
 @NgModule({

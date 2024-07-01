@@ -87,6 +87,17 @@ export class PushNotificationService  {
     return this.htpp.post<any>(`${this.urlApi}notify`,message);
   }
 
+  public MensajePagoRealizado(token : string) : Observable<any> {
+
+    let message = {
+        title : `¡Su pago fue validado con exito!`,
+        Body : "Un cliente ingresó al local",
+        token : token
+    }
+
+    return this.htpp.post<any>(`${this.urlApi}notify`,message);
+  }
+
   //By Juli, encapsulo la notificacion de chat y realizar pedido para el mozo
   public MesaNotificacionAMozo(title:string,body:string): Observable<any>{
     let message = {

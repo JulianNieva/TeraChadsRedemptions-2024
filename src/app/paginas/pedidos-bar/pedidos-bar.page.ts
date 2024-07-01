@@ -31,7 +31,7 @@ export class PedidosBarPage {
   PedidosPendientes() {
     this.list = []
     this.listOfAll.forEach((pedido: Pedido) => {
-      if (pedido.estado === "preparacion" && pedido.soloBartender === true) {
+      if (pedido.bartenderOk === false && pedido.soloBartender === true) {
         this.list.push(pedido)
       }
     })
@@ -46,13 +46,13 @@ export class PedidosBarPage {
   PedidosTerminados() {
     this.list = []
     this.listOfAll.forEach((pedido: Pedido) => {
-      if (pedido.estado === "cocinado" || (pedido.soloCocinero === false && pedido.soloBartender === true)) {
+      if (pedido.bartenderOk === true && pedido.soloBartender === true) {
         this.list.push(pedido)
       }
     });
-    this.pedidos_preparacion = true
+    this.pedidos_preparacion = false
     this.pedidos_cocion = false
-    this.pedidos_terminados = false
+    this.pedidos_terminados = true
     this.estado_pedidos = "Pedidos Terminados"
 
     this.DesSelect()
@@ -99,8 +99,8 @@ export class PedidosBarPage {
         this.bd.ModificarEstadoPedidoBar(this.pedido)
         this.bd.ModificarEstadoPedido(this.pedido, "cocinado")
         this.presentToast("middle", "Pedido listo", "primary")
-        this.DesSelect()
         this.pushNotification.MesaNotificacionAMozo("[Mesa " + this.pedido.mesa + "] Listo para entregar", "Hay un pedido para entregar").subscribe((res) => {console.log()});
+        this.DesSelect()
       }
       else {
         this.bd.ModificarEstadoPedidoBar(this.pedido)
