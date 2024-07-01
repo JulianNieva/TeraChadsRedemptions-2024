@@ -9,7 +9,7 @@ export class Juego15DescComponent  implements OnInit {
 
   @Input() descuento:any = false;
   @Output() cerrarJuego:EventEmitter<any> = new EventEmitter<any>()
-  @Output() cargarDescuento:EventEmitter<any> = new EventEmitter<any>()
+  @Output() sumarDescuento:EventEmitter<any> = new EventEmitter<any>()
   @Output() finalizoJuego:EventEmitter<any> = new EventEmitter()
   juegoActivo:boolean = false
   victoria:boolean = false;
@@ -149,7 +149,7 @@ export class Juego15DescComponent  implements OnInit {
       this.textoJuego = "¡Has ganado!"
       this.victoria = true
       if(!this.descuento)
-        this.cargarDescuento.emit(15);
+        this.sumarDescuento.emit(15);
     }
     else
     {
@@ -162,11 +162,6 @@ export class Juego15DescComponent  implements OnInit {
   CerrarJuego()
   {
     this.cerrarJuego.emit(20)
-  }
-
-  async presentToast(position:'top'|'middle',mensaje:string,color:string)
-  {
-
   }
 
   ngOnDestroy() {
