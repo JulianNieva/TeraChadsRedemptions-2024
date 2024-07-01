@@ -152,20 +152,34 @@
                 <div class="card-header">Mesa {{pedido.mesa}}</div>
                 <div class="card-body">
                     <table class="table table-bordered" style="color: #ffffff;">
+                      <thead>
+                        <tr>
+                          <th>PRODUCTO</th>
+                          <th>CANTIDAD</th>
+                          <th>PRECIO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         <tbody>
                           <ng-container *ngFor="let producto of AgruparProductos(pedido.productos)">
                             <tr>
-                                <td>SubTotal: ${{pedido.total}}</td>
-                            </tr>
-                            <tr>
-                                <td>Descuento: ${{(pedido.total * pedido.descuentoJuego)/100}}</td>
-                            </tr>
-                            <tr>
-                                <td>Propina: ${{pedido.porcentajePropina}}</td>
+                              <td>{{producto.nombre}}</td>
+                              <td *ngIf="producto.cantidad > 1">{{producto.cantidad}}</td>
+                              <td *ngIf="producto.cantidad === 1">1</td>
+                              <td>${{producto.precio * producto.cantidad}}</td>
                             </tr>
                           </ng-container>
                         </tbody>
                         <tfoot>
+                          <tr>
+                            <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;">SubTotal: ${{pedido.total}}</td>
+                          </tr>
+                          <tr>
+                              <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;">Descuento: ${{(pedido.total * pedido.descuentoJuego)/100}}</td>
+                          </tr>
+                          <tr>
+                              <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;">Propina: ${{pedido.propina}}</td>
+                          </tr>
                           <tr>
                             <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;">Total a abonar: ${{pedido.propina + pedido.total - ((pedido.total * pedido.descuentoJuego)/100)}}</td>
                           </tr>

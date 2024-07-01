@@ -28,6 +28,10 @@
     <ion-chip *ngIf="bd.userRol === 'Mozo'" (click)="MostrarPedidosMozo()">
       <img src="../assets/imagenes/pedidos.svg" />
     </ion-chip>
+    <br *ngIf="bd.userRol === 'Mozo'">
+    <ion-chip *ngIf="bd.userRol === 'Mozo'" (click)="SolicitarPago()">
+      <img src="../assets/imagenes/pagar.svg"  />
+    </ion-chip>
     <br *ngIf="bd.userRol === 'Cocinero'">
     <ion-chip *ngIf="bd.userRol === 'Cocinero'" (click)="MostrarCocinaCocineros()">
       <img src="../assets/imagenes/cocina.svg" />

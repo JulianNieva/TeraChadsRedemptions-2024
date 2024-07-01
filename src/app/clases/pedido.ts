@@ -18,6 +18,9 @@ export class Pedido {
     uid: string;
     uidCliente: string;
     realizoEncuesta:boolean;
+    desc20:boolean = false;
+    desc10:boolean = false;
+    desc15:boolean = false;
 
     constructor() {
         this.comienzo = new Date();

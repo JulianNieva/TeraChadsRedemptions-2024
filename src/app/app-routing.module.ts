@@ -41,10 +41,6 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/mesa-cliente/mesa-cliente.module').then( m => m.MesaClientePageModule)
   },
   {
-    path:'juego-20-desc/memoria',
-    component: MemoriaComponent 
-  },
-  {
     path: 'chat',
     loadChildren: () => import('./paginas/chat/chat.module').then( m => m.ChatPageModule)
   },
@@ -69,9 +65,18 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/cuenta/cuenta.module').then( m => m.CuentaPageModule)
   },
   {
-    path: 'juego-10-desc',
-    loadChildren: () => import('./componentes/juegos/juego-10-desc/juego-10-desc.module').then( m => m.Juego10DescPageModule)
-  }
+    path: 'solicitar-pago-qr',
+    loadChildren: () => import('./paginas/solicitar-pago-qr/solicitar-pago-qr.module').then( m => m.SolicitarPagoQrPageModule)
+  },
+  {
+    path: 'juegos',
+    loadChildren: () => import('./paginas/juegos/juegos.module').then( m => m.JuegosPageModule)
+  },
+
+  // {
+  //   path: 'juego-10-desc',
+  //   loadChildren: () => import('./componentes/juegos/juego-10-desc/juego-10-desc.module').then( m => m.Juego10DescPageModule)
+  // }
 
 ];
 

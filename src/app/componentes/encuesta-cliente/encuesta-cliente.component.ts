@@ -26,10 +26,10 @@ export class EncuestaClienteComponent implements OnInit {
 
   constructor(private fb:FormBuilder,private bd:BaseDatosService,private toastCtrl:ToastController) {
     this.forma = this.fb.group({
-      'satisfaccion': ['1', [Validators.required]],
+      'atencion': ['1', [Validators.required]],
       'comentario': [''],
-      'atencionMozo': ['', [Validators.required]],
-      'regresaria': ['0', [Validators.required]],
+      'puntuacion_app': ['', [Validators.required]],
+      'volverias': ['0', [Validators.required]],
       'comida': ['', [Validators.required]]
     });
    }
@@ -51,13 +51,14 @@ export class EncuestaClienteComponent implements OnInit {
     this.respuesta =
     {
       uid:"",
-      satisfaccion: this.forma.get('satisfaccion')!.value,
+      atencion: this.forma.get('atencion')!.value,
       comentario: this.forma.get('comentario')!.value,
-      atencionMozo: this.forma.get('atencionMozo')!.value,
-      regresaria: this.forma.get('regresaria')!.value,
+      puntuacion_app: this.forma.get('puntuacion_app')!.value,
+      volverias: this.forma.get('volverias')!.value,
       comida: this.forma.get('comida')!.value,
       fotos:this.fotos_urls,
-      fecha:Timestamp.now()
+      fecha:new Date(),
+      cliente: this.bd.Getlog()
     }
 
     this.bd.SubirEncuesta(this.respuesta,"encuestas-clientes").then(() => {

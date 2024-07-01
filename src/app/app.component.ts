@@ -48,6 +48,11 @@ export class AppComponent {
     this.navCtrl.navigateRoot(['/solicitar-mesa'])
   }
 
+  SolicitarPago()
+  {
+    this.navCtrl.navigateRoot(['/solicitar-pago-qr'])
+  }
+
   HomePage(){
     this.navCtrl.navigateRoot(['/home'])
   }

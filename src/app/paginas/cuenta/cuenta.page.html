@@ -1,4 +1,4 @@
-<div class="div-principal">
+<div class="div-principal" *ngIf="!qr.scan">
   <div class="contenedor-pedido" *ngIf="mostrarCuenta && !qr.scan">
     <ion-fab vertical="top" horizontal="end" slot="fixed">
       <ion-fab-button (click)="ScanPropina()" class="boton-fab">
@@ -46,8 +46,8 @@
       <p style="text-align: center;font-size: large;color: black;font-weight: bold;">Su pago esta siendo validado</p>
     </div>
   </div>
-  <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada" [disabled]="pedido.estado === 'pendiente-pago'" (click)="ScanPropina()"  size="large" fill="solid"  expand="block" id="btn_ingresar">Pagar con QR</ion-button>
-  <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada" [disabled]="pedido.estado === 'pendiente-pago'" (click)="Pagar()"  size="large" fill="outline"  expand="block" id="btn_borrar">Pagar Efectivo</ion-button>
+  <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada && !(pedido.estado === 'pendiente-pago')" (click)="ScanPropina()"  size="large" fill="solid"  expand="block" id="btn_ingresar">Pagar con QR</ion-button>
+  <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada && !(pedido.estado === 'pendiente-pago')" (click)="Pagar()"  size="large" fill="outline"  expand="block" id="btn_borrar">Pagar Efectivo</ion-button>
 
   <div *ngIf="mostrarPropina">
     <div class="contenedor-propina">

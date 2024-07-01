@@ -24,14 +24,8 @@ export class ChatPage implements OnInit {
       if(res)
         {
           this.loading = false;
-          this.chat = res.sort(function(a:any,b:any){
-            if(a.fecha > b.fecha){
-              return 1
-            }if(a.fecha < b.fecha){
-              return -1
-            }
-            return 0
-          });
+          
+          this.chat = res.sort((a, b) => new Date(a['datetime']).getTime() - new Date(b['datetime']).getTime());
           console.info(this.chat)
           //this.scrollToTheLastElementByClassName();
         }
@@ -58,13 +52,12 @@ export class ChatPage implements OnInit {
 
   
   EnviarMensaje(){
-      const fecha = moment(new Date()).format('DD-MM-YYYY HH:mm:ss');
       const nuevoMensaje =
       {
         uid: this.usuarioActual.uid,
         nombre: this.nombreMensaje,
         texto: this.mensaje,
-        fecha: fecha
+        fecha: new Date()
       }
 
       this.bdSrv.SubirMensaje(nuevoMensaje).then(() => {
