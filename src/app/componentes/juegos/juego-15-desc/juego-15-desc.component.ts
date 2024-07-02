@@ -161,7 +161,7 @@ export class Juego15DescComponent  implements OnInit {
 
   CerrarJuego()
   {
-    this.cerrarJuego.emit(20)
+    this.cerrarJuego.emit(15)
   }
 
   ngOnDestroy() {

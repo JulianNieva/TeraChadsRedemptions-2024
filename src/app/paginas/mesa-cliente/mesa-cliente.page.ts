@@ -162,7 +162,7 @@ export class MesaClientePage {
       {
         this.qrEscaneado = true
         //Se hace un check para ver si muestro el grafico de las encuestas o no
-        if(this.estadoPedido === "recibido" && this.realizoEncuesta)
+        if(this.estadoPedido === "recibido" && (!(this.realizoEncuesta) || this.realizoEncuesta))
         {
           this.navCtrl.navigateForward(['/ver-encuestas'])
         }

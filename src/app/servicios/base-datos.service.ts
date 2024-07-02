@@ -428,8 +428,8 @@ export class BaseDatosService {
 
     // TraerMensajes
     TraerMensajes(){
-      const coleccion = collection(this.firestore,'chatMozos')
-      return collectionData(coleccion)
+      const q = query(collection(this.firestore,'chatMozos'),orderBy('fecha','asc'));
+      return collectionData(q);
     }
 
   //#endregion

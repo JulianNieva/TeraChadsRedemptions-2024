@@ -22,13 +22,13 @@ export class ChatPage implements OnInit {
     this.loading = true;
     this.bdSrv.TraerMensajes().subscribe((res) => {
       if(res)
-        {
-          this.loading = false;
-          
-          this.chat = res.sort((a, b) => new Date(a['datetime']).getTime() - new Date(b['datetime']).getTime());
-          console.info(this.chat)
-          //this.scrollToTheLastElementByClassName();
-        }
+      {
+        this.loading = false;
+        
+        this.chat = res;
+        console.info(this.chat)
+        //this.scrollToTheLastElementByClassName();
+      }
     })
   }
 
@@ -52,12 +52,13 @@ export class ChatPage implements OnInit {
 
   
   EnviarMensaje(){
+    const fecha = moment(new Date()).format('DD-MM-YYYY HH:mm:ss');
       const nuevoMensaje =
       {
         uid: this.usuarioActual.uid,
         nombre: this.nombreMensaje,
         texto: this.mensaje,
-        fecha: new Date()
+        fecha: fecha
       }
 
       this.bdSrv.SubirMensaje(nuevoMensaje).then(() => {
