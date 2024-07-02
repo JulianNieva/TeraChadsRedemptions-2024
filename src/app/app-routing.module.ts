@@ -72,12 +72,6 @@ const routes: Routes = [
     path: 'juegos',
     loadChildren: () => import('./paginas/juegos/juegos.module').then( m => m.JuegosPageModule)
   },
-
-  // {
-  //   path: 'juego-10-desc',
-  //   loadChildren: () => import('./componentes/juegos/juego-10-desc/juego-10-desc.module').then( m => m.Juego10DescPageModule)
-  // }
-
 ];
 
 @NgModule({
