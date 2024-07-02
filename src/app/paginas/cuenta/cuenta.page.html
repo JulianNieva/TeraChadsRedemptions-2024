@@ -1,6 +1,6 @@
 <div class="div-principal" *ngIf="!qr.scan">
   <div class="contenedor-pedido" *ngIf="mostrarCuenta && !qr.scan">
-    <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="!propinaCargada">
       <ion-fab-button (click)="ScanPropina()" class="boton-fab">
         <ion-icon name="qr-code"></ion-icon>
       </ion-fab-button>
@@ -43,7 +43,7 @@
     </table>
     <div *ngIf="pedido.estado === 'pendiente-pago'" >
       <ion-spinner name="crescent"></ion-spinner>
-      <p style="text-align: center;font-size: large;color: black;font-weight: bold;">Su pago esta siendo validado</p>
+      <p style="text-align: center;font-size: large;color: black;font-weight: bold;">Su pago está siendo validado</p>
     </div>
   </div>
   <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada && !(pedido.estado === 'pendiente-pago')" (click)="ScanPropina()"  size="large" fill="solid"  expand="block" id="btn_ingresar">Pagar con QR</ion-button>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 import { register } from 'swiper/element/bundle';
+import { Cliente } from 'src/app/clases/cliente';
+import { Mesa } from 'src/app/clases/mesa';
 
 register();
 
@@ -150,5 +152,12 @@ export class ListadoPedidosMozoPage implements OnInit {
   AprobarPago(pedido:any)
   {
     this.bdSrv.ModificarEstadoPedido(pedido,"finalizado")
+    this.bdSrv.TraerUnaMesaPorNumero(pedido.mesa).then((m:Mesa)=>{
+      let mesa = m
+      mesa.cliente_uid= "";
+      this.bdSrv.ModificarMesa(mesa)
+      this.bdSrv.ModificarClienteMesa(pedido.uidCliente,0)
+      console.log("Se fue")
+    }) 
   }
 }

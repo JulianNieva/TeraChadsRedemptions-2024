@@ -31,14 +31,14 @@
 | ----- |   -------              |
 |   ✔️ | Funcionalidad de Login |
 |   ✔️ | Splashscreen animado|
-|   ✔️ | Realizar pedidos (Implementacion parcial)|
+|   ✔️ | Realizar pedidos|
 |   ✔️ | QR de propina|
 |   ✔️ | Push Confirmar realizacion del pedido|
 |   ✔️ | Push Consultar al mozo|
+|   ✔️ | Encuesta de Cliente|
+|   ✔️ | Juego para obtener 15% de descuento|  
 |   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
-|   ✖️ | Encuesta de Cliente|
-|   ✖️ | Juego para obtener 15% de descuento|  
 
 ***[Branch de ALFA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/alfa)***
 
@@ -60,10 +60,10 @@
 |   ✔️ | QR de ingreso al local|
 |   ✔️ | Confirmar pedidos|
 |   ✔️ | Push Confirmar pedido|
+|   ✔️ |  Juego para obtener 10% de descuento| 
 |   ✖️ | Alta de Dueño / Supervisor |
 |   ✖️ | Alta de Mesa|
-|   ✖️ | Encuesta de Supervisor|
-|   ✖️ |  Juego para obtener 10% de descuento|  
+|   ✖️ | Encuesta de Supervisor| 
 
 ***[Branch de BETA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/beta)***
 
@@ -102,25 +102,25 @@
 
 ## QR Ingreso
 
-[ingreso]: ./imagenes-qrs/qr_ingreso.png
+[ingreso]: ./imagenes_readme/imagenes-qrs/qr_ingreso.png
 ![Icono app][ingreso]
 
 ## QRs Mesas
-[mesa_1]: ./imagenes-qrs/mesa_1.png
+[mesa_1]: ./imagenes_readme/imagenes-qrs/mesa_1.png
 ![Icono app][mesa_1]
 
-[mesa_2]: ./imagenes-qrs/mesa_2.png
+[mesa_2]: ./imagenes_readme/imagenes-qrs/mesa_2.png
 ![Icono app][mesa_2]
 
-[mesa_3]: ./imagenes-qrs/mesa_3.png
+[mesa_3]: ./imagenes_readme/imagenes-qrs/mesa_3.png
 ![Icono app][mesa_3]
 
-[mesa_4]: ./imagenes-qrs/mesa_4.png
+[mesa_4]: ./imagenes_readme/imagenes-qrs/mesa_4.png
 ![Icono app][mesa_4]
 
-[mesa_5]: ./imagenes-qrs/mesa_5.png
+[mesa_5]: ./imagenes_readme/imagenes-qrs/mesa_5.png
 ![Icono app][mesa_5]
 
 ## QR Propina
-[propina]: ./imagenes-qrs/propina-qr.png
+[propina]: ./imagenes_readme/imagenes-qrs/propina-qr.png
 ![Icono app][propina]
