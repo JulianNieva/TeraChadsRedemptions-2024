@@ -315,7 +315,7 @@ export class BaseDatosService {
     }
 
     // TraerEncuestas
-    TraerEncuestas(tipoEncuesta:string)
+    TraerEncuestas(tipoEncuesta : "encuestas-clientes")
     {
       const coleccion = collection(this.firestore,tipoEncuesta)
       return collectionData(coleccion);
