@@ -37,11 +37,11 @@
         <ion-icon name="alert-circle" class="icono-estado"></ion-icon>
       </div>
       <div *ngIf="estadoPedido === 'preparacion'">
-        <p>Su pedido esta siendo preparado. <br>Tiene un tiempo estimado de {{pedido.tiempoPreparacion}} minutos</p>
+        <p>Su pedido está siendo preparado. <br>Tiene un tiempo estimado de {{pedido.tiempoPreparacion}} minutos</p>
         <ion-spinner></ion-spinner>
       </div>
       <div *ngIf="estadoPedido === 'cocinado'">
-        <p>¡Su pedido esta listo!. En un momento se lo llevaremos</p>
+        <p>¡Su pedido está listo!. En un momento se lo llevaremos</p>
         <ion-button (click)="PedidoRecibido()" id="btn_confirmar_pedido">
           <ion-icon name="notifications" class="icono-estado"></ion-icon>
         </ion-button>

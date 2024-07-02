@@ -50,6 +50,29 @@ ion-card-title{
     border: 2px inset white;
 }
 
+ion-fab-button{
+  --background:#8ac926;
+  height: 60px;
+  width: 60px;
+}
+
+ion-range{
+  --bar-background:#537718;
+  --bar-background-active:#a1f717;
+  --knob-size:30px;
+  --knob-background:#a1f717;
+  --pin-background:#8ac926;
+}
+
+.btn{
+  background-color:#8ac926;
+  color: black;
+}
+
+.btn:active{
+  transform: scale(0.8);
+}
+
 @keyframes rotate-center {
     0% {
       -webkit-transform: rotate(0);
