@@ -31,13 +31,13 @@
           <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;"><b>SUBTOTAL:</b> ${{pedido.total}}</td>
         </tr>
         <tr>
-          <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;"><b>DESCUENTO JUEGOS:</b> ${{(pedido.descuentoJuego * pedido.total)/100}}</td>
+          <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;"><b>DESCUENTO JUEGOS:</b> ${{descuentosJuegos}}</td>
         </tr>
         <tr>
           <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;"><b>PROPINA:</b> ${{pedido.propina}}</td>
         </tr>
         <tr>
-          <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;"><b>TOTAL:</b> ${{(pedido.propina + pedido.total) - pedido.descuentoJuego}}</td>
+          <td colspan="3" style="font-size: 25; font-weight: bolder;color: black;"><b>TOTAL:</b> ${{totalFinal}}</td>
         </tr>
       </tfoot>
     </table>
