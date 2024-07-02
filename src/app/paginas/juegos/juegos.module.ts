@@ -9,6 +9,7 @@ import { JuegosPageRoutingModule } from './juegos-routing.module';
 import { JuegosPage } from './juegos.page';
 import { MemoriaComponent } from 'src/app/componentes/juegos/juego_20_desc/memoria/memoria.component';
 import { Juego15DescComponent } from 'src/app/componentes/juegos/juego-15-desc/juego-15-desc.component';
+import { Juego10DescComponent } from 'src/app/componentes/juegos/juego-10-desc/juego-10-desc.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { Juego15DescComponent } from 'src/app/componentes/juegos/juego-15-desc/j
     IonicModule,
     JuegosPageRoutingModule
   ],
-  declarations: [JuegosPage,MemoriaComponent,Juego15DescComponent]
+  declarations: [JuegosPage,MemoriaComponent,Juego15DescComponent,Juego10DescComponent]
 })
 export class JuegosPageModule {}
