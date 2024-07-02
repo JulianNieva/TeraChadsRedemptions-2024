@@ -88,7 +88,7 @@
     <div *ngFor="let item of encuestas" class="card card-encuesta">
       <ion-chip>
         <ion-avatar>
-          <img [src]="item.cliente.img" />
+          <img [src]="item.cliente.imagen.path" />
         </ion-avatar>
         <h3>{{item.cliente.nombre}} {{item.cliente.apeliido}}</h3>
       </ion-chip>
@@ -96,9 +96,9 @@
     
       <div class="card-body">
         <h5 class="card-title">{{item.comentario}}.</h5>
-        <img *ngIf="item.imagenes[0]" class="img-enc" [src]="item.imagenes[0]">
-        <img *ngIf="item.imagenes[1]" class="img-enc" [src]="item.imagenes[1]">
-        <img *ngIf="item.imagenes[2]" class="img-enc" [src]="item.imagenes[2]">
+        <img *ngIf="item.fotos[0]" class="img-enc" [src]="item.fotos[0]">
+        <img *ngIf="item.fotos[1]" class="img-enc" [src]="item.fotos[1]">
+        <img *ngIf="item.fotos[2]" class="img-enc" [src]="item.fotos[2]">
       </div>
     </div>
   </div>

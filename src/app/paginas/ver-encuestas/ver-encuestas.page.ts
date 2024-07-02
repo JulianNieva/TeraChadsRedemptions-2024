@@ -16,6 +16,7 @@ import {
   ApexFill,
   ApexTheme
 } from "ng-apexcharts";
+import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 
 type ApexXAxis = {
   type?: "category" | "datetime" | "numeric";
@@ -126,52 +127,52 @@ export class VerEncuestasPage  {
   ver_grafico_puntuacionApp = true
   ver_comentarios_encuestas = false
 
-  constructor() {
+  constructor(private bd : BaseDatosService) {
 
-    //5 Encuestas
-    let img1_1 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fcomidas%2Fcarne-3.jpg?alt=media&token=10318264-2c6e-414d-9f48-1399e3dabe38" 
-    let e1 = { atencion : 100,  comida : "Exelente", volverias : true,  imagenes : new Array,  comentario : "Muy Buena Atencion y Comida",  puntuacion_app : "⭐⭐⭐⭐⭐", 
-      cliente : { nombre:"Mari", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fcliente.png?alt=media&token=5156f6b6-679d-48da-8f71-ae5f6031cf66" } }
-    e1.imagenes.push(img1_1)
+    // //5 Encuestas
+    // let img1_1 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fcomidas%2Fcarne-3.jpg?alt=media&token=10318264-2c6e-414d-9f48-1399e3dabe38" 
+    // let e1 = { atencion : 100,  comida : "Exelente", volverias : true,  imagenes : new Array,  comentario : "Muy Buena Atencion y Comida",  puntuacion_app : "⭐⭐⭐⭐⭐", 
+    //   cliente : { nombre:"Mari", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fcliente.png?alt=media&token=5156f6b6-679d-48da-8f71-ae5f6031cf66" } }
+    // e1.imagenes.push(img1_1)
     
-    let img2_1 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fcomidas%2Fpapas-1.jpg?alt=media&token=431350ae-07e6-499e-aa80-8bb8450b8ed3" 
-    let img2_2 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fbebidas%2Fvino-3.png?alt=media&token=d8e44556-3895-4292-9b5e-729e4a4a54e0" 
-    let e2 = { atencion : 80,  comida : "Buena", volverias : true,  imagenes : new Array,  comentario : "Buena comida, Atencion Buena pero se puede mejorar",  puntuacion_app : "⭐⭐⭐⭐", 
-      cliente : { nombre:"Pedro", apellido:"Prueba", img:"../../../assets/imagenes/icon.png" }
-     }
-    e2.imagenes.push(img2_1)
-    e2.imagenes.push(img2_2)
+    // let img2_1 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fcomidas%2Fpapas-1.jpg?alt=media&token=431350ae-07e6-499e-aa80-8bb8450b8ed3" 
+    // let img2_2 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fbebidas%2Fvino-3.png?alt=media&token=d8e44556-3895-4292-9b5e-729e4a4a54e0" 
+    // let e2 = { atencion : 80,  comida : "Buena", volverias : true,  imagenes : new Array,  comentario : "Buena comida, Atencion Buena pero se puede mejorar",  puntuacion_app : "⭐⭐⭐⭐", 
+    //   cliente : { nombre:"Pedro", apellido:"Prueba", img:"../../../assets/imagenes/icon.png" }
+    //  }
+    // e2.imagenes.push(img2_1)
+    // e2.imagenes.push(img2_2)
 
-    let img3_1 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fbebidas%2Fagua-1.jpg?alt=media&token=68c8fca9-343d-40be-8096-ff479bd9ad31" 
-    let img3_2 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fpostres%2Fflan-1.jpg?alt=media&token=6c51f465-8317-49c1-9ce8-a3115b36bdb2" 
-    let img3_3 = "../../../assets/imagenes/icon.png" 
-    let e3 = { atencion : 50,  comida : "Mala", volverias : false,  imagenes : new Array,  comentario : "xd",  puntuacion : "⭐", 
-      cliente : { nombre:"Papel Cliente", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Ffile%3A%2Fdata%2Fuser%2F0%2Fcom.pps.Comanda%2Ffiles%2F1718653772334.cliente.jpeg?alt=media&token=75e27213-36a7-43f3-99e7-83b09724aab5" }
-    }
-    e3.imagenes.push(img3_1)
-    e3.imagenes.push(img3_2)
-    e3.imagenes.push(img3_3)
+    // let img3_1 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fbebidas%2Fagua-1.jpg?alt=media&token=68c8fca9-343d-40be-8096-ff479bd9ad31" 
+    // let img3_2 = "https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fproductos%2Fpostres%2Fflan-1.jpg?alt=media&token=6c51f465-8317-49c1-9ce8-a3115b36bdb2" 
+    // let img3_3 = "../../../assets/imagenes/icon.png" 
+    // let e3 = { atencion : 50,  comida : "Mala", volverias : false,  imagenes : new Array,  comentario : "xd",  puntuacion : "⭐", 
+    //   cliente : { nombre:"Papel Cliente", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Ffile%3A%2Fdata%2Fuser%2F0%2Fcom.pps.Comanda%2Ffiles%2F1718653772334.cliente.jpeg?alt=media&token=75e27213-36a7-43f3-99e7-83b09724aab5" }
+    // }
+    // e3.imagenes.push(img3_1)
+    // e3.imagenes.push(img3_2)
+    // e3.imagenes.push(img3_3)
     
-    let e4 = { atencion : 10,  comida : "Exelente", volverias : true,  imagenes : new Array,  comentario : "Volveria solo por la comida, Atencion HORRIBLE",  puntuacion_app : "⭐⭐⭐",
-      cliente : { nombre:"Anonimo", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fanonimo.png?alt=media&token=4d4e1cf3-96bd-4659-a055-dec54bec5be7" }
-     }
+    // let e4 = { atencion : 10,  comida : "Exelente", volverias : true,  imagenes : new Array,  comentario : "Volveria solo por la comida, Atencion HORRIBLE",  puntuacion_app : "⭐⭐⭐",
+    //   cliente : { nombre:"Anonimo", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fanonimo.png?alt=media&token=4d4e1cf3-96bd-4659-a055-dec54bec5be7" }
+    //  }
 
-    let e5 = { atencion : 100,  comida : "Exelente", volverias : true,  imagenes : new Array,  comentario : "Rico",  puntuacion_app : "⭐⭐⭐⭐⭐",
-      cliente : { nombre:"Mari", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fcliente.png?alt=media&token=5156f6b6-679d-48da-8f71-ae5f6031cf66" }
-     }
+    // let e5 = { atencion : 100,  comida : "Exelente", volverias : true,  imagenes : new Array,  comentario : "Rico",  puntuacion_app : "⭐⭐⭐⭐⭐",
+    //   cliente : { nombre:"Mari", apellido:"Test", img:"https://firebasestorage.googleapis.com/v0/b/restaurante-lacomanda.appspot.com/o/imagenes%2Fusuarios%2Fcliente.png?alt=media&token=5156f6b6-679d-48da-8f71-ae5f6031cf66" }
+    //  }
 
-    this.encuestas.push(e1)
-    this.encuestas.push(e2)
-    this.encuestas.push(e3)
-    this.encuestas.push(e4)
-    this.encuestas.push(e5)
+    // this.encuestas.push(e1)
+    // this.encuestas.push(e2)
+    // this.encuestas.push(e3)
+    // this.encuestas.push(e4)
+    // this.encuestas.push(e5)
 
-    console.log(this.encuestas)
-
-
+    this.bd.TraerEncuestas("encuestas-clientes").subscribe((e : any)  => {
+      this.encuestas = e.sort((a : any, b : any) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime());
+      console.log(this.encuestas)
+      this.GenerarDataGraficos()
+    })
     this.GenerarDataGraficos()
-
-
   }
 
   // Genero la data o cantidad de coincidencias en base a una "pregunta : respuesta"
@@ -204,7 +205,7 @@ export class VerEncuestasPage  {
 
       if(enc.comida === "Buena") {
           this.data_count_comida_buena ++
-      } else if(enc.comida === "Exelente") {
+      } else if(enc.comida === "Excelente") {
           this.data_count_comida_exelente ++
       } else if (enc.comida === "Mala") {
           this.data_count_comida_mala ++
@@ -403,7 +404,7 @@ export class VerEncuestasPage  {
           type: 'polarArea',
           height: 1000
         },
-        labels: ['Buena ' + this.data_count_comida_buena, 'Exelente ' + this.data_count_comida_exelente, 'Mala ' + this.data_count_comida_mala],
+        labels: ['Buena ' + this.data_count_comida_buena, 'Excelente ' + this.data_count_comida_exelente, 'Mala ' + this.data_count_comida_mala],
         fill: {
           opacity: 1
         },
