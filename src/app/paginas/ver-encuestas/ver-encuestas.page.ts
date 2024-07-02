@@ -166,13 +166,17 @@ export class VerEncuestasPage  {
     // this.encuestas.push(e3)
     // this.encuestas.push(e4)
     // this.encuestas.push(e5)
-
+    this.GenerarDataGraficos()
     this.bd.TraerEncuestas("encuestas-clientes").subscribe((e : any)  => {
+      this.encuestas = []
       this.encuestas = e.sort((a : any, b : any) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime());
       console.log(this.encuestas)
+      // setTimeout(() => {
+      //   this.GenerarDataGraficos()
+      // },1000)
       this.GenerarDataGraficos()
     })
-    this.GenerarDataGraficos()
+  
   }
 
   // Genero la data o cantidad de coincidencias en base a una "pregunta : respuesta"
@@ -197,7 +201,7 @@ export class VerEncuestasPage  {
         mis_encuestas.push({ atencion : enc.atencion, count : 1 })
       }
 
-      if(enc.volverias){
+      if(enc.volverias == "1"){
         this.data_si_volverias ++
       } else {
         this.data_no_volverias ++

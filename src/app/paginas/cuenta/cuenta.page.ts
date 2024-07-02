@@ -18,6 +18,8 @@ export class CuentaPage implements OnInit {
   mostrarPropina = false;
   pedido:Pedido = new Pedido()
   propinaCargada:boolean = false;
+  descuentosJuegos:number = 0;
+  totalFinal:number = 0;
 
   constructor(public qr : QrService,private bdSrv:BaseDatosService,private navCtrl:NavController,private pushSrv:PushNotificationService) {
     const pedidoString = localStorage.getItem("pedido");
@@ -25,7 +27,7 @@ export class CuentaPage implements OnInit {
     if(pedido != null)
       {
         this.pedido = pedido
-        this.bdSrv.TraerUnPedidoPorMesa(this.pedido.mesa).subscribe((res:any) => {
+        this.bdSrv.TraerPedidoPorUid(this.pedido.uid).subscribe((res:any) => {
           console.log(res)
           if(res.length != 0)
           {
@@ -33,6 +35,8 @@ export class CuentaPage implements OnInit {
               if(pe.estado !== "finalizado") {
                 this.pedido = pe
                 this.propinaCargada = this.pedido.porcentajePropina != 0;
+                this.descuentosJuegos = ((this.pedido.total * this.pedido.descuentoJuego)/100)
+                this.totalFinal = (this.pedido.total + this.pedido.propina) - this.descuentosJuegos;
               }
               else{
                 this.bdSrv.TraerUnaMesaPorNumero(this.pedido.mesa).then((m:Mesa)=>{
