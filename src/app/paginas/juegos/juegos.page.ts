@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Pedido } from 'src/app/clases/pedido';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 
 @Component({
@@ -21,19 +22,18 @@ export class JuegosPage implements OnInit {
     const pedidoString = localStorage.getItem('pedido');
     console.log(pedidoString)
     const pedido = pedidoString ? JSON.parse(pedidoString) : null;
-    console.log(pedido)
-    console.info(this.pedido)
-    if(pedido != null)
-    {
-      console.info(this.pedido)
-      this.pedido = pedido
-      if(this.pedido.desc10)
-        this.Desc10Aplicado = true;
-      if(this.pedido.desc15)
-        this.Desc15Aplicado = true;
-      if(this.pedido.desc20)
-        this.Desc20Aplicado = true;
-    }
+    this.bdSrv.TraerPedidoPorUid(pedido.uid).subscribe((ped:any) => {
+      ped.forEach((e:any) => {
+        this.pedido = e as Pedido
+        console.info(this.pedido)
+        if(this.pedido.desc10)
+          this.Desc10Aplicado = true;
+        if(this.pedido.desc15)
+          this.Desc15Aplicado = true;
+        if(this.pedido.desc20)
+          this.Desc20Aplicado = true;
+      });
+    })
   }
 
   ngOnInit() {}
