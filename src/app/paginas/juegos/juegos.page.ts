@@ -17,6 +17,7 @@ export class JuegosPage implements OnInit {
   Desc20Aplicado:boolean = false
   Desc10Aplicado:boolean = false
   Desc15Aplicado:boolean = false
+  descuentoTotal:number = 0;
 
   constructor(private bdSrv:BaseDatosService) { 
     const pedidoString = localStorage.getItem('pedido');
@@ -25,6 +26,7 @@ export class JuegosPage implements OnInit {
     this.bdSrv.TraerPedidoPorUid(pedido.uid).subscribe((ped:any) => {
       ped.forEach((e:any) => {
         this.pedido = e as Pedido
+        this.descuentoTotal = this.pedido.descuentoJuego
         console.info(this.pedido)
         if(this.pedido.desc10)
           this.Desc10Aplicado = true;
