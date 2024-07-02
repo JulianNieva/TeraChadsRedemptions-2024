@@ -34,7 +34,7 @@ export class CuentaPage implements OnInit {
             res.forEach((pe : Pedido) => {
               if(pe.estado !== "finalizado") {
                 this.pedido = pe
-                this.propinaCargada = this.pedido.porcentajePropina < 0;
+                this.propinaCargada = this.pedido.porcentajePropina >= 0;
                 this.descuentosJuegos = ((this.pedido.total * this.pedido.descuentoJuego)/100)
                 this.totalFinal = (this.pedido.total + this.pedido.propina) - this.descuentosJuegos;
               }

@@ -1,6 +1,6 @@
 <div class="div-principal" *ngIf="!qr.scan">
   <div class="contenedor-pedido" *ngIf="mostrarCuenta && !qr.scan">
-    <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="!propinaCargada">
       <ion-fab-button (click)="ScanPropina()" class="boton-fab">
         <ion-icon name="qr-code"></ion-icon>
       </ion-fab-button>
