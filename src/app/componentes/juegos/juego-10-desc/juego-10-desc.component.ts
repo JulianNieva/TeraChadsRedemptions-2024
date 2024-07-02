@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IonThumbnail, ToastController } from '@ionic/angular';
 
 @Component({
@@ -7,11 +7,11 @@ import { IonThumbnail, ToastController } from '@ionic/angular';
   styleUrls: ['./juego-10-desc.component.scss'],
 })
 export class Juego10DescComponent {
-
-  @Input() descuento:any = false;
-  @Output() cerrarJuego:EventEmitter<any> = new EventEmitter<any>()
-  @Output() sumarDescuento:EventEmitter<any> = new EventEmitter<any>()
+  @Input() descuento:any
+  @Output() cerrarJuego:EventEmitter<any> = new EventEmitter()
+  @Output() sumarDescuento:EventEmitter<any> = new EventEmitter()
   @Output() finalizoJuego:EventEmitter<any> = new EventEmitter()
+
   usuario: any = null;
   pattern: number[] = [];
   patronUsuario: number[] = [];
@@ -25,9 +25,7 @@ export class Juego10DescComponent {
 
   private audioContext: AudioContext | null = null;
 
-  constructor(
-    private toastController : ToastController
-    ){
+  constructor(private toastController : ToastController){
     }
 
   startGame() {
@@ -51,6 +49,11 @@ export class Juego10DescComponent {
     this.isGameOver = false;
     this.colorActivo = null;
     this.perdio = false;
+  }
+
+  CerrarJuego()
+  {
+    this.cerrarJuego.emit(20)
   }
 
   async presentToast(position : 'top' | 'middle', message = "", color = "danger"){
@@ -110,12 +113,16 @@ export class Juego10DescComponent {
         this.isGameOver = true;
         this.perdio = true;        
         this.presentToast("middle","¡Has perdido!","danger")
-        //this.CrearResultado();
+        this.finalizoJuego.emit(15)
       } else if (this.patronUsuario.length === this.pattern.length) {
-        if (this.level === 5) {
-          this.victoria = true; 
-          this.presentToast("middle","Has ganado!","primary");
-          //this.CrearResultado();
+        if (this.level === 5) {          
+          this.isGameOn = false;
+          this.isUserTurn = false;
+          if(!this.descuento) {
+            this.sumarDescuento.emit(10);
+            this.victoria = true; 
+          }          
+          this.presentToast("middle","Has ganado!","primary");          
         } else {
           this.level++;
           this.generarPatron();
