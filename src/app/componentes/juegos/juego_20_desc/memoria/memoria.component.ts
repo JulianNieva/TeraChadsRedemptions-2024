@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cronometro } from './clases_juego/cronometro';
 import { Ficha, Fruta } from './clases_juego/ficha';
 
@@ -9,6 +9,10 @@ import { Ficha, Fruta } from './clases_juego/ficha';
 })
 export class MemoriaComponent  {
 
+  @Input() descuento:any
+  @Output() cerrarJuego:EventEmitter<any> = new EventEmitter()
+  @Output() sumarDescuento:EventEmitter<any> = new EventEmitter()
+  @Output() finalizoJuego:EventEmitter<any> = new EventEmitter()
   cronometro : Cronometro = new Cronometro();
   fichas : Array<Ficha> = [];
 
@@ -29,36 +33,36 @@ export class MemoriaComponent  {
   constructor() {
 
     let fichaBanana = new Ficha(Fruta.Banana,this.imagen_atras);
-    // let fichaCereza = new Ficha(Fruta.Cereza,this.imagen_atras);
+    let fichaCereza = new Ficha(Fruta.Cereza,this.imagen_atras);
     let fichaLimon = new Ficha(Fruta.Limon,this.imagen_atras);
     let fichaManzana = new Ficha(Fruta.Manzana,this.imagen_atras);
-    // let fichaNaranja = new Ficha(Fruta.Naranja,this.imagen_atras);
+    let fichaNaranja = new Ficha(Fruta.Naranja,this.imagen_atras);
     let fichaPalta = new Ficha(Fruta.Palta,this.imagen_atras);
     let fichaPera = new Ficha(Fruta.Pera,this.imagen_atras);
     let fichaUva = new Ficha(Fruta.Uva,this.imagen_atras);
     let fichaBanana2 = new Ficha(Fruta.Banana,this.imagen_atras);
-    // let fichaCereza2 = new Ficha(Fruta.Cereza,this.imagen_atras);
+    let fichaCereza2 = new Ficha(Fruta.Cereza,this.imagen_atras);
     let fichaLimon2 = new Ficha(Fruta.Limon,this.imagen_atras);
     let fichaManzana2 = new Ficha(Fruta.Manzana,this.imagen_atras);
-    // let fichaNaranja2 = new Ficha(Fruta.Naranja,this.imagen_atras);
+    let fichaNaranja2 = new Ficha(Fruta.Naranja,this.imagen_atras);
     let fichaPalta2 = new Ficha(Fruta.Palta,this.imagen_atras);
     let fichaPera2 = new Ficha(Fruta.Pera,this.imagen_atras);
     let fichaUva2 = new Ficha(Fruta.Uva,this.imagen_atras);
 
     
     this.fichas.push(fichaBanana);
-    // this.fichas.push(fichaCereza);
+    this.fichas.push(fichaCereza);
     this.fichas.push(fichaLimon);
     this.fichas.push(fichaManzana);
-    // this.fichas.push(fichaNaranja);
+    this.fichas.push(fichaNaranja);
     this.fichas.push(fichaPalta);
     this.fichas.push(fichaPera);
     this.fichas.push(fichaUva);
     this.fichas.push(fichaBanana2);
-    // this.fichas.push(fichaCereza2);
+    this.fichas.push(fichaCereza2);
     this.fichas.push(fichaLimon2);
     this.fichas.push(fichaManzana2);
-    // this.fichas.push(fichaNaranja2);
+    this.fichas.push(fichaNaranja2);
     this.fichas.push(fichaPalta2);
     this.fichas.push(fichaPera2);
     this.fichas.push(fichaUva2);
@@ -168,27 +172,30 @@ export class MemoriaComponent  {
   {
 
     if(this.cronometro.seconds !== 0){
-      if(this.primerPartida){
+      if(this.primerPartida && !this.descuento){
         this.primerPartida = false
           this.primerPartidaGanada = true
+          this.sumarDescuento.emit(20)
       }
     }
     navigator.vibrate(1000);
     this.cronometro.stopTimer();
     this.partidaTerminada = true;
+    this.finalizoJuego.emit(20)
   }
 
   ComienzoPartida()
   {
-      this.partidaIniciada = true;
-      this.cronometro.startTimer();
-      this.ChechTimer()
+    this.partidaIniciada = true;
+    this.cronometro.startTimer();
+    this.ChechTimer()
   }
 
   Salir()
   {
     this.Reiniciar();
     navigator.vibrate(1000);
+    this.cerrarJuego.emit(20);
   }
 
   Reiniciar()

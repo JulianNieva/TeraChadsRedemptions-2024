@@ -10,15 +10,15 @@
       <ion-card-content>
         <form [formGroup]="forma" (ngSubmit)="EnviarEncuesta()">
           <ion-card-subtitle class="ion-text-center">¿Cómo calificaría el servicio de atención?</ion-card-subtitle>
-          <ion-range aria-label="Range with ticks" [pin]="true" formControlName="satisfaccion" [pinFormatter]="formato"></ion-range>
+          <ion-range aria-label="Range with ticks" [pin]="true" formControlName="atencion" [pinFormatter]="formato"></ion-range>
           <ion-card-subtitle class="ion-text-center mb-1">¿Volvería al restaurante con un amigo?</ion-card-subtitle>
           <div class="radioButtons mb-3" style="text-align: center; margin: 0 auto;">
             <div class="form-check">
-              <input value="1"  type="radio" class="form-check-input" name="regresaria" formControlName="regresaria">
+              <input value="1"  type="radio" class="form-check-input" name="volverias" formControlName="volverias">
               <label class="form-check-label">Si</label>
             </div>
             <div class="form-check">
-              <input value="0" type="radio" class="form-check-input " name="regresaria" formControlName="regresaria">
+              <input value="0" type="radio" class="form-check-input " name="volverias" formControlName="volverias">
               <label class="form-check-label">No</label>
             </div>
           </div>
@@ -45,7 +45,7 @@
           </div>
           <ion-card-subtitle class="ion-text-center mb-2">¿Cómo calificaría la aplicación?</ion-card-subtitle>
           <div class="select">
-            <select class="form-select form-select-sm mb-2" formControlName="atencionMozo">
+            <select class="form-select form-select-sm mb-2" formControlName="puntuacion_app">
               <option value="" disabled selected>Seleccione una opción</option>
               <option value="⭐">⭐</option>
               <option value="⭐⭐">⭐⭐</option>

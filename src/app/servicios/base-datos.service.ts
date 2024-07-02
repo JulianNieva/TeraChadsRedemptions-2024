@@ -392,6 +392,12 @@ export class BaseDatosService {
       });
     }
 
+    AgregarDescuentoJuego(pedido:any){
+      const coleccion = collection(this.firestore, 'pedidos')
+      const documento = doc(coleccion, pedido.uid)
+      return updateDoc(documento,JSON.parse(JSON.stringify(pedido)));
+    }
+
     ModificarEstadoPedidoCocina(pedido:any){
       const coleccion = collection(this.firestore, 'pedidos')
       const documento = doc(coleccion, pedido.uid)
@@ -407,6 +413,7 @@ export class BaseDatosService {
         bartenderOk:true
       });
     }
+
   //#endregion
 
   //#region  ////////////////// CHAT ////////////////////////

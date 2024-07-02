@@ -181,6 +181,7 @@ export class MesaClientePage {
     this.loading = true;
     this.pushSrv.MesaNotificacionAMozo(`[Mesa ${this.mesa.numero}] Pidio la cuenta`,"Verifique el listado de pedidos para cobrar a la mesa").subscribe((res) => console.log(res))
     this.bd.ModificarEstadoPedido(this.pedido,"cuenta").then((res) => {
+      this.loading = false;
       this.NavegarCuentaDelPedido()
     })
   }
@@ -189,6 +190,12 @@ export class MesaClientePage {
   {
     localStorage.setItem("pedido",JSON.stringify(this.pedido))
     this.navCtrl.navigateRoot(['/cuenta'])
+  }
+
+  NavegarListadoJuegos()
+  {
+    localStorage.setItem("pedido",JSON.stringify(this.pedido))
+    this.navCtrl.navigateForward(['/juegos'])
   }
 
   MostrarEncuesta()

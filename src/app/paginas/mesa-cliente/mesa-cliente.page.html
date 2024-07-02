@@ -15,7 +15,7 @@
         <ion-fab-button class="fabs-btns" (click)="ConsultarMozo()">
           <ion-icon name="chatbubbles"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado'">
+        <ion-fab-button class="fabs-btns" *ngIf="estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado'" (click)="NavegarListadoJuegos()">
           <ion-icon name="game-controller"></ion-icon>
         </ion-fab-button>
         <ion-fab-button class="fabs-btns" *ngIf="(estadoPedido === 'preparacion' || estadoPedido === 'recibido' || estadoPedido === 'cocinado') && !realizoEncuesta" (click)="MostrarEncuesta()">

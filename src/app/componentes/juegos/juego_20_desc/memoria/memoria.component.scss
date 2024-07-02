@@ -8,12 +8,16 @@
 }
 
 .container{
-    margin-top: 60px;
+    margin-top: 30px;
+    padding-left: 0px;
+    //margin-top: 60px;
 }
 
 .btn_jugar{
-    height: 160px;
-    width: 100%;
+    //height: 160px;
+    height: 110px;
+    //width: 100%;
+    width: 115%;
     color:#FFFF3F;
     border-color:#FD846A;
     background-color: #FD846A;
@@ -28,9 +32,11 @@
 }
 
 .btn_Herramientas{
-    margin-top: 100px;
+    margin-top: 80px;
+    //margin-top: 100px;
     height: 60px;
-    width: 80%;
+    //width: 80%;
+    width: 75%;
     color:#80B918;
     border-color:#80B918;
     background-color: #80B918;

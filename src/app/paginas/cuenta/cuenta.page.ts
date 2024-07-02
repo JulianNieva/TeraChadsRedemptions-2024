@@ -45,6 +45,7 @@ export class CuentaPage implements OnInit {
                   user.mesa_asignada = 0;
                   this.bdSrv.ActualizarLog(user as Cliente)
                   this.pushSrv.MensajePagoRealizado(user.token_mensajes).subscribe((res) => console.log(res))
+                  localStorage.removeItem("pedido")
                   this.navCtrl.navigateRoot(['/home'])
                 }) 
               }
@@ -104,10 +105,6 @@ export class CuentaPage implements OnInit {
         }
         else if(this.qr.scanResult == "pago" && this.propinaCargada){
           this.Pagar()
-          //Aca se cambiaria el estado del pedido a Finalizado una vez que se obtuvo el qr del mozo
-          // setTimeout(() => {
-            //Simular carga de pago
-          // }, 1500);
         }
         else{
 
