@@ -39,19 +39,8 @@ export class CuentaPage implements OnInit {
                 this.totalFinal = (this.pedido.total + this.pedido.propina) - this.descuentosJuegos;
               }
               else{
-                this.bdSrv.TraerUnaMesaPorNumero(this.pedido.mesa).then((m:Mesa)=>{
-                  let mesa = m
-                  mesa.cliente_uid= "";
-                  this.bdSrv.ModificarMesa(mesa)
-                  this.bdSrv.ModificarClienteMesa(this.pedido.uidCliente,0)
-                  console.log("Se fue")
-                  let user = this.bdSrv.Getlog();
-                  user.mesa_asignada = 0;
-                  this.bdSrv.ActualizarLog(user as Cliente)
-                  this.pushSrv.MensajePagoRealizado(user.token_mensajes).subscribe((res) => console.log(res))
-                  localStorage.removeItem("pedido")
-                  this.navCtrl.navigateRoot(['/home'])
-                }) 
+                localStorage.removeItem("pedido")
+                this.navCtrl.navigateRoot(['/home'])
               }
           });
           }

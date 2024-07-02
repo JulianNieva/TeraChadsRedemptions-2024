@@ -31,14 +31,14 @@
 | ----- |   -------              |
 |   ✔️ | Funcionalidad de Login |
 |   ✔️ | Splashscreen animado|
-|   ✔️ | Realizar pedidos (Implementacion parcial)|
+|   ✔️ | Realizar pedidos|
 |   ✔️ | QR de propina|
 |   ✔️ | Push Confirmar realizacion del pedido|
 |   ✔️ | Push Consultar al mozo|
+|   ✔️ | Encuesta de Cliente|
+|   ✔️ | Juego para obtener 15% de descuento|  
 |   ✖️ | Alta de Empleados |
 |   ✖️ | Alta de Productos|
-|   ✖️ | Encuesta de Cliente|
-|   ✖️ | Juego para obtener 15% de descuento|  
 
 ***[Branch de ALFA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/alfa)***
 
@@ -60,10 +60,10 @@
 |   ✔️ | QR de ingreso al local|
 |   ✔️ | Confirmar pedidos|
 |   ✔️ | Push Confirmar pedido|
+|   ✔️ |  Juego para obtener 10% de descuento| 
 |   ✖️ | Alta de Dueño / Supervisor |
 |   ✖️ | Alta de Mesa|
-|   ✖️ | Encuesta de Supervisor|
-|   ✖️ |  Juego para obtener 10% de descuento|  
+|   ✖️ | Encuesta de Supervisor| 
 
 ***[Branch de BETA](https://github.com/JulianNieva/TeraChadsRedemptions-2024/tree/beta)***
 
