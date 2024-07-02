@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { IonThumbnail, ToastController } from '@ionic/angular';
 
 @Component({
@@ -7,6 +7,11 @@ import { IonThumbnail, ToastController } from '@ionic/angular';
   styleUrls: ['./juego-10-desc.component.scss'],
 })
 export class Juego10DescComponent {
+
+  @Input() descuento:any = false;
+  @Output() cerrarJuego:EventEmitter<any> = new EventEmitter<any>()
+  @Output() sumarDescuento:EventEmitter<any> = new EventEmitter<any>()
+  @Output() finalizoJuego:EventEmitter<any> = new EventEmitter()
   usuario: any = null;
   pattern: number[] = [];
   patronUsuario: number[] = [];

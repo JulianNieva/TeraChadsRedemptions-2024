@@ -27,6 +27,7 @@
      </div>
   </div>
   <div *ngIf="mostrarJuego10">
+    <app-juego-10-desc [descuento]="Desc10Aplicado" (cerrarJuego)="CerrarJuego($event)" (sumarDescuento)="AgregarDescuento($event)" (finalizoJuego)="YaJugo($event)"></app-juego-10-desc>
   </div>
   <div *ngIf="mostrarJuego15">
     <app-juego-15-desc [descuento]="Desc15Aplicado" (cerrarJuego)="CerrarJuego($event)" (sumarDescuento)="AgregarDescuento($event)" (finalizoJuego)="YaJugo($event)"></app-juego-15-desc>
