@@ -102,6 +102,11 @@
 
 ![](./imagenes_readme/ejemplo_notificacion.gif)
 
+# Login e Inicio Rápido
+
+![](./imagenes_readme/login.png)
+![](./imagenes_readme/login_menu.png)
+
 # Funcionalidades del clientes
 >El cliente es el enfoque de esta aplicación, podra realizar una serie de acciones dentro la misma
 
