@@ -40,6 +40,9 @@ export class CuentaPage implements OnInit {
               }
               else{
                 localStorage.removeItem("pedido")
+                let user = this.bdSrv.Getlog()
+                user.mesa_asignada = 0;
+                this.bdSrv.ActualizarLog(user as Cliente)
                 this.navCtrl.navigateRoot(['/home'])
               }
           });
@@ -91,7 +94,7 @@ export class CuentaPage implements OnInit {
     this.qr.StartScan().then((res) => {
       try {
         console.log(this.qr.scanResult == "accederPropina")
-        if(this.qr.scanResult == "accederPropina" && !this.propinaCargada)
+        if(this.qr.scanResult == "accederPropina" && this.propinaCargada)
         {
           this.AlternarVista()
           this.propinaCargada = true;
