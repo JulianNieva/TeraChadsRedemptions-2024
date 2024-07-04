@@ -171,13 +171,9 @@
 ![](./imagenes_readme/vista_cliente/encuesta_cliente.png)
 
 ### Vista de Cuenta y Propina
-> El CLiente, cuando decide solicitar la cuenta, apretara un boton donde se le cambiara la vista y se le muestra detalladamente el pedido realizado, y podra realizar el pago de dos formas distintas
+> El Cliente, cuando decide solicitar la cuenta, apretara un boton donde se le cambiara la vista y se le muestra detalladamente el pedido realizado, y podra realizar el pago de dos formas distintas. Asimismo, podra agregar una propina siempre y cuando lea el QR correspondiente
 
 ![](./imagenes_readme/vista_cliente/vista_cuenta.png)
-
->Asimismo, podra agregar una propina siempre y cuando lea el QR correspondiente
-
-![](./imagenes_readme/vista_cliente/propina.png)
 
 # Funcionalidades de los empleados
 
@@ -272,8 +268,22 @@
 ### Mesa 5
 ![](./imagenes_readme/imagenes-qrs/mesa_5.png)
 
-## QR Propina
-![](./imagenes_readme/imagenes-qrs/propina-qr.png) 
-
 ## QR Pagar 
 ![](./imagenes_readme/imagenes-qrs/qr-pago.png)
+
+## QRs de la Propina
+
+### Mala - 0% de propina
+![](./imagenes_readme/imagenes-qrs/propina_mala.png) 
+
+### Regular - 5% de propina
+![](./imagenes_readme/imagenes-qrs/propina_regular.png) 
+
+### Buena - 10% de propina
+![](./imagenes_readme/imagenes-qrs/propina_buena.png) 
+
+### Muy Buena - 15% de propina
+![](./imagenes_readme/imagenes-qrs/propina_muy_buena.png) 
+
+### Excelente - 20% de propina
+![](./imagenes_readme/imagenes-qrs/propina_excelente.png) 

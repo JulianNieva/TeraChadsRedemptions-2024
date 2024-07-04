@@ -173,7 +173,7 @@ export class MesaClientePage {
         this.MostrarProductos()
       }
     }else{
-    this.presentToast("middle","¡No es su mesa asignada!","danger")
+      this.presentToast("middle","¡No es su mesa asignada!","danger")
     }
   }
 

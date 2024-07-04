@@ -1,10 +1,11 @@
-<div class="div-principal" *ngIf="!qr.scan">
+<ion-content>
+  <div class="div-principal" *ngIf="!qr.scan">
   <div class="contenedor-pedido" *ngIf="mostrarCuenta && !qr.scan">
-    <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="!propinaCargada">
+    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="!propinaCargada">
       <ion-fab-button (click)="ScanPropina()" class="boton-fab">
         <ion-icon name="qr-code"></ion-icon>
       </ion-fab-button>
-    </ion-fab>
+    </ion-fab> -->
     <table class="table table-bordered caption-top" style="color: #ffffff;">
       <caption style="color: white; font-size: 20px;">CUENTA
         <ion-icon name="newspaper"></ion-icon>
@@ -46,23 +47,8 @@
       <p style="text-align: center;font-size: large;color: black;font-weight: bold;">Su pago está siendo validado</p>
     </div>
   </div>
-  <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada && !(pedido.estado === 'pendiente-pago')" (click)="ScanPropina()"  size="large" fill="solid"  expand="block" id="btn_ingresar">Pagar con QR</ion-button>
-  <ion-button *ngIf="mostrarCuenta && !qr.scan && propinaCargada && !(pedido.estado === 'pendiente-pago')" (click)="Pagar()"  size="large" fill="outline"  expand="block" id="btn_borrar">Pagar Efectivo</ion-button>
-
-  <div *ngIf="mostrarPropina">
-    <div class="contenedor-propina">
-      <div class="card card-propina">
-        <div class="card-header card-header-propina">
-          <h1 style="font-size: 23px;text-align: center;">¿Cuál es su nivel de satisfacción respecto a su atención?</h1>
-        </div>
-        <div class="card-body card-body-propina">
-          <button class="btn btn-propina" (click)="AgregarPropina(20)">Excelente</button>
-          <button class="btn btn-propina" (click)="AgregarPropina(15)">Muy Bueno</button>
-          <button class="btn btn-propina" (click)="AgregarPropina(10)">Bueno</button>
-          <button class="btn btn-propina" (click)="AgregarPropina(5)">Regular</button>
-          <button class="btn btn-propina" (click)="AgregarPropina(0)">Malo</button>
-        </div>
-      </div>
-    </div>
+  <ion-button *ngIf="!propinaCargada && !qr.scan" (click)="ScanPropina()"  size="large" fill="solid"  expand="block" id="btn_ingresar">Agregar Propina</ion-button>
+  <ion-button *ngIf="mostrarCuenta && !qr.scan && !(pedido.estado === 'pendiente-pago')" (click)="ScanPropina()"  size="large" fill="outline"  expand="block" id="btn_borrar">Pagar con QR</ion-button>
+  <ion-button *ngIf="mostrarCuenta && !qr.scan && !(pedido.estado === 'pendiente-pago')" (click)="Pagar()"  size="large" fill="outline"  expand="block" id="btn_borrar">Pagar Efectivo</ion-button>
   </div>
-</div>
+</ion-content>

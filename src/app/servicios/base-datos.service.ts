@@ -382,13 +382,14 @@ export class BaseDatosService {
       });
     }
 
-    CargarPropinaPedido(pedido:any,porcentajePropina:number,propina:number)
+    CargarPropinaPedido(pedido:any,porcentajePropina:number,propina:number,cargoPropina:boolean)
     {
       const coleccion = collection(this.firestore, 'pedidos')
       const documento = doc(coleccion, pedido.uid)
       return updateDoc(documento,{
         porcentajePropina:porcentajePropina,
-        propina:propina
+        propina:propina,
+        cargoPropina:cargoPropina
       });
     }
 
