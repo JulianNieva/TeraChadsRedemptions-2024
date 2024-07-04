@@ -3,9 +3,9 @@ import { QrService } from 'src/app/servicios/qr.service';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { Pedido } from 'src/app/clases/pedido';
 import { NavController } from '@ionic/angular';
-import { Mesa } from 'src/app/clases/mesa';
 import { PushNotificationService } from 'src/app/servicios/push-notification.service';
 import { Cliente } from 'src/app/clases/cliente';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cuenta',
@@ -21,7 +21,7 @@ export class CuentaPage implements OnInit {
   descuentosJuegos:number = 0;
   totalFinal:number = 0;
 
-  constructor(public qr : QrService,private bdSrv:BaseDatosService,private navCtrl:NavController,private pushSrv:PushNotificationService) {
+  constructor(public qr : QrService,private bdSrv:BaseDatosService,private navCtrl:NavController,private pushSrv:PushNotificationService,private toastCtrl:ToastController) {
     const pedidoString = localStorage.getItem("pedido");
     const pedido = pedidoString ? JSON.parse(pedidoString) : null;
     if(pedido != null)
@@ -34,7 +34,7 @@ export class CuentaPage implements OnInit {
             res.forEach((pe : Pedido) => {
               if(pe.estado !== "finalizado") {
                 this.pedido = pe
-                this.propinaCargada = this.pedido.porcentajePropina >= 0;
+                this.propinaCargada = this.pedido.cargoPropina;
                 this.descuentosJuegos = ((this.pedido.total * this.pedido.descuentoJuego)/100)
                 this.totalFinal = (this.pedido.total + this.pedido.propina) - this.descuentosJuegos;
               }
@@ -76,40 +76,36 @@ export class CuentaPage implements OnInit {
   AgregarPropina(porcentajePropina:number)
   {
     const propinaTotal = (this.pedido.total * porcentajePropina) / 100;
-    this.bdSrv.CargarPropinaPedido(this.pedido,porcentajePropina,propinaTotal)
+    this.bdSrv.CargarPropinaPedido(this.pedido,porcentajePropina,propinaTotal,true)
     this.pedido.porcentajePropina = porcentajePropina
     this.pedido.propina = propinaTotal
     localStorage.setItem("pedido",JSON.stringify(this.pedido))
-    this.mostrarPropina = false;
-    this.mostrarCuenta = true;  
-  }
-
-  AlternarVista()
-  {
-    this.mostrarCuenta = false;
-    this.mostrarPropina = true;
+    this.propinaCargada = true; 
+    this.presentToast("middle","¡Muchas gracias por valorar la atención!","primary")
   }
 
   async ScanPropina(){
-    this.qr.StartScan().then((res) => {
       try {
-        console.log(this.qr.scanResult == "accederPropina")
-        if(this.qr.scanResult == "accederPropina" && this.propinaCargada)
+        await this.qr.StartScan()
+        console.log(this.qr.scanResult)
+        let rtObject = JSON.parse(this.qr.scanResult)
+        console.log(rtObject)
+        if(rtObject.propina && !this.propinaCargada)
         {
-          this.AlternarVista()
-          this.propinaCargada = true;
-        }
-        else if(this.qr.scanResult == "pago" && this.propinaCargada){
-          this.Pagar()
+          this.AgregarPropina(rtObject.cantidad)
         }
         else{
-
+          if(this.qr.scanResult == "pago"){
+            this.Pagar()
+          }
+          else{
+            this.presentToast("middle","¡Codigo de QR incorrecto!","danger")
+          }
         }
       } 
       catch(error) {
         console.log(error)
       }
-    })
   }
 
   Pagar()
@@ -118,15 +114,15 @@ export class CuentaPage implements OnInit {
     this.pedido.estado = "pendiente-pago"
   }
 
-  // async presentToast(position : 'top' | 'middle', message = "", color = "danger"){
-  //   const toast = await this.toastController.create({
-  //     message: message,
-  //     duration: 2000,
-  //     position: position,
-  //     color : color,
-  //   });
+  async presentToast(position : 'top' | 'middle', message = "", color = "danger"){
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: position,
+      color : color,
+    });
 
-  //   await toast.present()
-  // }
+    await toast.present()
+  }
 
 }

@@ -64,7 +64,10 @@ export class ListadoPedidosMozoPage implements OnInit {
 
       //Pedidos en espera a cobrar
       this.bdSrv.TraerPedidosConEstado('pendiente-pago').subscribe((pedidos) => {
-        this.listadoPedidosACobrar = pedidos;
+        if(pedidos)
+        {
+          this.listadoPedidosACobrar = pedidos;
+        }
       });
     }
   }
