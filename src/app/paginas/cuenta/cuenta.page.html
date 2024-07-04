@@ -1,11 +1,6 @@
-<ion-content>
-  <div class="div-principal" *ngIf="!qr.scan">
+<ion-content *ngIf="!qr.scan">
+  <div class="div-principal">
   <div class="contenedor-pedido" *ngIf="mostrarCuenta && !qr.scan">
-    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="!propinaCargada">
-      <ion-fab-button (click)="ScanPropina()" class="boton-fab">
-        <ion-icon name="qr-code"></ion-icon>
-      </ion-fab-button>
-    </ion-fab> -->
     <table class="table table-bordered caption-top" style="color: #ffffff;">
       <caption style="color: white; font-size: 20px;">CUENTA
         <ion-icon name="newspaper"></ion-icon>
