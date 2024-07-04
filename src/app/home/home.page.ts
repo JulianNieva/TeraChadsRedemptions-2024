@@ -122,10 +122,14 @@ export class HomePage implements OnDestroy {
             this.push_notification.ClienteIngresaLocal(this.cliente).subscribe((response) => {
               console.log(response)
             })
+          } else {
+            if(this.qr.scanResult !== 0){
+              this.presentToast("middle","No tiene mesa asignada! Ingrese a la fila")
+            }
           }
         }
         catch(e) {
-            this.presentToast("top","QR Invalido!")
+            this.presentToast("middle","QR Invalido!")
         }
     } else {
         // Al estar en Fila busca escanear el QR de una Mesa
@@ -135,7 +139,7 @@ export class HomePage implements OnDestroy {
             this.MesaAsignada(parseInt(this.qr.scanResult))
           }
           catch(e) {
-              this.presentToast("top","QR Invalido!")
+              this.presentToast("middle","QR Invalido!")
           }
         })
       }
@@ -194,7 +198,7 @@ export class HomePage implements OnDestroy {
   // }
 
 
-  async presentToast(position : 'top' | 'middle', message = "", color = "danger",duration = 2000){
+  async presentToast(position : 'top' | 'middle', message = "", color = "danger",duration = 2500){
     const toast = await this.toastController.create({
       message: message,
       duration: duration,
