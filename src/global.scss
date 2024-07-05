@@ -43,3 +43,17 @@ body.scanner-active {
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 $mainFont: "Lato", sans-serif;
+
+ion-toast.my-toast{
+    --height:100px;
+    --width:90%;
+    --border-style: solid;
+    --border-width: 2px;
+    --border-style:#292929;
+    --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+ion-toast.my-toast::part(message) {
+    font-size: large;
+    font-weight: bold;
+  }

@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './cuenta.page.html',
   styleUrls: ['./cuenta.page.scss'],
 })
-export class CuentaPage implements OnInit {
+export class CuentaPage {
 
   mostrarCuenta = true;
   mostrarPropina = false;
@@ -50,8 +50,6 @@ export class CuentaPage implements OnInit {
         })
       }
   }
-
-  ngOnInit() {}
 
   AgruparProductos(pedido: any[]): any[] {
     const productosAgrupados:any = [];
@@ -120,6 +118,7 @@ export class CuentaPage implements OnInit {
       duration: 2000,
       position: position,
       color : color,
+      cssClass:"my-toast"
     });
 
     await toast.present()

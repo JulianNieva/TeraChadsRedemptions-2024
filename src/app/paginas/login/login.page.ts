@@ -164,6 +164,7 @@ export class LoginPage implements OnInit {
       duration: 2000,
       position: position,
       color : color,
+      cssClass:"my-toast"
     });
 
     await toast.present();

@@ -7,7 +7,7 @@ import { BaseDatosService } from 'src/app/servicios/base-datos.service';
   templateUrl: './juegos.page.html',
   styleUrls: ['./juegos.page.scss'],
 })
-export class JuegosPage implements OnInit {
+export class JuegosPage {
 
   pedido:any
   mostrarJuegos:boolean = true
@@ -37,9 +37,6 @@ export class JuegosPage implements OnInit {
       });
     })
   }
-
-  ngOnInit() {}
-
 
   Jugar10Descuento(){
     this.mostrarJuegos = false;
