@@ -12,7 +12,7 @@ register();
   templateUrl: './listado-pedidos-mozo.page.html',
   styleUrls: ['./listado-pedidos-mozo.page.scss'],
 })
-export class ListadoPedidosMozoPage implements OnInit {
+export class ListadoPedidosMozoPage {
 
   listadoPedidosEnRevision:any = [];
   listadoPedidosAEntregar:any = [];
@@ -71,8 +71,6 @@ export class ListadoPedidosMozoPage implements OnInit {
       });
     }
   }
-
-  ngOnInit() { }
 
   AceptarPedido(pedido:any)
   {

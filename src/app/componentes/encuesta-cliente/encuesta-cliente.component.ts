@@ -12,7 +12,7 @@ import { Timestamp } from '@angular/fire/firestore';
   templateUrl: './encuesta-cliente.component.html',
   styleUrls: ['./encuesta-cliente.component.scss'],
 })
-export class EncuestaClienteComponent implements OnInit {
+export class EncuestaClienteComponent {
 
   loading:boolean = false;
   @Input() pedidoRecibido:any;
@@ -34,8 +34,6 @@ export class EncuestaClienteComponent implements OnInit {
     });
    }
   
-
-  ngOnInit() {}
 
   async EnviarEncuesta()
   {
@@ -128,6 +126,7 @@ export class EncuestaClienteComponent implements OnInit {
       duration: 2000,
       position: position,
       color : color,
+      cssClass:"my-toast"
     });
 
     await toast.present()

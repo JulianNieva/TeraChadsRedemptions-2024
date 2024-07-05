@@ -204,6 +204,7 @@ export class HomePage implements OnDestroy {
       duration: duration,
       position: position,
       color : color,
+      cssClass:"my-toast"
     });
 
     await toast.present();

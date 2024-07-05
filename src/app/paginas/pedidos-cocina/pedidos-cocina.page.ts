@@ -118,6 +118,7 @@ export class PedidosCocinaPage {
       duration: 2000,
       position: position,
       color: color,
+      cssClass:"my-toast"
     });
 
     await toast.present();
